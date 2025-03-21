@@ -2,6 +2,14 @@ extends Node
 
 var stack: Array[Input.MouseMode]
 
+func _ready() -> void:
+	if OS.has_feature("web"):
+		var js_code = """
+		document.addEventListener("click", function () {
+		document.body.requestPointerLock();});
+		"""
+		JavaScriptBridge.eval(js_code, true)
+
 ## Puts a mouse mode onto the stack, effectively setting the mouse mode
 func push(mode: Input.MouseMode) -> void:
 	stack.push_back(mode)
