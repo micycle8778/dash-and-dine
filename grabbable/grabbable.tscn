@@ -12,12 +12,14 @@ absorbent = true
 collision_layer = 4
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_yyata")
+can_sleep = false
 contact_monitor = true
 max_contacts_reported = 10
 script = ExtResource("1_6d6p2")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.195306, 0, 0, 0, 0.195306, 0, 0, 0, 0.195306, 0, 0, 0.532103)
+visible = false
 texture = ExtResource("2_yyata")
 
 [node name="Sprite3D2" type="Sprite3D" parent="Sprite3D"]

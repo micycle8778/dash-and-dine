@@ -9,7 +9,6 @@ const MOUSE_SENSITIVITY: float = 0.0015
 @onready var camera: Camera3D = %Camera3D
 @onready var grab_raycast: RayCast3D = %GrabRaycast
 @onready var hold_distance_raycast: RayCast3D = %HoldDistanceRaycast
-@onready var hold_icon: CanvasItem = %HoldIcon
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -69,8 +68,28 @@ func _handle_holding(_delta: float) -> void:
 	for body in cols:
 		body.global_position = holding.to_global(cols[body])
 
+var last_grabbable_hovered: Grabbable
 func _handle_hold_icon() -> void:
-	hold_icon.visible = grab_raycast.is_colliding() and holding == null
+	if holding != null: return
+
+	if grab_raycast.is_colliding():
+		var grabbable = grab_raycast.get_collider()
+
+		# check if we swapped to a different grabbable
+		if last_grabbable_hovered != null and grabbable != last_grabbable_hovered:
+			last_grabbable_hovered.disable_outline_shader()
+		last_grabbable_hovered = grabbable
+
+		# check if the grabbable has an outline shader
+		if last_grabbable_hovered.outline_shader != null:
+			last_grabbable_hovered.enable_outline_shader()
+		else:
+			last_grabbable_hovered = null
+
+	# check if we just stopped looking at a grabbable
+	elif last_grabbable_hovered != null:
+		last_grabbable_hovered.disable_outline_shader()
+		last_grabbable_hovered = null
 
 func _process(delta: float) -> void:
 	_kinematics(delta)

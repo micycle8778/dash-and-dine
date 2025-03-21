@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://bitfv6iqc8mwh"]
+[gd_scene load_steps=31 format=3 uid="uid://bitfv6iqc8mwh"]
 
 [ext_resource type="PackedScene" uid="uid://jgyasjf5x5fh" path="res://player/player.tscn" id="1_6xmxd"]
 [ext_resource type="Script" uid="uid://pbe2nre427ka" path="res://world/world.gd" id="1_tcf2h"]
 [ext_resource type="PackedScene" uid="uid://b8cjslhovtlba" path="res://grabbable/grabbable.tscn" id="3_4717r"]
+[ext_resource type="Shader" uid="uid://ba5uvtjdaxx07" path="res://grabbable/outline.gdshader" id="4_h5o24"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4717r"]
 
@@ -25,6 +26,7 @@ size = Vector2(25, 25)
 [sub_resource type="Environment" id="Environment_6xmxd"]
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.37
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tcf2h"]
 albedo_color = Color(1, 0.16, 0.16, 1)
@@ -50,11 +52,33 @@ size = Vector3(3, 3, 3)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h5o24"]
 points = PackedVector3Array(1.5, 1.5, 1.5, 1.5, 1.5, -1.5, -1.5, 1.5, 1.5, 1.5, -1.5, 1.5, 1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mmdvd"]
+render_priority = 0
+shader = ExtResource("4_h5o24")
+shader_parameter/enabled = false
+shader_parameter/x_expand = 1.02
+shader_parameter/y_expand = 1.329
+shader_parameter/z_expand = 1.03
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fn3g3"]
+next_pass = SubResource("ShaderMaterial_mmdvd")
+
 [sub_resource type="BoxMesh" id="BoxMesh_h5o24"]
 size = Vector3(1.5, 0.1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4717r"]
 size = Vector3(1.52295, 0.102661, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fn3g3"]
+render_priority = 0
+shader = ExtResource("4_h5o24")
+shader_parameter/enabled = false
+shader_parameter/x_expand = 1.05
+shader_parameter/y_expand = 1.05
+shader_parameter/z_expand = 1.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sc4t8"]
+next_pass = SubResource("ShaderMaterial_fn3g3")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_fn3g3"]
 top_radius = 0.1
@@ -63,6 +87,28 @@ height = 0.3
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fn3g3"]
 points = PackedVector3Array(-0.1, -0.15, 0, -0.0995302, -0.15, -0.00980815, -0.0995302, -0.15, 0.00978857, -0.1, 0.15, 0, -0.0980814, -0.15, -0.0195184, -0.0995302, 0.15, -0.00980815, -0.0980814, -0.15, 0.0194988, -0.0995302, 0.15, 0.00978857, -0.0957126, -0.15, -0.0290329, -0.0980814, 0.15, -0.0195184, -0.0957126, -0.15, 0.0290133, -0.0980814, 0.15, 0.0194988, -0.0924041, -0.15, -0.0382733, -0.0957126, 0.15, -0.0290329, -0.0924041, -0.15, 0.0382537, -0.0957126, 0.15, 0.0290133, -0.088195, -0.15, -0.0471417, -0.0924041, 0.15, -0.0382733, -0.088195, -0.15, 0.0471222, -0.0924041, 0.15, 0.0382537, -0.0831637, -0.15, -0.0555599, -0.088195, 0.15, -0.0471417, -0.0831637, -0.15, 0.0555403, -0.088195, 0.15, 0.0471222, -0.0773101, -0.15, -0.0634495, -0.0831637, 0.15, -0.0555599, -0.0773101, -0.15, 0.0634299, -0.0831637, 0.15, 0.0555403, -0.0707126, -0.15, -0.0707126, -0.0773101, 0.15, -0.0634495, -0.0707126, -0.15, 0.070693, -0.0773101, 0.15, 0.0634299, -0.0634495, -0.15, -0.0773101, -0.0707126, 0.15, -0.0707126, -0.0634495, -0.15, 0.0772905, -0.0707126, 0.15, 0.070693, -0.0555599, -0.15, -0.0831637, -0.0634495, 0.15, -0.0773101, -0.0555599, -0.15, 0.0831441, -0.0634495, 0.15, 0.0772905, -0.0471417, -0.15, -0.088195, -0.0555599, 0.15, -0.0831637, -0.0471417, -0.15, 0.0881754, -0.0555599, 0.15, 0.0831441, -0.0382733, -0.15, -0.0924041, -0.0471417, 0.15, -0.088195, -0.0382733, -0.15, 0.0923845, -0.0471417, 0.15, 0.0881754, -0.0290329, -0.15, -0.0957126, -0.0382733, 0.15, -0.0924041, -0.0290329, -0.15, 0.095693, -0.0382733, 0.15, 0.0923845, -0.0195184, -0.15, -0.0980814, -0.0290329, 0.15, -0.0957126, -0.0195184, -0.15, 0.0980619, -0.0290329, 0.15, 0.095693, -0.00980815, -0.15, -0.0995302, -0.0195184, 0.15, -0.0980814, -0.00980815, -0.15, 0.0995106, -0.0195184, 0.15, 0.0980619, 0, -0.15, -0.1, -0.00980815, 0.15, -0.0995302, 0, -0.15, 0.1, -0.00980815, 0.15, 0.0995106, 0.00978857, -0.15, -0.0995302, 0, 0.15, -0.1, 0.00978857, -0.15, 0.0995106, 0, 0.15, 0.1, 0.0194988, -0.15, -0.0980814, 0.00978857, 0.15, -0.0995302, 0.0194988, -0.15, 0.0980619, 0.00978857, 0.15, 0.0995106, 0.0290133, -0.15, -0.0957126, 0.0194988, 0.15, -0.0980814, 0.0290133, -0.15, 0.095693, 0.0194988, 0.15, 0.0980619, 0.0382537, -0.15, -0.0924041, 0.0290133, 0.15, -0.0957126, 0.0382537, -0.15, 0.0923845, 0.0290133, 0.15, 0.095693, 0.0471222, -0.15, -0.088195, 0.0382537, 0.15, -0.0924041, 0.0471222, -0.15, 0.0881754, 0.0382537, 0.15, 0.0923845, 0.0555403, -0.15, -0.0831637, 0.0471222, 0.15, -0.088195, 0.0555403, -0.15, 0.0831441, 0.0471222, 0.15, 0.0881754, 0.0634299, -0.15, -0.0773101, 0.0555403, 0.15, -0.0831637, 0.0634299, -0.15, 0.0772905, 0.0555403, 0.15, 0.0831441, 0.070693, -0.15, -0.0707126, 0.0634299, 0.15, -0.0773101, 0.070693, -0.15, 0.070693, 0.0634299, 0.15, 0.0772905, 0.0772905, -0.15, -0.0634495, 0.070693, 0.15, -0.0707126, 0.0772905, -0.15, 0.0634299, 0.070693, 0.15, 0.070693, 0.0831441, -0.15, -0.0555599, 0.0772905, 0.15, -0.0634495, 0.0831441, -0.15, 0.0555403, 0.0772905, 0.15, 0.0634299, 0.0881754, -0.15, -0.0471417, 0.0831441, 0.15, -0.0555599, 0.0881754, -0.15, 0.0471222, 0.0831441, 0.15, 0.0555403, 0.0923845, -0.15, -0.0382733, 0.0881754, 0.15, -0.0471417, 0.0923845, -0.15, 0.0382537, 0.0881754, 0.15, 0.0471222, 0.095693, -0.15, -0.0290329, 0.0923845, 0.15, -0.0382733, 0.095693, -0.15, 0.0290133, 0.0923845, 0.15, 0.0382537, 0.0980619, -0.15, -0.0195184, 0.095693, 0.15, -0.0290329, 0.0980619, -0.15, 0.0194988, 0.095693, 0.15, 0.0290133, 0.0995106, -0.15, -0.00980815, 0.0980619, 0.15, -0.0195184, 0.0995106, -0.15, 0.00978857, 0.0980619, 0.15, 0.0194988, 0.1, -0.15, 0, 0.0995106, 0.15, -0.00980815, 0.0995106, 0.15, 0.00978857, 0.1, 0.15, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4papg"]
+render_priority = 0
+shader = ExtResource("4_h5o24")
+shader_parameter/enabled = false
+shader_parameter/x_expand = 1.05
+shader_parameter/y_expand = 1.05
+shader_parameter/z_expand = 1.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fyhu2"]
+next_pass = SubResource("ShaderMaterial_4papg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mad0u"]
+render_priority = 0
+shader = ExtResource("4_h5o24")
+shader_parameter/enabled = false
+shader_parameter/x_expand = 1.144
+shader_parameter/y_expand = 1.026
+shader_parameter/z_expand = 1.109
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ocfjn"]
+next_pass = SubResource("ShaderMaterial_mad0u")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_mmdvd"]
 top_radius = 0.2
@@ -84,6 +130,7 @@ shape = SubResource("WorldBoundaryShape3D_4717r")
 metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.111793, 0)
 material_override = SubResource("StandardMaterial3D_h5o24")
 mesh = SubResource("PlaneMesh_6xmxd")
 skeleton = NodePath("../..")
@@ -126,9 +173,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0183773, -1.03589, -1.0911
 shape = SubResource("ConvexPolygonShape3D_h5o24")
 
 [node name="Tray" parent="." instance=ExtResource("3_4717r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.202274, 3.94384)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00303888, 0.202274, 3.9591)
+outline_shader = SubResource("ShaderMaterial_mmdvd")
 
 [node name="Tray" type="MeshInstance3D" parent="Tray"]
+material_override = SubResource("StandardMaterial3D_fn3g3")
 mesh = SubResource("BoxMesh_h5o24")
 skeleton = NodePath("")
 metadata/_edit_lock_ = true
@@ -140,8 +189,10 @@ metadata/_edit_lock_ = true
 
 [node name="Cylinder" parent="." instance=ExtResource("3_4717r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.459582, 3.93201)
+outline_shader = SubResource("ShaderMaterial_fn3g3")
 
 [node name="Cylinder" type="MeshInstance3D" parent="Cylinder"]
+material_override = SubResource("StandardMaterial3D_sc4t8")
 mesh = SubResource("CylinderMesh_fn3g3")
 skeleton = NodePath("../../Tray/Tray")
 metadata/_edit_lock_ = true
@@ -152,8 +203,10 @@ metadata/_edit_lock_ = true
 
 [node name="Cylinder2" parent="." instance=ExtResource("3_4717r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.500173, 0.459582, 3.93201)
+outline_shader = SubResource("ShaderMaterial_4papg")
 
 [node name="Cylinder" type="MeshInstance3D" parent="Cylinder2"]
+material_override = SubResource("StandardMaterial3D_fyhu2")
 mesh = SubResource("CylinderMesh_fn3g3")
 skeleton = NodePath("../../Tray/Tray")
 metadata/_edit_lock_ = true
@@ -164,8 +217,10 @@ metadata/_edit_lock_ = true
 
 [node name="BigCylinder" parent="." instance=ExtResource("3_4717r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.66751, 7.07619)
+outline_shader = SubResource("ShaderMaterial_mad0u")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BigCylinder"]
+material_override = SubResource("StandardMaterial3D_ocfjn")
 mesh = SubResource("CylinderMesh_mmdvd")
 skeleton = NodePath("")
 metadata/_edit_lock_ = true
