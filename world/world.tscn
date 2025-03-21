@@ -145,6 +145,7 @@ environment = SubResource("Environment_6xmxd")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.996308, 0.077639, 0.0366442, -0.0406115, 0.050151, 0.997915, 0.0756394, -0.995719, 0.0531188, 0, 0, 0)
 shadow_enabled = true
+directional_shadow_max_distance = 17.7
 metadata/_edit_lock_ = true
 
 [node name="Cube" type="StaticBody3D" parent="."]
@@ -216,6 +217,7 @@ metadata/_edit_lock_ = true
 
 [node name="BigCylinder" parent="." instance=ExtResource("3_4717r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.66751, 7.07619)
+mass = 10.0
 outline_shader = SubResource("ShaderMaterial_mad0u")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BigCylinder"]

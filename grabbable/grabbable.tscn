@@ -1,21 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8cjslhovtlba"]
+[gd_scene load_steps=5 format=3 uid="uid://b8cjslhovtlba"]
 
 [ext_resource type="Script" uid="uid://d1k6r4l6xpmh3" path="res://grabbable/grabbable.gd" id="1_6d6p2"]
 [ext_resource type="Texture2D" uid="uid://cg6druy07ydqq" path="res://icon.svg" id="2_yyata"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yyata"]
+friction = 200.0
 rough = true
 bounce = 10000.0
 absorbent = true
+
+[sub_resource type="Curve" id="Curve_yyata"]
+_limits = [0.0, 1.0, 7.0, 10.0]
+_data = [Vector2(7, 1), 0.0, 0.0, 0, 0, Vector2(10, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Grabbable" type="RigidBody3D"]
 collision_layer = 4
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_yyata")
 can_sleep = false
+continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 10
 script = ExtResource("1_6d6p2")
+inertia_curve = SubResource("Curve_yyata")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.195306, 0, 0, 0, 0.195306, 0, 0, 0, 0.195306, 0, 0, 0.532103)
@@ -33,3 +41,5 @@ texture = ExtResource("2_yyata")
 [node name="Sprite3D4" type="Sprite3D" parent="Sprite3D"]
 transform = Transform3D(0.0366611, 0, 0.999328, 0, 1, 0, -0.999328, 0, 0.0366611, -2.99352, 0, -2.73813)
 texture = ExtResource("2_yyata")
+
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

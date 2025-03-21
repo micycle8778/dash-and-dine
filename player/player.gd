@@ -38,7 +38,7 @@ func _handle_holding(_delta: float) -> void:
 			if grab_raycast.is_colliding():
 				holding = grab_raycast.get_collider()
 
-				holding.grabbed = true
+				holding.state = Grabbable.State.GRABBED
 				hold_distance_raycast.add_exception(holding)
 			else: return
 		else: return
@@ -46,7 +46,7 @@ func _handle_holding(_delta: float) -> void:
 	# if the player is dropping the object, drop it then return
 	if Input.is_action_just_released("pickup"):
 		# drop the object!
-		holding.grabbed = false
+		holding.state = Grabbable.State.FREE
 		hold_distance_raycast.remove_exception(holding)
 		holding = null
 		return
@@ -56,17 +56,7 @@ func _handle_holding(_delta: float) -> void:
 	if hold_distance_raycast.is_colliding():
 		pos = hold_distance_raycast.get_collision_point()
 
-	# first, lets build a list of items that `holding` is touching
-	var cols: Dictionary[Grabbable, Vector3] # grabbable : position relative to `holding`
-	for body in holding.grabbed_neighbors:
-		cols[body] = holding.to_local(body.global_position)
-
-	# execute the move
-	holding.global_position = pos
-
-	# move everything else
-	for body in cols:
-		body.global_position = holding.to_global(cols[body])
+	holding.move_to(pos, _delta)
 
 var last_grabbable_hovered: Grabbable
 func _handle_hold_icon() -> void:
