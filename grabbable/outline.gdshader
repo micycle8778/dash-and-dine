@@ -17,5 +17,5 @@ void fragment() {
 	if (!enabled) discard;
 	float t = TIME / 1.5;
 	float x = mod(SCREEN_UV.x + t, 1.);
-	ALBEDO = mix(vec3(0.), vec3(0.4, 0.4, 0.3), distance(x, 0.5) * 2.);
+	ALBEDO *= mix(vec3(0.), vec3(0.4, 0.4, 0.3), distance(x, 0.5) * 2.);
 }

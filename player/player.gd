@@ -27,9 +27,15 @@ func _kinematics(delta: float) -> void:
 		run_mul *= WALK_MUL
 
 	var raw_input := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	var input = transform.basis * Vector3(raw_input.x, 0, raw_input.y) * MOVE_SPEED * run_mul
-	velocity.x = input.x
-	velocity.z = input.z
+	var desired_vel := transform.basis * Vector3(raw_input.x, 0, raw_input.y) * MOVE_SPEED * run_mul
+	var accel :=  MOVE_SPEED * run_mul * delta * 3.5
+
+	var dv := Vector2(desired_vel.x, desired_vel.z)
+	var v := Vector2(velocity.x, velocity.z)
+	
+	v = v.move_toward(dv, accel)
+	velocity.x = v.x
+	velocity.z = v.y
 
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		velocity += Vector3.UP * JUMP_POWER

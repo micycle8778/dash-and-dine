@@ -6,7 +6,7 @@ enum State {
 	PASSENGER
 }
 
-const MASS_MUL := 8.
+const GRAV_MUL := 1.75
 
 @export var inertia_curve: Curve
 @export var outline_shader: ShaderMaterial
@@ -42,8 +42,8 @@ func _leave_state(old_state: State) -> void:
 					body.linear_velocity = instant_velocity
 			disable_outline_shader()
 		State.PASSENGER:
-			gravity_scale /= MASS_MUL
-			$Sprite3D.visible = false
+			gravity_scale /= GRAV_MUL
+			# $Sprite3D.visible = false
 
 func _enter_state(new_state: State) -> void:
 	match new_state:
@@ -58,8 +58,8 @@ func _enter_state(new_state: State) -> void:
 			enable_outline_shader()
 			has_moved = false
 		State.PASSENGER:
-			gravity_scale *= MASS_MUL
-			$Sprite3D.visible = true
+			gravity_scale *= GRAV_MUL
+			# $Sprite3D.visible = true
 
 func _ready() -> void:
 	var aabb := AABB()
