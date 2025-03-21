@@ -1,12 +1,20 @@
-class_name Grabbable extends Node3D
+class_name Grabbable extends RigidBody3D
 
-## Object to be moved by the player when being held
-@export var target: RigidBody3D
+var grabbed := false:
+	set(v):
+		grabbed = v
+		freeze = grabbed
 
-@onready var remote: RemoteTransform3D = %RemoteTransform3D
-@onready var grab_box: Area3D = %GrabBox
+func _process(delta: float) -> void:
+	$Sprite3D.visible = freeze
 
-func _ready() -> void:
-	remove_child(remote)
-	target.add_child(remote)
-	remote.remote_path = remote.get_path_to(grab_box)
+# check if we're colliding with a grabbed grabbable
+func _physics_process(delta: float) -> void:
+	if grabbed: return
+
+	for body in get_colliding_bodies():
+		if body is Grabbable and body.grabbed:
+			freeze = true
+			return
+	
+	freeze = false

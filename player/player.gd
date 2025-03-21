@@ -31,30 +31,44 @@ func _kinematics(delta: float) -> void:
 	move_and_slide()
 
 var holding: Grabbable = null
-func _handle_holding(delta: float) -> void:
+func _handle_holding(_delta: float) -> void:
+	# if we're not holding anything, check if the player is trying to hold something
+	# if they aren't or can't, return
 	if holding == null:
 		if Input.is_action_just_pressed("pickup"):
 			if grab_raycast.is_colliding():
-				print("get_collider = ", grab_raycast.get_collider())
-				holding = grab_raycast.get_collider().get_parent()
+				holding = grab_raycast.get_collider()
 
-				holding.target.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
-				holding.target.freeze = true
-				hold_distance_raycast.add_exception(holding.target)
+				holding.grabbed = true
+				hold_distance_raycast.add_exception(holding)
 			else: return
 		else: return
 
+	# if the player is dropping the object, drop it then return
 	if Input.is_action_just_released("pickup"):
 		# drop the object!
-		holding.target.freeze = false
-		hold_distance_raycast.remove_exception(holding.target)
+		holding.grabbed = false
+		hold_distance_raycast.remove_exception(holding)
 		holding = null
 		return
 
+	# move the object
 	var pos := hold_distance_raycast.to_global(hold_distance_raycast.target_position)
 	if hold_distance_raycast.is_colliding():
 		pos = hold_distance_raycast.get_collision_point()
-	holding.target.global_position = pos
+
+	# first, lets build a list of items that `holding` is touching
+	var cols: Dictionary[Grabbable, Vector3] # grabbable : position relative to `holding`
+	for body in holding.get_colliding_bodies():
+		if body is Grabbable:
+			cols[body as Grabbable] = holding.to_local(body.global_position)
+
+	# execute the move
+	holding.global_position = pos
+
+	# move everything else
+	for body in cols:
+		body.global_position = holding.to_global(cols[body])
 
 func _handle_hold_icon() -> void:
 	hold_icon.visible = grab_raycast.is_colliding() and holding == null

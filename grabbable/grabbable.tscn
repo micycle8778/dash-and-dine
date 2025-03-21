@@ -1,15 +1,35 @@
-[gd_scene load_steps=2 format=3 uid="uid://celoyr831c4cw"]
+[gd_scene load_steps=4 format=3 uid="uid://b8cjslhovtlba"]
 
-[ext_resource type="Script" uid="uid://bsucj58k1gj2d" path="res://grabbable/grabbable.gd" id="1_6d6p2"]
+[ext_resource type="Script" uid="uid://d1k6r4l6xpmh3" path="res://grabbable/grabbable.gd" id="1_6d6p2"]
+[ext_resource type="Texture2D" uid="uid://cg6druy07ydqq" path="res://icon.svg" id="2_yyata"]
 
-[node name="Grabbable" type="Node3D"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yyata"]
+rough = true
+bounce = 10000.0
+absorbent = true
+
+[node name="Grabbable" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_yyata")
+freeze_mode = 1
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 10
 script = ExtResource("1_6d6p2")
 
-[node name="GrabBox" type="Area3D" parent="."]
-unique_name_in_owner = true
-collision_layer = 4
-collision_mask = 0
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.195306, 0, 0, 0, 0.195306, 0, 0, 0, 0.195306, 0, 0, 0.532103)
+texture = ExtResource("2_yyata")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
-unique_name_in_owner = true
-remote_path = NodePath("../GrabBox")
+[node name="Sprite3D2" type="Sprite3D" parent="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.58634)
+texture = ExtResource("2_yyata")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Sprite3D"]
+transform = Transform3D(0.0366611, 0, 0.999328, 0, 1, 0, -0.999328, 0, 0.0366611, 2.81868, 0, -2.73813)
+texture = ExtResource("2_yyata")
+
+[node name="Sprite3D4" type="Sprite3D" parent="Sprite3D"]
+transform = Transform3D(0.0366611, 0, 0.999328, 0, 1, 0, -0.999328, 0, 0.0366611, -2.99352, 0, -2.73813)
+texture = ExtResource("2_yyata")

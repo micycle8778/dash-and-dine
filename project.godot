@@ -70,7 +70,7 @@ pickup={
 
 3d_physics/layer_1="Terrain"
 3d_physics/layer_2="Player"
-3d_physics/layer_3="GrabBox"
+3d_physics/layer_3="Grabbable"
 
 [physics]
 
