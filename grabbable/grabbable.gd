@@ -1,23 +1,28 @@
 class_name Grabbable extends RigidBody3D
 
-@export var inertia_curve: Curve
-@export var outline_shader: ShaderMaterial
-
 enum State {
 	FREE,
 	GRABBED,
 	PASSENGER
 }
 
+const MASS_MUL := 8.
+
+@export var inertia_curve: Curve
+@export var outline_shader: ShaderMaterial
+
 var state: State = State.FREE:
 	set(v):
-		freeze = v != State.FREE
+		# freeze = v != State.FREE
+		freeze = v == State.GRABBED
 		_leave_state(state)
 		state = v
 		_enter_state(v)
 
 var driver: Grabbable
 var passengers: Array[Grabbable]
+
+@onready var driver_cast: RayCast3D = %DriverCast
 
 func enable_outline_shader() -> void:
 	if outline_shader != null:
@@ -36,6 +41,9 @@ func _leave_state(old_state: State) -> void:
 					body.state = State.FREE
 					body.linear_velocity = instant_velocity
 			disable_outline_shader()
+		State.PASSENGER:
+			gravity_scale /= MASS_MUL
+			$Sprite3D.visible = false
 
 func _enter_state(new_state: State) -> void:
 	match new_state:
@@ -49,6 +57,19 @@ func _enter_state(new_state: State) -> void:
 			last_pos = global_position
 			enable_outline_shader()
 			has_moved = false
+		State.PASSENGER:
+			gravity_scale *= MASS_MUL
+			$Sprite3D.visible = true
+
+func _ready() -> void:
+	var aabb := AABB()
+	for child in get_children():
+		if child is MeshInstance3D:
+			var mi := child as MeshInstance3D
+			aabb = aabb.merge(mi.get_aabb())
+	
+	$Label3D.text = "%.2f" % aabb.size.y
+	driver_cast.target_position.y = -(aabb.size.y / 2. + .05)
 
 var has_moved := false
 ## move grabbed object to specified global position
@@ -68,39 +89,34 @@ func move_to(global_pos: Vector3, delta: float) -> void:
 
 var passenger_velocity: Vector3
 func displace(amount: Vector3, delta: float, grabbed_has_moved: bool) -> void:
-	position.y += amount.y
-	amount.y = 0
-
 	if not grabbed_has_moved:
 		passenger_velocity = Vector3.ZERO
 		position += amount
 		linear_velocity = Vector3.ZERO
-		return
-
-	var requested_velocity = amount / delta
-	if abs(requested_velocity.length() - passenger_velocity.length()) < 2.:
-		passenger_velocity = requested_velocity
-	else:
-		passenger_velocity = passenger_velocity.lerp(requested_velocity, 0.1)
-	
-	position += passenger_velocity * delta
-
-	# position += linear_velocity * delta
-	# rotation += angular_velocity * delta
-	# var requested_accel = (requested_velocity - linear_velocity) / delta
-	# apply_central_force(requested_accel * 10)
-
-func _process(_delta: float) -> void:
-	$Sprite3D.visible = freeze #and false
 
 var last_pos: Vector3
 var instant_velocity: Vector3
 
 # track grabbed velocity
-func _physics_process(delta: float) -> void:
-	if state != State.GRABBED: return
+func _grabbed_physics(delta: float) -> void:
 	instant_velocity = (global_position - last_pos) / delta
 	last_pos = global_position
+
+func _physics_process(delta: float) -> void:
+	if state == State.GRABBED:
+		_grabbed_physics(delta)
+		return
+
+	var grabbable: Grabbable = driver_cast.get_collider()
+	var is_passenger = driver_cast.is_colliding() and grabbable.state == State.GRABBED
+	if is_passenger and state != State.PASSENGER:
+		driver = grabbable
+		driver.passengers.push_back(self)
+		state = State.PASSENGER
+	elif not is_passenger and state != State.FREE:
+		driver.passengers.remove_at(driver.passengers.find(self))
+		driver = null
+		state = State.FREE
 
 func _on_body_exited(body:Node) -> void:
 	var grabbable := body as Grabbable

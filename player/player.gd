@@ -1,6 +1,8 @@
 extends CharacterBody3D
 
-const MOVE_SPEED: float = 8
+const RUN_MUL: float = 2.
+const WALK_MUL: float = .5
+const MOVE_SPEED: float = 8.
 
 const GRAVITY: float = 35
 const JUMP_POWER: float = 15
@@ -17,8 +19,15 @@ func _input(event: InputEvent) -> void:
 		camera.rotation.x = clampf(camera.rotation.x - event.relative.y * sens, -PI / 2 + 0.1, PI / 2)
 
 func _kinematics(delta: float) -> void:
+	var run_mul := 1.
+
+	if Input.is_action_pressed("sprint"):
+		run_mul *= RUN_MUL
+	if Input.is_action_pressed("walk"):
+		run_mul *= WALK_MUL
+
 	var raw_input := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	var input = transform.basis * Vector3(raw_input.x, 0, raw_input.y) * MOVE_SPEED
+	var input = transform.basis * Vector3(raw_input.x, 0, raw_input.y) * MOVE_SPEED * run_mul
 	velocity.x = input.x
 	velocity.z = input.z
 

@@ -4,9 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cg6druy07ydqq" path="res://icon.svg" id="2_yyata"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yyata"]
-friction = 200.0
 rough = true
-bounce = 10000.0
+bounce = 1.0
 absorbent = true
 
 [sub_resource type="Curve" id="Curve_yyata"]
@@ -19,11 +18,16 @@ collision_layer = 4
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_yyata")
 can_sleep = false
+freeze_mode = 1
 continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 10
 script = ExtResource("1_6d6p2")
 inertia_curve = SubResource("Curve_yyata")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../Node/DriverCast")
+update_rotation = false
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.195306, 0, 0, 0, 0.195306, 0, 0, 0, 0.195306, 0, 0, 0.532103)
@@ -42,4 +46,15 @@ texture = ExtResource("2_yyata")
 transform = Transform3D(0.0366611, 0, 0.999328, 0, 1, 0, -0.999328, 0, 0.0366611, -2.99352, 0, -2.73813)
 texture = ExtResource("2_yyata")
 
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.435155, 0)
+visible = false
+
+[node name="Node" type="Node" parent="."]
+
+[node name="DriverCast" type="RayCast3D" parent="Node"]
+unique_name_in_owner = true
+collision_mask = 4
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
