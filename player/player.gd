@@ -59,9 +59,8 @@ func _handle_holding(_delta: float) -> void:
 
 	# first, lets build a list of items that `holding` is touching
 	var cols: Dictionary[Grabbable, Vector3] # grabbable : position relative to `holding`
-	for body in holding.get_colliding_bodies():
-		if body is Grabbable:
-			cols[body as Grabbable] = holding.to_local(body.global_position)
+	for body in holding.grabbed_neighbors:
+		cols[body] = holding.to_local(body.global_position)
 
 	# execute the move
 	holding.global_position = pos
