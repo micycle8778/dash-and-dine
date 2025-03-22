@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8cjslhovtlba"]
+[gd_scene load_steps=5 format=3 uid="uid://celoyr831c4cw"]
 
 [ext_resource type="Script" uid="uid://d1k6r4l6xpmh3" path="res://grabbable/grabbable.gd" id="1_6d6p2"]
 [ext_resource type="Texture2D" uid="uid://cg6druy07ydqq" path="res://icon.svg" id="2_yyata"]

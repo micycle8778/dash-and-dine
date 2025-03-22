@@ -69,9 +69,11 @@ func _handle_holding(_delta: float) -> void:
 	# move the object
 	var pos := hold_distance_raycast.to_global(hold_distance_raycast.target_position)
 	if hold_distance_raycast.is_colliding():
-		pos = hold_distance_raycast.get_collision_point()
+		pos = hold_distance_raycast.to_local(hold_distance_raycast.get_collision_point())
+		pos -= pos.normalized() * 0.20
+		pos = hold_distance_raycast.to_global(pos)
 
-	holding.move_to(pos, _delta)
+	holding.move_to(pos, global_rotation, _delta)
 
 var last_grabbable_hovered: Grabbable
 func _handle_hold_icon() -> void:

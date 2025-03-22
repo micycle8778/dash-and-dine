@@ -3,7 +3,8 @@ class_name Grabbable extends RigidBody3D
 enum State {
 	FREE,
 	GRABBED,
-	PASSENGER
+	PASSENGER,
+	ANIMATED
 }
 
 const GRAV_MUL := 1.75
@@ -14,13 +15,14 @@ const GRAV_MUL := 1.75
 var state: State = State.FREE:
 	set(v):
 		# freeze = v != State.FREE
-		freeze = v == State.GRABBED
+		freeze = v == State.GRABBED or v == State.ANIMATED
 		_leave_state(state)
 		state = v
 		_enter_state(v)
 
 var driver: Grabbable
 var passengers: Array[Grabbable]
+var still_time := 0.
 
 @onready var driver_cast: RayCast3D = %DriverCast
 
@@ -43,7 +45,8 @@ func _leave_state(old_state: State) -> void:
 			disable_outline_shader()
 		State.PASSENGER:
 			gravity_scale /= GRAV_MUL
-			# $Sprite3D.visible = false
+		State.ANIMATED:
+			process_mode = Node.PROCESS_MODE_INHERIT
 
 func _enter_state(new_state: State) -> void:
 	match new_state:
@@ -59,7 +62,8 @@ func _enter_state(new_state: State) -> void:
 			has_moved = false
 		State.PASSENGER:
 			gravity_scale *= GRAV_MUL
-			# $Sprite3D.visible = true
+		State.ANIMATED:
+			process_mode = Node.PROCESS_MODE_DISABLED
 
 func _ready() -> void:
 	var aabb := AABB()
@@ -73,7 +77,7 @@ func _ready() -> void:
 
 var has_moved := false
 ## move grabbed object to specified global position
-func move_to(global_pos: Vector3, delta: float) -> void:
+func move_to(global_pos: Vector3, global_rot: Vector3, delta: float) -> void:
 	assert(state == State.GRABBED)
 
 	var relative_poss: Dictionary[Grabbable, Vector3]
@@ -81,6 +85,7 @@ func move_to(global_pos: Vector3, delta: float) -> void:
 		relative_poss[body] = to_local(body.global_position)
 	
 	global_position = global_pos
+	global_rotation = global_rot
 
 	for body in relative_poss:
 		body.displace(to_global(relative_poss[body]) - body.global_position, delta, has_moved)
@@ -103,6 +108,11 @@ func _grabbed_physics(delta: float) -> void:
 	last_pos = global_position
 
 func _physics_process(delta: float) -> void:
+	if state == State.FREE and linear_velocity.is_zero_approx():
+		still_time += delta
+	else:
+		still_time = 0.
+
 	if state == State.GRABBED:
 		_grabbed_physics(delta)
 		return

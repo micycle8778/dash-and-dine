@@ -1,0 +1,107 @@
+[gd_scene load_steps=12 format=4 uid="uid://c042pmytv5ng2"]
+
+[ext_resource type="PackedScene" uid="uid://celoyr831c4cw" path="res://grabbable/grabbable.tscn" id="1_q10sx"]
+[ext_resource type="Script" uid="uid://xjrrb5n406r0" path="res://world/ticket.gd" id="2_a733h"]
+[ext_resource type="PackedScene" uid="uid://u0djgmir05wj" path="res://world/ticket.blend" id="2_og6eu"]
+[ext_resource type="Shader" path="res://grabbable/outline.gdshader" id="3_q6c65"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a733h"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_q6c65")
+shader_parameter/enabled = false
+shader_parameter/x_expand = 1.15
+shader_parameter/y_expand = 1.6
+shader_parameter/z_expand = 1.1
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_q6c65"]
+points = PackedVector3Array(0.5, 0.05, 0.455546, 0.375, 0.05, 0.596345, 0.5, 0, 0.455546, 0.5, 0.05, -0.5, 0.375, 0, 0.596345, -0.375, 0.05, 0.596345, 0.5, 0, -0.5, -0.5, 0.05, -0.5, -0.375, 0, 0.596345, -0.5, 0.05, 0.455546, -0.5, 0, -0.5, -0.5, 0, 0.455546)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1i6iu"]
+resource_name = "Material.001"
+cull_mode = 2
+albedo_color = Color(1, 0.985896, 0.473647, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_u22k0"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.05, 1.09634),
+"format": 34359742465,
+"index_count": 120,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMAAQAEAAIABQADAAQAAQAFAAQAAAADAAYABQAGAAMAAAAGAAcABwABAAAABwAGAAgABgAJAAgABQAJAAYABwAIAAoACgAIAAkACwAHAAoACgAJAAsACwABAAcACwAJAAwACQANAAwACQAFAA0ACwAMAA4ADgAMAA0ADwALAA4AAQALAA8ADgANAA8AEAAFAAEAEAARAAUAAQASABAAEgARABAAAQAPABIAEwAFABEADQAFABMAEgATABEADwANABQADQATABQAEgAPABUAFQATABIADwAUABUAFQAUABMA"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 22,
+"vertex_data": PackedByteArray("AADAvgAAAAAPqhg/AAAAvwAAAAAAAAC/AAAAvwAAAAAdQ+k+AADAvs3MTD0Pqhg/AAAAv83MTD0dQ+k+AAAAv83MTD0AAAC/AACAvs3MTD0dQ+k+AACAvgAAAAAdQ+k+AAAAvs3MTD0Pqhg/AAAAAM3MTD0dQ+k+AAAAvgAAAAAPqhg/AAAAAAAAAAAdQ+k+AAAAPs3MTD0Pqhg/AACAPs3MTD0dQ+k+AAAAPgAAAAAPqhg/AACAPgAAAAAdQ+k+AAAAPwAAAAAAAAC/AAAAP83MTD0AAAC/AAAAPwAAAAAdQ+k+AAAAP83MTD0dQ+k+AADAPs3MTD0Pqhg/AADAPgAAAAAPqhg/")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_gj66g"]
+resource_name = "ticket_Plane"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.05, 1.09634),
+"attribute_data": PackedByteArray("AAAAPgAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPgAAgD8AAAA/AACAPwAAwD4AAIA/AABAPwAAgD8AACA/AACAPwAAgD8AAIA/AABgPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAPgAAgD8AAAAAAACAPwAAgD4AAIA/AAAAPwAAgD8AAMA+AACAPwAAQD8AAIA/AAAgPwAAgD8AAIA/AACAPwAAgD8AAAAAAABgPwAAgD8AAAAAAACAPwAAAD4AAIA/AAAAPgAAgD8AAAAAAACAPwAAYD8AAIA/AACAPwAAgD8AAIA/AACAPwAAYD8AAIA/AAAAPwAAgD8AACA/AACAPwAAID8AAIA/AAAAPwAAgD8AAAA+AACAPwAAgD4AAIA/AACAPgAAgD8AAAA+AACAPwAAgD8AAIA/AACAPwAAAAAAAIA/AAAAAAAAgD8AAIA/AAAgPwAAgD8AAEA/AACAPwAAQD8AAIA/AAAgPwAAgD8AAIA+AACAPwAAwD4AAIA/AADAPgAAgD8AAIA+AACAPwAAgD8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgD8AAAAAAABAPwAAgD8AAGA/AACAPwAAYD8AAIA/AABAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAgD8AAAAAAAAAAAAAwD4AAIA/AAAAPwAAgD8AAAA/AACAPwAAwD4AAIA/"),
+"format": 34359742487,
+"index_count": 120,
+"index_data": PackedByteArray("AAABAAIAAwABAAAABAABAAMABAADAAUAAQAEAAYABgAEAAcAAQAGAAgACAAGAAkAAQAIAAoACwAMAA0ACwAOAAwACwAPAA4ADgAPABAADwALABEADwARABIAEQALABMAEwALABQAEQATABUAFgAXABgAFgAZABcAGgAbABwAGgAdABsAHgAfACAAHgAhAB8AIgAjACQAIgAlACMAJgAnACgAJgApACcAKgArACwAKgAtACsALgAvADAALgAxAC8AMgAzADQAMgA1ADMANgA3ADgANgA5ADcAOgA7ADwAOgA9ADsAPgA/AEAAPgBBAD8A"),
+"material": SubResource("StandardMaterial3D_1i6iu"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 66,
+"vertex_data": PackedByteArray("AADAvgAAAAAPqhg/AAAAvwAAAAAAAAC/AAAAvwAAAAAdQ+k+AACAvgAAAAAdQ+k+AAAAAAAAAAAdQ+k+AAAAvgAAAAAPqhg/AACAPgAAAAAdQ+k+AAAAPgAAAAAPqhg/AAAAPwAAAAAdQ+k+AADAPgAAAAAPqhg/AAAAPwAAAAAAAAC/AAAAv83MTD0AAAC/AADAvs3MTD0Pqhg/AAAAv83MTD0dQ+k+AACAvs3MTD0dQ+k+AAAAAM3MTD0dQ+k+AAAAvs3MTD0Pqhg/AACAPs3MTD0dQ+k+AAAAPs3MTD0Pqhg/AAAAP83MTD0dQ+k+AAAAP83MTD0AAAC/AADAPs3MTD0Pqhg/AAAAvwAAAAAdQ+k+AADAvs3MTD0Pqhg/AADAvgAAAAAPqhg/AAAAv83MTD0dQ+k+AADAPgAAAAAPqhg/AAAAP83MTD0dQ+k+AAAAPwAAAAAdQ+k+AADAPs3MTD0Pqhg/AAAAAAAAAAAdQ+k+AAAAPs3MTD0Pqhg/AAAAPgAAAAAPqhg/AAAAAM3MTD0dQ+k+AADAvgAAAAAPqhg/AACAvs3MTD0dQ+k+AACAvgAAAAAdQ+k+AADAvs3MTD0Pqhg/AAAAPwAAAAAdQ+k+AAAAP83MTD0AAAC/AAAAPwAAAAAAAAC/AAAAP83MTD0dQ+k+AAAAPgAAAAAPqhg/AACAPs3MTD0dQ+k+AACAPgAAAAAdQ+k+AAAAPs3MTD0Pqhg/AACAvgAAAAAdQ+k+AAAAvs3MTD0Pqhg/AAAAvgAAAAAPqhg/AACAvs3MTD0dQ+k+AAAAPwAAAAAAAAC/AAAAv83MTD0AAAC/AAAAvwAAAAAAAAC/AAAAP83MTD0AAAC/AACAPgAAAAAdQ+k+AADAPs3MTD0Pqhg/AADAPgAAAAAPqhg/AACAPs3MTD0dQ+k+AAAAvwAAAAAAAAC/AAAAv83MTD0dQ+k+AAAAvwAAAAAdQ+k+AAAAv83MTD0AAAC/AAAAvgAAAAAPqhg/AAAAAM3MTD0dQ+k+AAAAAAAAAAAdQ+k+AAAAvs3MTD0Pqhg//38AAP//azb/fwAA//8VP/9/AAAzvP8//38AAP//zSr/fwAA////P/9/AAD///+//38AAP///z//fwAA////v/9/AAD///8//38AAP///7//fwAA////P/9//////+nA/3//////k8n/f///M7z/v/9//////zHV/3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////780PP9/////PzQ8/3////8/NDz/f////z80PP9/////P8rD/3////8/ysP/f////z/Kw/9/////P8rD/3////8/NDz/f////z80PP9/////PzQ8/3////8/NDz/f////z/Kw/9/////P8rD/3////8/ysP/f////z/Kw/9/////P////3////+/////f////7////9/////v////3////+/ysP/f////z/Kw/9/////P8rD/3////8/ysP/f////z80PP9/////PzQ8/3////8/NDz/f////z80PP9/////P/////////+//////////7//////////v/////////+/NDz/f////z80PP9/////PzQ8/3////8/NDz/f////z8AAP9/////vwAA/3////+/AAD/f////78AAP9/////v8rD/3////8/ysP/f////z/Kw/9/////P8rD/3////8/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_u22k0")
+
+[sub_resource type="Theme" id="Theme_q6c65"]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 128
+MarginContainer/constants/margin_bottom = 0
+MarginContainer/constants/margin_left = 50
+MarginContainer/constants/margin_right = 0
+MarginContainer/constants/margin_top = 0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_q6c65"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Ticket" instance=ExtResource("1_q10sx")]
+script = ExtResource("2_a733h")
+inertia_curve = null
+outline_shader = SubResource("ShaderMaterial_a733h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0" groups=["Ticket"]]
+transform = Transform3D(0.611684, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_q6c65")
+
+[node name="ticket" parent="." index="5" instance=ExtResource("2_og6eu")]
+
+[node name="Outline" type="MeshInstance3D" parent="ticket" index="1"]
+transform = Transform3D(0.611684, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_a733h")
+mesh = SubResource("ArrayMesh_gj66g")
+skeleton = NodePath("")
+
+[node name="SubViewport" type="SubViewport" parent="." index="6"]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(700, 1024)
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport" index="0"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_q6c65")
+
+[node name="FoodItems" type="VBoxContainer" parent="SubViewport/MarginContainer" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Sprite3D2" type="Sprite3D" parent="." index="7"]
+transform = Transform3D(0.0833079, 0, 0, 0, -3.6415e-09, 0.0833079, 0, -0.0833079, -3.6415e-09, 0, 0.0647723, -0.0491179)
+texture = SubResource("ViewportTexture_q6c65")
+
+[editable path="ticket"]
