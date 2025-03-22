@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3gtxah04qeqc"]
+
+[ext_resource type="Script" uid="uid://ca2kh106mi66k" path="res://spawning_machine/conveyor.gd" id="1_pndrd"]
+[ext_resource type="PackedScene" uid="uid://d3isokxgjsqt0" path="res://spawning_machine/conveyor.blend" id="1_ybgiq"]
+[ext_resource type="Shader" uid="uid://bhjuo82dhq580" path="res://spawning_machine/conveyor.gdshader" id="2_pndrd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ybgiq"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_pndrd")
+shader_parameter/speed = 1.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_m4epd"]
+points = PackedVector3Array(-4.60744e-05, -1, -2.548, -4.60744e-05, 1, -2.548, 0.0467736, -1, -2.54351, -0.0468657, -1, -2.54351, -0.0468657, 1, -2.54351, 0.0467736, 1, -2.54351, 0.091796, -1, -2.53004, -0.0918881, -1, -2.53004, -0.0918881, 1, -2.53004, 0.091796, 1, -2.53004, 0.133316, -1, -2.50759, -0.133362, -1, -2.50759, -0.133362, 1, -2.50759, 0.133316, 1, -2.50759, 0.169675, -1, -2.47816, -0.169721, -1, -2.47816, -0.169721, 1, -2.47816, 0.169675, 1, -2.47816, 0.199536, -1, -2.44175, -0.199583, -1, -2.44175, -0.199583, 1, -2.44175, 0.199536, 1, -2.44175, 0.221702, -1, -2.40035, -0.221748, -1, -2.40035, -0.221748, 1, -2.40035, 0.221702, 1, -2.40035, 0.235342, -1, -2.35495, -0.235388, -1, -2.35495, -0.235388, 1, -2.35495, 0.235342, 1, -2.35495, 0.235342, -1, 2.35445, -0.235388, -1, 2.35445, -0.235388, 1, 2.35445, 0.235342, 1, 2.35445, 0.221702, -1, 2.39935, -0.221748, -1, 2.39935, -0.221748, 1, 2.39935, 0.221702, 1, 2.39935, 0.199536, -1, 2.44125, -0.199583, -1, 2.44125, -0.199583, 1, 2.44125, 0.199536, 1, 2.44125, 0.169675, -1, 2.47766, -0.169721, -1, 2.47766, -0.169721, 1, 2.47766, 0.169675, 1, 2.47766, 0.133316, -1, 2.50709, -0.133362, -1, 2.50709, -0.133362, 1, 2.50709, 0.133316, 1, 2.50709, 0.091796, -1, 2.52954, -0.0918881, -1, 2.52954, -0.0918881, 1, 2.52954, 0.091796, 1, 2.52954, 0.0467736, -1, 2.54301, -0.0468657, -1, 2.54301, -0.0468657, 1, 2.54301, 0.0467736, 1, 2.54301, -4.60744e-05, -1, 2.548, -4.60744e-05, 1, 2.548)
+
+[node name="Conveyor" type="Node3D"]
+script = ExtResource("1_pndrd")
+shader = SubResource("ShaderMaterial_ybgiq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+unique_name_in_owner = true
+constant_linear_velocity = Vector3(0, 0, -0.9)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_m4epd")
+
+[node name="conveyor" parent="." instance=ExtResource("1_ybgiq")]
+
+[node name="Cylinder_001" parent="conveyor" index="0"]
+material_override = SubResource("ShaderMaterial_ybgiq")
+
+[editable path="conveyor"]

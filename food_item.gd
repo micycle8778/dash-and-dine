@@ -19,3 +19,6 @@ static func create(display_name: String) -> FoodItem:
 
 static func get_random_food_item() -> FoodItem:
 	return [Burger, Salad, Soup, Fruit, Soda, Coffee].pick_random()
+
+func equals(other: FoodItem) -> bool:
+	return display_name == other.display_name

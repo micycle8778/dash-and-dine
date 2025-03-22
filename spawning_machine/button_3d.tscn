@@ -1,0 +1,91 @@
+[gd_scene load_steps=9 format=4 uid="uid://bnkieq0nem3g6"]
+
+[ext_resource type="Script" uid="uid://dtypmqth014ix" path="res://spawning_machine/button_3d.gd" id="1_6c3xq"]
+[ext_resource type="PackedScene" uid="uid://bxwa3t0h8lemi" path="res://spawning_machine/button_3d.blend" id="2_70heo"]
+[ext_resource type="Shader" uid="uid://ba5uvtjdaxx07" path="res://grabbable/outline.gdshader" id="3_6c3xq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7qq1a"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_6c3xq")
+shader_parameter/enabled = false
+shader_parameter/x_expand = 1.1
+shader_parameter/y_expand = 1.1
+shader_parameter/z_expand = 1.1
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6c3xq"]
+points = PackedVector3Array(-0.102885, 0.352258, 0.316363, -0.102885, 0.352258, -0.316425, -0.102885, -0.352258, 0.316363, 0.0120484, 0.306674, 0.275478, 0.0120484, 0.306674, -0.27554, -0.102885, -0.352258, -0.316425, 0.0120372, -0.306743, 0.275478, 0.0120372, -0.306743, -0.27554)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rsc8h"]
+resource_name = "Material.002"
+cull_mode = 2
+albedo_color = Color(0.828554, 0.828554, 0.828554, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_r2fp8"]
+_surfaces = [{
+"aabb": AABB(-0.102885, -0.352258, -0.316425, 0.114934, 0.704517, 0.632849),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"name": "Material.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD//3HvjRAAAP7/jRBx7wAA//9x73HvAAD+/40QjRAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_38yxt"]
+resource_name = "button_3d_Cube_002"
+_surfaces = [{
+"aabb": AABB(-0.102885, -0.352258, -0.316425, 0.114934, 0.704517, 0.632849),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_rsc8h"),
+"name": "Material.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAAq9v//ce+NECr2AAD//wAAKvb+/40QjRAq9v7/jRCNEFTV//9x73HvVNX//3HvjRBU1f7/jRBx71TV/v+NEHHvLcEAAP////8twf//ce9x7y3BAAAAAP//LcEAAAAAAACDw/7/jRBx7yfA/v+NEI0QwsQAAAAA//8HwP//ce+NEPrtAAD/////bPsAAP//AAAf7P//ce9x71f+VNVU1VTVVNVU1VTVVNVU1ek66TrpOuk66TrpOuk66TqqKqoqqiqqKqoqqiqqKqoqbhBuEG4QbhBuEG4QbhBuEGoHJl0CHv1bswJkXVwh0VuJP/IDeTa6EABB4QHENCsT")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_r2fp8")
+
+[node name="Button3D" type="Node3D"]
+script = ExtResource("1_6c3xq")
+outline_shader = SubResource("ShaderMaterial_7qq1a")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.784776, -0.619779, 0, 0.619779, 0.784776, 0, 0, 0, 1, 0.0885339, 0.0697566, -0.00061761)
+shape = SubResource("ConvexPolygonShape3D_6c3xq")
+
+[node name="button_3d" parent="." instance=ExtResource("2_70heo")]
+
+[node name="Cube" parent="button_3d" index="0"]
+transform = Transform3D(0.784776, -0.619779, 0, 0.619779, 0.784776, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Cube_001" parent="button_3d" index="1"]
+transform = Transform3D(0.784776, -0.619779, 0, 0.619779, 0.784776, 0, 0, 0, 1, 0.0885339, 0.0697566, -0.00061761)
+
+[node name="Cube_002" type="MeshInstance3D" parent="button_3d"]
+transform = Transform3D(0.784776, -0.619779, 0, 0.619779, 0.784776, 0, 0, 0, 1, 0.100861, 0.0794719, -0.000324615)
+material_override = SubResource("ShaderMaterial_7qq1a")
+mesh = SubResource("ArrayMesh_38yxt")
+skeleton = NodePath("")
+
+[node name="Label3D" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, -0.614395, 0.788998, 0, 0.788998, 0.614395, -1, 2.68561e-08, -3.44882e-08, 0.0955914, 0.0842428, 8.90657e-09)
+modulate = Color(0, 0, 0, 1)
+outline_size = 0
+autowrap_mode = 2
+width = 130.0
+
+[editable path="button_3d"]

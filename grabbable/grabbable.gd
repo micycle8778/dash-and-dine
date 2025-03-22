@@ -9,7 +9,6 @@ enum State {
 
 const GRAV_MUL := 1.75
 
-@export var inertia_curve: Curve
 @export var outline_shader: ShaderMaterial
 
 var state: State = State.FREE:
@@ -75,6 +74,9 @@ func _ready() -> void:
 	$Label3D.text = "%.2f" % aabb.size.y
 	driver_cast.target_position.y = -(aabb.size.y / 2. + .05)
 
+	if outline_shader == null or not outline_shader.resource_local_to_scene:
+		push_error(get_path(), " does not have a unique outline shader!")
+
 var has_moved := false
 ## move grabbed object to specified global position
 func move_to(global_pos: Vector3, global_rot: Vector3, delta: float) -> void:
@@ -127,11 +129,3 @@ func _physics_process(delta: float) -> void:
 		driver.passengers.remove_at(driver.passengers.find(self))
 		driver = null
 		state = State.FREE
-
-func _on_body_exited(body:Node) -> void:
-	var grabbable := body as Grabbable
-	if state != State.PASSENGER: return
-	if body is not Grabbable: return
-	if body.state != State.GRABBED: return
-	grabbable.passengers.remove_at(grabbable.passengers.find(self))
-	state = State.FREE

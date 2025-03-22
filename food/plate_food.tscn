@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvwamwxca565f"]
+
+[ext_resource type="PackedScene" uid="uid://celoyr831c4cw" path="res://grabbable/grabbable.tscn" id="1_a2h0r"]
+[ext_resource type="Script" uid="uid://b2t8mhfssctcj" path="res://food/plate_food.gd" id="2_4cbfg"]
+
+[node name="PlateFood" instance=ExtResource("1_a2h0r")]
+script = ExtResource("2_4cbfg")
+food_item = null
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

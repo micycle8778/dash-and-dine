@@ -11,6 +11,7 @@ const MOUSE_SENSITIVITY: float = 0.0015
 @onready var camera: Camera3D = %Camera3D
 @onready var grab_raycast: RayCast3D = %GrabRaycast
 @onready var hold_distance_raycast: RayCast3D = %HoldDistanceRaycast
+@onready var button_raycast: RayCast3D = %ButtonRaycast
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -76,11 +77,14 @@ func _handle_holding(_delta: float) -> void:
 	holding.move_to(pos, global_rotation, _delta)
 
 var last_grabbable_hovered: Grabbable
-func _handle_hold_icon() -> void:
+func _handle_hold() -> void:
 	if holding != null: return
 
 	if grab_raycast.is_colliding():
 		var grabbable = grab_raycast.get_collider()
+
+		# apparently you can raycast a freed object??????
+		if grabbable == null: return
 
 		# check if we swapped to a different grabbable
 		if last_grabbable_hovered != null and grabbable != last_grabbable_hovered:
@@ -98,7 +102,25 @@ func _handle_hold_icon() -> void:
 		last_grabbable_hovered.disable_outline_shader()
 		last_grabbable_hovered = null
 
+var last_button_hovered: Button3D
+func _handle_button() -> void:
+	if button_raycast.is_colliding():
+		var button := button_raycast.get_collider().get_parent() as Button3D
+
+		if last_button_hovered != null and button != last_button_hovered:
+			last_button_hovered.disable_outline_shader()
+		last_button_hovered = button
+		last_button_hovered.enable_outline_shader()
+
+	elif last_button_hovered != null:
+		last_button_hovered.disable_outline_shader()
+		last_button_hovered = null
+
+	if last_button_hovered != null and Input.is_action_just_pressed("pickup"):
+		last_button_hovered.pressed.emit()
+
 func _process(delta: float) -> void:
 	_kinematics(delta)
-	_handle_hold_icon()
+	_handle_hold()
 	_handle_holding(delta)
+	_handle_button()

@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcdrq1lxcsxd7"]
+
+[ext_resource type="PackedScene" uid="uid://celoyr831c4cw" path="res://grabbable/grabbable.tscn" id="1_gwxra"]
+[ext_resource type="Script" uid="uid://jdjbu28v367n" path="res://grabbable/food_container/food_container.gd" id="2_6v5u3"]
+[ext_resource type="Script" uid="uid://b61oqqblniwdn" path="res://food_item.gd" id="3_6v5u3"]
+
+[node name="FoodContainer" instance=ExtResource("1_gwxra")]
+script = ExtResource("2_6v5u3")
+acceptable_foods = Array[ExtResource("3_6v5u3")]([])

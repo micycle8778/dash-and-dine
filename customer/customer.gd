@@ -17,7 +17,7 @@ func _check_for_grabbable(body: Node3D, predicate: Callable) -> Grabbable:
 	var grabbable := body as Grabbable
 	if grabbable.state != Grabbable.State.FREE: return null
 	if grabbable.linear_velocity.length() > .1: return null
-	if grabbable.still_time < 1.: return
+	if grabbable.still_time < .4: return
 	if not predicate.call(grabbable): return null
 	return grabbable
 
@@ -34,8 +34,9 @@ func _physics_process(_delta: float) -> void:
 			var ticket: Ticket = _check_for_grabbable(body, _is_valid_ticket)
 			ticket.written_in = true
 			ticket.state = Grabbable.State.ANIMATED
-			ticket.global_transform = ticket_transform
 
+			var t := create_tween().tween_property(ticket, "global_transform", ticket_transform, .15)
+			await t.finished
 			await get_tree().create_timer(3., false).timeout
 			
 			while desired_food_items.size() < 2:

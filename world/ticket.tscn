@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://celoyr831c4cw" path="res://grabbable/grabbable.tscn" id="1_q10sx"]
 [ext_resource type="Script" uid="uid://xjrrb5n406r0" path="res://world/ticket.gd" id="2_a733h"]
 [ext_resource type="PackedScene" uid="uid://u0djgmir05wj" path="res://world/ticket.blend" id="2_og6eu"]
-[ext_resource type="Shader" path="res://grabbable/outline.gdshader" id="3_q6c65"]
+[ext_resource type="Shader" uid="uid://ba5uvtjdaxx07" path="res://grabbable/outline.gdshader" id="3_q6c65"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a733h"]
 resource_local_to_scene = true
@@ -68,7 +68,6 @@ viewport_path = NodePath("SubViewport")
 
 [node name="Ticket" instance=ExtResource("1_q10sx")]
 script = ExtResource("2_a733h")
-inertia_curve = null
 outline_shader = SubResource("ShaderMaterial_a733h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0" groups=["Ticket"]]

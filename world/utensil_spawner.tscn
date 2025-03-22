@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://cilpu2u6opesq"]
+
+[ext_resource type="Script" uid="uid://eehgpyw22stc" path="res://world/utensil_spawner.gd" id="1_g3tqu"]
+[ext_resource type="PackedScene" uid="uid://bm63xcd308a4k" path="res://spawning_machine/spawning_machine.tscn" id="2_rqw4i"]
+[ext_resource type="PackedScene" uid="uid://bnkieq0nem3g6" path="res://spawning_machine/button_3d.tscn" id="3_qjir6"]
+[ext_resource type="Shader" uid="uid://ba5uvtjdaxx07" path="res://grabbable/outline.gdshader" id="4_fsxkb"]
+[ext_resource type="PackedScene" uid="uid://d3gtxah04qeqc" path="res://spawning_machine/conveyor.tscn" id="5_qjir6"]
+[ext_resource type="Shader" uid="uid://bhjuo82dhq580" path="res://spawning_machine/conveyor.gdshader" id="6_fsxkb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ocfjn"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_fsxkb")
+shader_parameter/enabled = false
+shader_parameter/x_expand = 1.1
+shader_parameter/y_expand = 1.1
+shader_parameter/z_expand = 1.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dqqhb"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_fsxkb")
+shader_parameter/enabled = false
+shader_parameter/x_expand = 1.1
+shader_parameter/y_expand = 1.1
+shader_parameter/z_expand = 1.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b2suy"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_fsxkb")
+shader_parameter/enabled = false
+shader_parameter/x_expand = 1.1
+shader_parameter/y_expand = 1.1
+shader_parameter/z_expand = 1.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5bw1f"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_fsxkb")
+shader_parameter/enabled = false
+shader_parameter/x_expand = 1.1
+shader_parameter/y_expand = 1.1
+shader_parameter/z_expand = 1.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2gm0f"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_fsxkb")
+shader_parameter/speed = 2.0
+
+[node name="UtensilSpawner" type="Node3D"]
+script = ExtResource("1_g3tqu")
+
+[node name="PlateButton" parent="." instance=ExtResource("3_qjir6")]
+transform = Transform3D(-0.840302, -0.228415, 0.491649, -0.262307, 0.964984, 0, -0.474433, -0.128963, -0.870794, -2.07515, 0.281873, 1.343)
+text = "plate"
+outline_shader = SubResource("ShaderMaterial_ocfjn")
+
+[node name="MugButton" parent="PlateButton" instance=ExtResource("3_qjir6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.472569, 0.596708, 0)
+text = "mug"
+outline_shader = SubResource("ShaderMaterial_dqqhb")
+
+[node name="BowlButton" parent="PlateButton/MugButton" instance=ExtResource("3_qjir6")]
+transform = Transform3D(1, -0.000909371, 0.00014925, 0.000909217, 0.999999, 0.00102568, -0.000150186, -0.00102555, 1, -0.472569, 0.596708, 0)
+text = "bowl"
+outline_shader = SubResource("ShaderMaterial_b2suy")
+
+[node name="TrayButton" parent="PlateButton/MugButton/BowlButton" instance=ExtResource("3_qjir6")]
+transform = Transform3D(1, 2.13163e-12, -1.45519e-11, 4.78906e-12, 1, 0, 0, 0, 1, -0.472569, 0.596708, 0)
+text = "tray"
+outline_shader = SubResource("ShaderMaterial_5bw1f")
+
+[node name="SpawningMachine" parent="." instance=ExtResource("2_rqw4i")]
+unique_name_in_owner = true
+
+[node name="Conveyor" parent="." instance=ExtResource("5_qjir6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.299903, -1.58092)
+shader = SubResource("ShaderMaterial_2gm0f")
+conveyor_speed = 2.0
+
+[connection signal="pressed" from="PlateButton" to="." method="_on_plate_button_pressed"]
+[connection signal="pressed" from="PlateButton/MugButton" to="." method="_on_mug_button_pressed"]
+[connection signal="pressed" from="PlateButton/MugButton/BowlButton" to="." method="_on_bowl_button_pressed"]
+[connection signal="pressed" from="PlateButton/MugButton/BowlButton/TrayButton" to="." method="_on_tray_button_pressed"]

@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://b0n8hvq0gl7rp"]
+
+[ext_resource type="Script" uid="uid://b8p773m00tsb8" path="res://world/plate_food_spawner.gd" id="1_51al4"]
+[ext_resource type="PackedScene" uid="uid://bnkieq0nem3g6" path="res://spawning_machine/button_3d.tscn" id="2_35db0"]
+[ext_resource type="Shader" uid="uid://ba5uvtjdaxx07" path="res://grabbable/outline.gdshader" id="3_e6my4"]
+[ext_resource type="PackedScene" uid="uid://bm63xcd308a4k" path="res://spawning_machine/spawning_machine.tscn" id="4_dhhnj"]
+[ext_resource type="PackedScene" uid="uid://d3gtxah04qeqc" path="res://spawning_machine/conveyor.tscn" id="5_1rwie"]
+[ext_resource type="Shader" uid="uid://bhjuo82dhq580" path="res://spawning_machine/conveyor.gdshader" id="6_jeb38"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ocfjn"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_e6my4")
+shader_parameter/enabled = false
+shader_parameter/x_expand = 1.1
+shader_parameter/y_expand = 1.1
+shader_parameter/z_expand = 1.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dqqhb"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_e6my4")
+shader_parameter/enabled = false
+shader_parameter/x_expand = 1.1
+shader_parameter/y_expand = 1.1
+shader_parameter/z_expand = 1.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2gm0f"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_jeb38")
+shader_parameter/speed = 2.0
+
+[node name="PlateFoodSpawner" type="Node3D"]
+script = ExtResource("1_51al4")
+
+[node name="BurgerButton" parent="." instance=ExtResource("2_35db0")]
+transform = Transform3D(0.741144, 0.201462, 0.640405, -0.262307, 0.964984, 7.19671e-09, -0.61798, -0.167983, 0.768038, 2.11115, 0.281873, 1.29553)
+text = "burger"
+outline_shader = SubResource("ShaderMaterial_ocfjn")
+
+[node name="SaladButton" parent="BurgerButton" instance=ExtResource("2_35db0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.472569, 0.596708, 0)
+text = "salad"
+outline_shader = SubResource("ShaderMaterial_dqqhb")
+
+[node name="SpawningMachine" parent="." instance=ExtResource("4_dhhnj")]
+unique_name_in_owner = true
+
+[node name="Conveyor" parent="." instance=ExtResource("5_1rwie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.299903, -1.58092)
+shader = SubResource("ShaderMaterial_2gm0f")
+conveyor_speed = 2.0
+
+[connection signal="pressed" from="BurgerButton" to="." method="_on_burger_button_pressed"]
+[connection signal="pressed" from="BurgerButton/SaladButton" to="." method="_on_salad_button_pressed"]
