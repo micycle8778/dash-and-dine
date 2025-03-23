@@ -33,7 +33,7 @@ var bobbing := true:
 @onready var ticket_transform = dummy_ticket.transform
 
 @onready var patience_label: Label3D = %PatienceLabel
-var patience := randf_range(50, 70)
+var patience := randf_range(80, 120)
 @onready var initial_patience := patience
 
 class Lifetime extends Node:
@@ -91,6 +91,9 @@ func _process(delta: float) -> void:
 	if state == State.SEATED or state == State.ORDERED:
 		patience -= delta * World.instance.difficulty
 		patience_label.text = "%.1f/%.1f" % [patience, initial_patience]
+
+		if patience <= 0:
+			state = State.LEAVING
 	
 	if bobbing:
 		bob_clock += delta * 2.5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bitfv6iqc8mwh"]
+[gd_scene load_steps=39 format=3 uid="uid://bitfv6iqc8mwh"]
 
 [ext_resource type="PackedScene" uid="uid://jgyasjf5x5fh" path="res://player/player.tscn" id="1_6xmxd"]
 [ext_resource type="Script" uid="uid://pbe2nre427ka" path="res://world/world.gd" id="1_tcf2h"]
@@ -6,7 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://ut4diejo6rsx" path="res://world/ticket_printer.tscn" id="9_4papg"]
 [ext_resource type="Script" uid="uid://62gn63hhfleb" path="res://world/customer_spawner.gd" id="9_fyhu2"]
 [ext_resource type="PackedScene" uid="uid://cpikm7nt00snq" path="res://world/piggy_bank.tscn" id="10_fyhu2"]
+[ext_resource type="Script" uid="uid://cikhht6ma4o64" path="res://world/stats.gd" id="10_mad0u"]
+[ext_resource type="FontFile" uid="uid://dctmqca3eeblm" path="res://fonts/CursedTimerUlil-Aznm.ttf" id="11_mad0u"]
 [ext_resource type="PackedScene" uid="uid://cilpu2u6opesq" path="res://world/utensil_spawner.tscn" id="11_ov2xu"]
+[ext_resource type="FontFile" uid="uid://dpuhqobm1nfoa" path="res://fonts/CourierPrime-Regular.ttf" id="12_b2suy"]
+[ext_resource type="Script" uid="uid://cu4umqfgvyjnu" path="res://world/bonus_time.gd" id="12_ocfjn"]
 [ext_resource type="PackedScene" uid="uid://b0n8hvq0gl7rp" path="res://world/plate_food_spawner.tscn" id="14_dqqhb"]
 [ext_resource type="PackedScene" uid="uid://cmg6qfaa8n7he" path="res://pour_machine/pour_machine.tscn" id="15_b2suy"]
 
@@ -113,6 +117,19 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_4papg"]
+viewport_path = NodePath("Stats/SubViewport")
+
+[sub_resource type="Theme" id="Theme_mad0u"]
+7Segment/base_type = &"Label"
+7Segment/colors/font_color = Color(1, 0, 0, 1)
+7Segment/font_sizes/font_size = 56
+7Segment/fonts/font = ExtResource("11_mad0u")
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("12_b2suy")
+
 [node name="World" type="Node3D"]
 script = ExtResource("1_tcf2h")
 
@@ -190,6 +207,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConvexPolygonShape3D_ysn08")
 
 [node name="PiggyBank" parent="." instance=ExtResource("10_fyhu2")]
+unique_name_in_owner = true
 transform = Transform3D(2.98023e-08, 0, -1, 0, 1, 0, 1, 0, 2.98023e-08, -5.09677, 1.91817, -0.0050869)
 
 [node name="TicketPrinter" parent="." instance=ExtResource("9_4papg")]
@@ -226,4 +244,99 @@ curve = SubResource("Curve3D_h8lre")
 wait_time = 30.0
 autostart = true
 
+[node name="Stats" type="Sprite3D" parent="."]
+transform = Transform3D(-2.63718e-08, 0, 0.603315, 0, 0.603315, 0, -0.603315, 0, -2.63718e-08, -5.47452, 3.96539, -0.000142336)
+texture = SubResource("ViewportTexture_4papg")
+script = ExtResource("10_mad0u")
+
+[node name="SubViewport" type="SubViewport" parent="Stats"]
+handle_input_locally = false
+size = Vector2i(768, 384)
+render_target_update_mode = 4
+
+[node name="Control" type="Control" parent="Stats/SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_mad0u")
+
+[node name="ColorRect" type="ColorRect" parent="Stats/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.925353, 0.925353, 0.925353, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Stats/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 398.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Stats/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 18.0
+offset_right = -18.0
+offset_bottom = 100.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Stats/SubViewport/Control/HBoxContainer"]
+layout_mode = 2
+text = "Time until end of shift: "
+
+[node name="ClockLabel" type="Label" parent="Stats/SubViewport/Control/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_type_variation = &"7Segment"
+text = "69:69.696"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Stats/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 18.0
+offset_top = 196.0
+offset_right = -18.0
+offset_bottom = 296.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Stats/SubViewport/Control/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Money Earned:"
+
+[node name="TotalLabel" type="Label" parent="Stats/SubViewport/Control/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_type_variation = &"7Segment"
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "$0.00"
+
+[node name="BonusTimeLabel" type="Label" parent="Stats/SubViewport/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 450.0
+offset_top = 95.0
+offset_right = 798.0
+offset_bottom = 146.0
+theme_type_variation = &"7Segment"
+theme_override_font_sizes/font_size = 28
+text = "BONUS TIME: 69.69"
+script = ExtResource("12_ocfjn")
+
+[connection signal="total_updated" from="PiggyBank" to="Stats" method="_on_piggy_bank_total_updated"]
 [connection signal="timeout" from="CustomerSpawner/SpawnTimer" to="CustomerSpawner" method="_on_spawn_timer_timeout"]

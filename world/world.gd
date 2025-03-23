@@ -14,3 +14,4 @@ func _process(delta: float) -> void:
 	difficulty += delta / 200
 	if Input.is_action_just_pressed("debug_reset"):
 		get_tree().reload_current_scene()
+

@@ -57,6 +57,7 @@ points = PackedVector3Array(-0.0958434, 0.00105157, -0.246459, -0.139876, -0.012
 
 [node name="Money" instance=ExtResource("1_4lytw")]
 script = ExtResource("2_faqr3")
+value = 5.0
 outline_shader = SubResource("ShaderMaterial_3dd8c")
 
 [node name="Plane_005" type="MeshInstance3D" parent="." index="4"]

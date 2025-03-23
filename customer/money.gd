@@ -2,7 +2,7 @@ class_name Money extends Grabbable
 
 @onready var value_label: Label3D = %ValueLabel
 
-var value: float = 5.:
+@export var value: float = 5.:
 	set(v):
 		value = v
 		_update_value()
