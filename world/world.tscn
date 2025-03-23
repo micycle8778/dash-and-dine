@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://bitfv6iqc8mwh"]
+[gd_scene load_steps=68 format=3 uid="uid://bitfv6iqc8mwh"]
 
 [ext_resource type="PackedScene" uid="uid://jgyasjf5x5fh" path="res://player/player.tscn" id="1_6xmxd"]
 [ext_resource type="Script" uid="uid://pbe2nre427ka" path="res://world/world.gd" id="1_tcf2h"]
@@ -25,6 +25,8 @@
 [ext_resource type="AudioStream" uid="uid://cfggl5imdl4jr" path="res://sfx/coin.wav" id="23_gi7ib"]
 [ext_resource type="AudioStream" uid="uid://b15op0e5lb11h" path="res://sfx/cash-register-purchase-87313.mp3" id="24_llyeo"]
 [ext_resource type="PackedScene" uid="uid://c2dvimpy52fkb" path="res://world/wall.tscn" id="25_0pnie"]
+[ext_resource type="Script" uid="uid://d2t4ys5ganatg" path="res://world/pause_menu.gd" id="26_llyeo"]
+[ext_resource type="FontFile" uid="uid://beermqri38tb5" path="res://fonts/SourGummy-VariableFont_wdth,wght.ttf" id="27_2tavo"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4717r"]
 
@@ -123,10 +125,17 @@ shader = ExtResource("14_b2suy")
 shader_parameter/modulate = 1.0
 shader_parameter/strength = 0.0
 
+[sub_resource type="Gradient" id="Gradient_2tavo"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k8wd0"]
+gradient = SubResource("Gradient_2tavo")
+fill_from = Vector2(0, 0.111111)
+
 [sub_resource type="Theme" id="Theme_m0cxt"]
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/font_sizes/font_size = 36
 Label/fonts/font = ExtResource("12_b2suy")
+VSlider/icons/grabber = SubResource("GradientTexture2D_k8wd0")
 
 [sub_resource type="Animation" id="Animation_h8lre"]
 length = 0.001
@@ -580,6 +589,105 @@ stream_3/stream = ExtResource("19_gi7ib")
 random_pitch = 1.2
 streams_count = 1
 stream_0/stream = ExtResource("21_0pnie")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t6bnd"]
+bg_color = Color(1, 0.27069, 0.241459, 1)
+border_width_bottom = 10
+border_color = Color(0.8, 0.096, 0.096, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 20.0
+expand_margin_right = 20.0
+expand_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6tl50"]
+bg_color = Color(1, 0.17, 0.17, 1)
+border_width_bottom = 30
+border_color = Color(0.8, 0.096, 0.096, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 20.0
+expand_margin_right = 20.0
+expand_margin_bottom = 15.0
+
+[sub_resource type="Gradient" id="Gradient_j7vgi"]
+offsets = PackedFloat32Array(0.540201, 0.580402)
+colors = PackedColorArray(0.88, 0.1496, 0.1496, 1, 0.83, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_inp7a"]
+gradient = SubResource("Gradient_j7vgi")
+width = 48
+height = 48
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_bwxdu"]
+offsets = PackedFloat32Array(0.540201, 0.580402)
+colors = PackedColorArray(0.831373, 0, 0, 1, 0.83, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lwhbe"]
+gradient = SubResource("Gradient_bwxdu")
+width = 48
+height = 48
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ftqqi"]
+bg_color = Color(1, 0.31, 0.31, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avd5l"]
+bg_color = Color(0.9, 0.198, 0.198, 1)
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ll3gq"]
+bg_color = Color(0.15, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+
+[sub_resource type="Theme" id="Theme_k8wd0"]
+Button/colors/font_color = Color(0.831373, 0, 0, 1)
+Button/colors/font_focus_color = Color(0.831373, 0, 0, 1)
+Button/colors/font_hover_color = Color(0.831373, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0.831373, 0, 0, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0.831373, 0, 0, 1)
+Button/constants/outline_size = 30
+Button/font_sizes/font_size = 96
+Button/fonts/font = ExtResource("27_2tavo")
+Button/styles/focus = SubResource("StyleBoxFlat_t6bnd")
+Button/styles/hover = SubResource("StyleBoxFlat_t6bnd")
+Button/styles/normal = SubResource("StyleBoxFlat_6tl50")
+Button/styles/pressed = SubResource("StyleBoxFlat_t6bnd")
+Label/colors/font_color = Color(0.831373, 0, 0, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 30
+Label/font_sizes/font_size = 69
+Label/fonts/font = ExtResource("27_2tavo")
+VSlider/icons/grabber = SubResource("GradientTexture2D_inp7a")
+VSlider/icons/grabber_highlight = SubResource("GradientTexture2D_lwhbe")
+VSlider/styles/grabber_area = SubResource("StyleBoxFlat_ftqqi")
+VSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_avd5l")
+VSlider/styles/slider = SubResource("StyleBoxFlat_ll3gq")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tavo"]
+bg_color = Color(0, 0, 0, 0.623529)
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_tcf2h")
@@ -1042,6 +1150,107 @@ light_energy = 6.86
 spot_range = 21.637
 spot_angle_attenuation = 0.101532
 
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+script = ExtResource("26_llyeo")
+
+[node name="Panel" type="Panel" parent="PauseMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_k8wd0")
+theme_override_styles/panel = SubResource("StyleBoxFlat_2tavo")
+
+[node name="Label" type="Label" parent="PauseMenu/Panel"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 37.0
+offset_right = 424.0
+offset_bottom = 177.0
+theme_override_font_sizes/font_size = 108
+text = "Paused"
+
+[node name="Button" type="Button" parent="PauseMenu/Panel/Label"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 431.0
+offset_right = 299.0
+offset_bottom = 555.0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 72
+text = "Resume"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/Panel"]
+layout_mode = 0
+offset_left = 502.0
+offset_top = 79.0
+offset_right = 1104.0
+offset_bottom = 603.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MusicVolSlider" type="VSlider" parent="PauseMenu/Panel/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+max_value = 1.2
+step = 0.01
+value = 1.0
+
+[node name="Label" type="Label" parent="PauseMenu/Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 48
+text = "Music"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PauseMenu/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SFXVolSlider" type="VSlider" parent="PauseMenu/Panel/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+max_value = 1.2
+step = 0.01
+value = 1.0
+
+[node name="Label" type="Label" parent="PauseMenu/Panel/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 48
+text = "SFX"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PauseMenu/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SensSlider" type="VSlider" parent="PauseMenu/Panel/HBoxContainer/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+min_value = -5.0
+max_value = 5.0
+step = 0.01
+
+[node name="Label" type="Label" parent="PauseMenu/Panel/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 48
+text = "Mouse Sens"
+
 [connection signal="total_updated" from="PiggyBank" to="Stats" method="_on_piggy_bank_total_updated"]
 [connection signal="timeout" from="CustomerSpawner/SpawnTimer" to="CustomerSpawner" method="_on_spawn_timer_timeout"]
 [connection signal="time_expired" from="Stats" to="EndScreen" method="_on_stats_time_expired"]
+[connection signal="value_changed" from="PauseMenu/Panel/HBoxContainer/VBoxContainer/MusicVolSlider" to="PauseMenu" method="_on_music_vol_slider_value_changed"]
+[connection signal="value_changed" from="PauseMenu/Panel/HBoxContainer/VBoxContainer2/SFXVolSlider" to="PauseMenu" method="_on_sfx_vol_slider_value_changed"]
+[connection signal="value_changed" from="PauseMenu/Panel/HBoxContainer/VBoxContainer3/SensSlider" to="PauseMenu" method="_on_sens_slider_value_changed"]

@@ -11,11 +11,8 @@ func _ready() -> void:
 	MouseStack.push(Input.MOUSE_MODE_CAPTURED)
 
 func _process(delta: float) -> void:
-	difficulty += delta / 225
+	difficulty += delta / 175
 	if Input.is_action_just_pressed("debug_reset") and OS.has_feature("editor"):
 		get_tree().reload_current_scene()
 
-
-func _on_stats_time_expired() -> void:
-	pass # Replace with function body.
 

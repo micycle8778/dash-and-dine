@@ -5,10 +5,11 @@ const save_file := "user://save.dat"
 var save_data := {
 	high_score = 0.,
 
-	main_vol = 0.,
-	music_vol = 0.,
-	sfx_vol = 0.,
-	vo_vol = 0.,
+	music_vol = 1.,
+	sfx_vol = 1.,
+	sens = 0.,
+
+	tutorial_completed = false
 }
 
 func _ready() -> void:
@@ -20,3 +21,15 @@ func save() -> void:
 func load_save() -> void:
 	if not FileAccess.file_exists(save_file): return
 	save_data = FileAccess.open(save_file, FileAccess.READ).get_var()
+	commit_volume()
+
+func commit_volume() -> void:
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index(&"Music"), save_data.music_vol)
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index(&"SFX"), save_data.sfx_vol)
+
+func sens_multiplier() -> float:
+	var s := save_data.sens as float
+	if s < 0.:
+		return 1. / (1 - s)
+	else:
+		return 1. + s

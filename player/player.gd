@@ -24,7 +24,7 @@ func _input(event: InputEvent) -> void:
 	if frozen: return
 
 	if event is InputEventMouseMotion:
-		var sens := MOUSE_SENSITIVITY # * Globals.sensitivity
+		var sens := MOUSE_SENSITIVITY * SaveSystem.sens_multiplier()
 		rotation.y -= event.relative.x * sens
 		camera.rotation.x = clampf(camera.rotation.x - event.relative.y * sens, -PI / 2 + 0.1, PI / 2)
 
