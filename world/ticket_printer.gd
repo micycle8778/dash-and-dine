@@ -13,10 +13,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if ticket == null:
 		ticket = ticket_scene.instantiate()
-		add_sibling(ticket)
-
 		ticket.state = Grabbable.State.ANIMATED
 		ticket.global_transform = start_transform
+		add_sibling(ticket)
+
+
 		var tween := create_tween() 
 		tween.tween_property(ticket, "global_transform", end_transform, 2.)
 		await tween.finished
