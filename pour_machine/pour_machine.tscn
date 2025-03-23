@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=4 uid="uid://cmg6qfaa8n7he"]
+[gd_scene load_steps=26 format=4 uid="uid://cmg6qfaa8n7he"]
 
 [ext_resource type="Script" uid="uid://co1i6d2e4r885" path="res://pour_machine/pour_machine.gd" id="1_du4yb"]
 [ext_resource type="PackedScene" uid="uid://divwvk8a61l4a" path="res://pour_machine/pour_machine.blend" id="1_lqr6v"]
 [ext_resource type="Texture2D" uid="uid://dgx8rnlpjmdus" path="res://pour_machine/pour_machine.png" id="2_du4yb"]
 [ext_resource type="PackedScene" uid="uid://bnkieq0nem3g6" path="res://spawning_machine/button_3d.tscn" id="4_41ee4"]
 [ext_resource type="Shader" uid="uid://ba5uvtjdaxx07" path="res://grabbable/outline.gdshader" id="5_n86hl"]
+[ext_resource type="AudioStream" uid="uid://buaupjmf6pta" path="res://sfx/beerpour-91033.wav" id="6_hr0ia"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lqr6v"]
 data = PackedVector3Array(-0.25, -0.0496, 0.1775, -0.25, 0.25, 0.25, -0.25, -0.0496, 0.25, -0.25, 0.25, 0.25, -0.25, -0.0496, 0.1775, -0.25, -0.0496, -0.25, -0.25, 0.25, 0.25, -0.25, -0.0496, -0.25, -0.25, 0.25, -0.25, -0.25, -0.0496, 0.25, -0.25, -0.3037, 0.1775, -0.25, -0.0496, 0.1775, -0.25, -0.0496, 0.25, -0.25, -0.3037, 0.25, -0.25, -0.3037, 0.1775, -0.25, -0.0496, -0.25, 0.25, 0.25, -0.25, -0.25, 0.25, -0.25, -0.25, -0.0496, -0.25, 0.25, -0.0496, -0.25, 0.25, 0.25, -0.25, 0.25, -0.0496, 0.1775, 0.25, 0.25, -0.25, 0.25, -0.0496, -0.25, 0.25, 0.25, -0.25, 0.25, -0.0496, 0.1775, 0.25, -0.0496, 0.25, 0.25, 0.25, -0.25, 0.25, -0.0496, 0.25, 0.25, 0.25, 0.25, 0.25, -0.0496, 0.1775, 0.25, -0.3037, 0.25, 0.25, -0.0496, 0.25, 0.25, -0.0496, 0.1775, 0.25, -0.3037, 0.1775, 0.25, -0.3037, 0.25, 0.25, -0.0496, 0.25, -0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, -0.0496, 0.25, -0.25, -0.0496, 0.25, -0.25, 0.25, 0.25, 0.25, -0.0496, 0.25, -0.25, -0.3037, 0.25, -0.25, -0.0496, 0.25, 0.25, -0.0496, 0.25, 0.25, -0.3037, 0.25, -0.25, -0.3037, 0.25, -0.25, -0.0496, -0.25, 0.25, -0.0496, 0.1775, 0.25, -0.0496, -0.25, -0.25, -0.0496, -0.25, -0.25, -0.0496, 0.1775, 0.25, -0.0496, 0.1775, 0.25, 0.25, -0.25, -0.25, 0.25, 0.25, -0.25, 0.25, -0.25, 0.25, 0.25, -0.25, 0.25, 0.25, 0.25, -0.25, 0.25, 0.25, -0.25, -0.3037, 0.1775, 0.25, -0.3037, 0.25, 0.25, -0.3037, 0.1775, -0.25, -0.3037, 0.1775, -0.25, -0.3037, 0.25, 0.25, -0.3037, 0.25, 0.25, -0.3037, 0.1775, -0.25, -0.3037, 0.1775, -0.25, -0.3037, 0.1775, -0.25, -0.3037, -0.2415, -0.25, -0.3037, 0.1775, 0.25, -0.3037, 0.1775, -0.25, -0.3037, -0.2415, 0.25, -0.3037, 0.1775, 0.25, -0.3037, -0.2415, 0.25, -0.3037, -0.2415, 0.25, -0.3037, 0.1775, 0.25, -0.3037, 0.1775, -0.25, -0.0496, 0.1775, 0.25, -0.3037, 0.1775, 0.25, -0.0496, 0.1775, -0.25, -0.0496, 0.1775, -0.25, -0.3037, 0.1775, 0.25, -0.3037, 0.1775, -0.25, -0.3037, 0.1775, 0.25, -0.3037, 0.1775, 0.25, -0.3037, 0.1775, -0.25, -0.3037, 0.1775, -0.25, -0.3037, 0.1775, 0.25, -0.3037, 0.1775, -0.25, -0.3037, -0.2415, -0.25, -0.2781, 0.1775, -0.25, -0.3037, 0.1775, -0.25, -0.3037, -0.2415, -0.25, -0.2781, -0.2415, -0.25, -0.2781, 0.1775, -0.25, -0.2781, 0.1775, 0.25, -0.2781, -0.2415, 0.25, -0.2781, 0.1775, -0.25, -0.2781, 0.1775, -0.25, -0.2781, -0.2415, 0.25, -0.2781, -0.2415, -0.25, -0.3037, 0.1775, 0.25, -0.2781, 0.1775, 0.25, -0.3037, 0.1775, -0.25, -0.3037, 0.1775, -0.25, -0.2781, 0.1775, 0.25, -0.2781, 0.1775, 0.25, -0.3037, 0.1775, 0.25, -0.2781, -0.2415, 0.25, -0.3037, -0.2415, 0.25, -0.3037, 0.1775, 0.25, -0.2781, 0.1775, 0.25, -0.2781, -0.2415, 0.25, -0.3037, -0.2415, -0.25, -0.2781, -0.2415, -0.25, -0.3037, -0.2415, 0.25, -0.3037, -0.2415, 0.25, -0.2781, -0.2415, -0.25, -0.2781, -0.2415)
@@ -30,6 +31,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_n86hl")
 shader_parameter/enabled = false
+shader_parameter/animated = true
 shader_parameter/x_expand = 1.1
 shader_parameter/y_expand = 1.1
 shader_parameter/z_expand = 1.1
@@ -39,6 +41,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_n86hl")
 shader_parameter/enabled = false
+shader_parameter/animated = true
 shader_parameter/x_expand = 1.1
 shader_parameter/y_expand = 1.1
 shader_parameter/z_expand = 1.1
@@ -48,6 +51,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_n86hl")
 shader_parameter/enabled = false
+shader_parameter/animated = true
 shader_parameter/x_expand = 1.1
 shader_parameter/y_expand = 1.1
 shader_parameter/z_expand = 1.1
@@ -57,6 +61,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_n86hl")
 shader_parameter/enabled = false
+shader_parameter/animated = true
 shader_parameter/x_expand = 1.1
 shader_parameter/y_expand = 1.1
 shader_parameter/z_expand = 1.1
@@ -94,6 +99,12 @@ size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6nvua"]
 albedo_color = Color(0.88, 0.73568, 0.1584, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hr0ia"]
+random_pitch = 1.05
+random_volume_offset_db = 5.0
+streams_count = 1
+stream_0/stream = ExtResource("6_hr0ia")
 
 [node name="PourMachine" type="Node3D"]
 script = ExtResource("1_du4yb")
@@ -202,6 +213,13 @@ mesh = SubResource("BoxMesh_d8jr5")
 transform = Transform3D(0.151524, 0.55878, -0.560218, 0.661449, 0.223583, 0.401914, 0.43424, -0.535551, -0.416725, -0.116587, -0.173415, 0.123313)
 material_override = SubResource("StandardMaterial3D_6nvua")
 mesh = SubResource("BoxMesh_d8jr5")
+
+[node name="PourSFX" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.729936, -0.153394)
+stream = SubResource("AudioStreamRandomizer_hr0ia")
+volume_db = -2.0
+bus = &"Music"
 
 [connection signal="pressed" from="SoupButton" to="." method="_on_soup_button_pressed"]
 [connection signal="pressed" from="SoupButton/FruitButton" to="." method="_on_fruit_button_pressed"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=4 uid="uid://ut4diejo6rsx"]
+[gd_scene load_steps=13 format=4 uid="uid://ut4diejo6rsx"]
 
 [ext_resource type="PackedScene" uid="uid://cf0mxnui0opmk" path="res://world/ticket_printer.blend" id="1_cplob"]
 [ext_resource type="Script" uid="uid://d0wxlj7g428mw" path="res://world/ticket_printer.gd" id="1_sevbx"]
 [ext_resource type="PackedScene" uid="uid://c042pmytv5ng2" path="res://world/ticket.tscn" id="3_qq7on"]
 [ext_resource type="Shader" uid="uid://ba5uvtjdaxx07" path="res://grabbable/outline.gdshader" id="4_rj3g5"]
+[ext_resource type="AudioStream" uid="uid://chlv7d8ubwdci" path="res://sfx/receipt-printing-82897.wav" id="5_qq7on"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cplob"]
 albedo_color = Color(0, 0, 0, 1)
@@ -47,6 +48,12 @@ shader_parameter/z_expand = 1.1
 [sub_resource type="BoxShape3D" id="BoxShape3D_sevbx"]
 size = Vector3(1, 0.127731, 1)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rj3g5"]
+random_pitch = 1.05
+random_volume_offset_db = 5.0
+streams_count = 1
+stream_0/stream = ExtResource("5_qq7on")
+
 [node name="TicketPrinter" type="StaticBody3D"]
 script = ExtResource("1_sevbx")
 
@@ -76,5 +83,10 @@ outline_shader = SubResource("ShaderMaterial_sevbx")
 [node name="TicketSupport" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.074791, 0)
 shape = SubResource("BoxShape3D_sevbx")
+
+[node name="PrintSFX" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_rj3g5")
+volume_db = -10.0
 
 [editable path="ticket_printer"]

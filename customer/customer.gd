@@ -13,7 +13,7 @@ var state = State.APPROACHING:
 		state = v
 		bobbing = state in [State.APPROACHING, State.LEAVING]
 
-		if state == State.LEAVING:
+		if state == State.LEAVING and patience != 0.:
 			Globals.customer_leaves.emit(patience / initial_patience)
 
 @export var head_material: StandardMaterial3D

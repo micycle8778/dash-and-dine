@@ -29,7 +29,6 @@ func _process(delta: float) -> void:
 					_get_random_path().add_child(path_follow)
 					path_follow.progress = 0
 				else:
-					print("hai")
 					customer.state = Customer.State.SEATED
 		elif customer.state == Customer.State.LEAVING:
 			path_follow.progress -= delta * WALK_SPEED
@@ -46,7 +45,7 @@ func _remove_customer(customer: Customer) -> void:
 		customers.erase(customer)
 
 func _on_spawn_timer_timeout() -> void:
-	spawn_timer.start(spawn_timer.wait_time - 0.2)
+	spawn_timer.start(spawn_timer.wait_time - .5)
 	if customers.size() >= 5: return
 
 	var customer: Customer = customer_scene.instantiate()

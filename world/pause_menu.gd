@@ -29,3 +29,6 @@ func _on_music_vol_slider_value_changed(value:float) -> void:
 	SaveSystem.save_data.music_vol = value
 	SaveSystem.commit_volume()
 
+func _on_resume_button_pressed() -> void:
+	unpause()
+

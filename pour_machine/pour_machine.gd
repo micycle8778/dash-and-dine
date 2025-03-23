@@ -7,6 +7,8 @@ var filled_container: FoodContainer
 @onready var area: Area3D = %Area3D
 @onready var pos: Vector3 = %Pos.global_position
 
+@onready var pour_sfx: AudioStreamPlayer3D = %PourSFX
+
 @onready var soda_vfx: Node3D = %SodaVFX
 @onready var coffee_vfx: Node3D = %CoffeeVFX
 @onready var soup_vfx: Node3D = %SoupVFX
@@ -63,7 +65,8 @@ func _pour(food_item: FoodItem) -> void:
 
 	var vfx := _get_vfx(food_item)
 	vfx.visible = true
-	await get_tree().create_timer(5., false).timeout
+	pour_sfx.play()
+	await pour_sfx.finished
 	vfx.visible = false
 
 	pouring = false

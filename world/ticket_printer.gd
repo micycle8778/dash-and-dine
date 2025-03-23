@@ -3,6 +3,7 @@ extends StaticBody3D
 var ticket_scene := preload("res://world/ticket.tscn")
 var ticket: Ticket = null
 
+@onready var print_sfx: AudioStreamPlayer3D = %PrintSFX
 @onready var start_transform: Transform3D = %TicketStart.global_transform
 @onready var end_transform: Transform3D = %TicketEnd.global_transform
 
@@ -20,6 +21,7 @@ func _process(delta: float) -> void:
 
 		var tween := create_tween() 
 		tween.tween_property(ticket, "global_transform", end_transform, 2.)
+		print_sfx.play()
 		await tween.finished
 
 		ticket.state = Grabbable.State.FREE

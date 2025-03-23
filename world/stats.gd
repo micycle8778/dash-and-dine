@@ -3,7 +3,7 @@ class_name Stats extends Sprite3D
 signal time_expired
 
 var total_bonus_time := 0.
-var clock := 300.
+var clock := 180.
 var running := true
 
 @onready var piggy_bank: PiggyBank = %PiggyBank
