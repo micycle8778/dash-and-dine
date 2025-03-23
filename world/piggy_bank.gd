@@ -11,5 +11,6 @@ var total: float = 0:
 func _on_body_entered(body:Node3D) -> void:
 	if body is Money:
 		total += (body as Money).value
+		%OinkSFX.play()
 		body.queue_free()
 

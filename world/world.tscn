@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bitfv6iqc8mwh"]
+[gd_scene load_steps=57 format=3 uid="uid://bitfv6iqc8mwh"]
 
 [ext_resource type="PackedScene" uid="uid://jgyasjf5x5fh" path="res://player/player.tscn" id="1_6xmxd"]
 [ext_resource type="Script" uid="uid://pbe2nre427ka" path="res://world/world.gd" id="1_tcf2h"]
@@ -11,8 +11,18 @@
 [ext_resource type="PackedScene" uid="uid://cilpu2u6opesq" path="res://world/utensil_spawner.tscn" id="11_ov2xu"]
 [ext_resource type="FontFile" uid="uid://dpuhqobm1nfoa" path="res://fonts/CourierPrime-Regular.ttf" id="12_b2suy"]
 [ext_resource type="Script" uid="uid://cu4umqfgvyjnu" path="res://world/bonus_time.gd" id="12_ocfjn"]
+[ext_resource type="Script" uid="uid://deg1mals8wypl" path="res://world/end_screen.gd" id="14_3ljsx"]
+[ext_resource type="Shader" uid="uid://8sou8felth8b" path="res://blur.gdshader" id="14_b2suy"]
 [ext_resource type="PackedScene" uid="uid://b0n8hvq0gl7rp" path="res://world/plate_food_spawner.tscn" id="14_dqqhb"]
 [ext_resource type="PackedScene" uid="uid://cmg6qfaa8n7he" path="res://pour_machine/pour_machine.tscn" id="15_b2suy"]
+[ext_resource type="AudioStream" uid="uid://y5l4bifg8ggj" path="res://sfx/referee-whistle-blow-gymnasium-6320.mp3" id="15_h8lre"]
+[ext_resource type="Texture2D" uid="uid://dkj6ase2vaup" path="res://wp2748727-3226810524.png" id="15_ysn08"]
+[ext_resource type="AudioStream" uid="uid://ipqhg27uinjc" path="res://sfx/typewriter-01.wav" id="16_aysyn"]
+[ext_resource type="AudioStream" uid="uid://bo07jl406nmh3" path="res://sfx/typewriter-02.wav" id="17_o1net"]
+[ext_resource type="AudioStream" uid="uid://cmiixtrkuvpju" path="res://sfx/typewriter-03.wav" id="18_3ljsx"]
+[ext_resource type="AudioStream" uid="uid://jigjxi07u23v" path="res://sfx/typewriter-04.wav" id="19_gi7ib"]
+[ext_resource type="AudioStream" uid="uid://bt7qeyseb27m5" path="res://sfx/traditional-stamp-44189.wav" id="21_0pnie"]
+[ext_resource type="AudioStream" uid="uid://cfggl5imdl4jr" path="res://sfx/coin.wav" id="23_gi7ib"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4717r"]
 
@@ -130,6 +140,468 @@ Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/font_sizes/font_size = 24
 Label/fonts/font = ExtResource("12_b2suy")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h8lre"]
+shader = ExtResource("14_b2suy")
+shader_parameter/modulate = 1.0
+shader_parameter/strength = 0.0
+
+[sub_resource type="Theme" id="Theme_m0cxt"]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 36
+Label/fonts/font = ExtResource("12_b2suy")
+
+[sub_resource type="Animation" id="Animation_b2suy"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:material:shader_parameter/modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:material:shader_parameter/strength")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WhistleSFX:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_h8lre"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:material:shader_parameter/modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:material:shader_parameter/strength")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel/TextureRect:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1152, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer/Label:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer/ServedLabel:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer2/Label:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer2/SatisfactionLabel:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer3/Label:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer3/OvertimeLabel:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer4/Label:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer4/ScoreLabel:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("TypewriterSFX:playing")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("StampSFX:playing")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer5/Label:visible")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer5/LostLabel:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("WhistleSFX:playing")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_llyeo"]
+resource_name = "slide_in"
+length = 13.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.258817, 1),
+"update": 0,
+"values": [Vector2(-1152, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer/Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer/ServedLabel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer2/Label:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer2/SatisfactionLabel:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer3/Label:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer3/OvertimeLabel:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer4/Label:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer4/ScoreLabel:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 11),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("TypewriterSFX:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 2, 4, 6, 8, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, true, true, true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("StampSFX:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 3, 5, 7, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, true, true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer5/Label:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Panel/TextureRect/VBoxContainer/HBoxContainer5/LostLabel:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/13/type = "method"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath(".")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(11),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_anim_score_label_visible"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ysn08"]
+_data = {
+&"RESET": SubResource("Animation_h8lre"),
+&"fade_in": SubResource("Animation_b2suy"),
+&"slide_in": SubResource("Animation_llyeo")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2tavo"]
+streams_count = 4
+stream_0/stream = ExtResource("16_aysyn")
+stream_1/stream = ExtResource("17_o1net")
+stream_2/stream = ExtResource("18_3ljsx")
+stream_3/stream = ExtResource("19_gi7ib")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_aysyn"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("21_0pnie")
+
 [node name="World" type="Node3D"]
 script = ExtResource("1_tcf2h")
 
@@ -245,6 +717,7 @@ wait_time = 30.0
 autostart = true
 
 [node name="Stats" type="Sprite3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(-2.63718e-08, 0, 0.603315, 0, 0.603315, 0, -0.603315, 0, -2.63718e-08, -5.47452, 3.96539, -0.000142336)
 texture = SubResource("ViewportTexture_4papg")
 script = ExtResource("10_mad0u")
@@ -301,7 +774,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 theme_type_variation = &"7Segment"
-text = "69:69.696"
+text = "69:69.420"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Stats/SubViewport/Control"]
 layout_mode = 1
@@ -338,5 +811,253 @@ theme_override_font_sizes/font_size = 28
 text = "BONUS TIME: 69.69"
 script = ExtResource("12_ocfjn")
 
+[node name="EndScreen" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("14_3ljsx")
+
+[node name="Panel" type="Panel" parent="EndScreen"]
+modulate = Color(1, 1, 1, 0)
+material = SubResource("ShaderMaterial_h8lre")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="EndScreen/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="EndScreen/Panel/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.5
+offset_top = -48.0
+offset_right = 280.5
+offset_bottom = 177.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 50
+theme_override_font_sizes/font_size = 164
+text = "OVER"
+
+[node name="Label" type="Label" parent="EndScreen/Panel/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -195.0
+offset_right = 193.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 50
+theme_override_font_sizes/font_size = 164
+text = "SHIFT"
+
+[node name="TextureRect" type="TextureRect" parent="EndScreen/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1152.0
+offset_right = -1152.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_m0cxt")
+texture = ExtResource("15_ysn08")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="EndScreen/Panel/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -364.5
+offset_top = 87.0
+offset_right = 364.5
+offset_bottom = 159.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "EMPLOYEE EVALUATION"
+
+[node name="ColorRect" type="ColorRect" parent="EndScreen/Panel/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -436.0
+offset_top = 174.0
+offset_right = 364.0
+offset_bottom = 174.5
+grow_horizontal = 2
+scale = Vector2(1.08018, 9.42014)
+color = Color(0, 0, 0, 0.839216)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndScreen/Panel/TextureRect"]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 196.0
+offset_right = 993.0
+offset_bottom = 481.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EndScreen/Panel/TextureRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EndScreen/Panel/TextureRect/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Customers Served:"
+
+[node name="ServedLabel" type="Label" parent="EndScreen/Panel/TextureRect/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 10
+text = "69"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="EndScreen/Panel/TextureRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EndScreen/Panel/TextureRect/VBoxContainer/HBoxContainer5"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Customers Lost:"
+
+[node name="LostLabel" type="Label" parent="EndScreen/Panel/TextureRect/VBoxContainer/HBoxContainer5"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_color = Color(0.82, 0.0246, 0.0246, 1)
+text = "13"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="EndScreen/Panel/TextureRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EndScreen/Panel/TextureRect/VBoxContainer/HBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Average Customer Satisfaction:"
+
+[node name="SatisfactionLabel" type="Label" parent="EndScreen/Panel/TextureRect/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 10
+text = "420%"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="EndScreen/Panel/TextureRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EndScreen/Panel/TextureRect/VBoxContainer/HBoxContainer3"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Overtime Worked:"
+
+[node name="OvertimeLabel" type="Label" parent="EndScreen/Panel/TextureRect/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 10
+text = "3:14.159"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="EndScreen/Panel/TextureRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="Label" type="Label" parent="EndScreen/Panel/TextureRect/VBoxContainer/HBoxContainer4"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 56
+text = "Money Earned:"
+
+[node name="ScoreLabel" type="Label" parent="EndScreen/Panel/TextureRect/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 96
+text = "$42.24"
+
+[node name="HighScoreLabel" type="Label" parent="EndScreen/Panel/TextureRect"]
+visible = false
+layout_mode = 2
+offset_left = 146.0
+offset_top = 495.0
+offset_right = 993.0
+offset_bottom = 567.0
+theme_override_colors/font_color = Color(0.1694, 0.56, 0.0392, 1)
+theme_override_font_sizes/font_size = 64
+text = "NEW HIGH SCORE!"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EndScreen"]
+libraries = {
+&"": SubResource("AnimationLibrary_ysn08")
+}
+
+[node name="TypewriterSFX" type="AudioStreamPlayer" parent="EndScreen"]
+stream = SubResource("AudioStreamRandomizer_2tavo")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="WhistleSFX" type="AudioStreamPlayer" parent="EndScreen"]
+stream = ExtResource("15_h8lre")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="StampSFX" type="AudioStreamPlayer" parent="EndScreen"]
+stream = SubResource("AudioStreamRandomizer_aysyn")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="ScoreTickSFX" type="AudioStreamPlayer" parent="EndScreen"]
+unique_name_in_owner = true
+stream = ExtResource("23_gi7ib")
+bus = &"SFX"
+
+[node name="HighScoreSFX" type="AudioStreamPlayer" parent="EndScreen"]
+unique_name_in_owner = true
+stream = ExtResource("23_gi7ib")
+volume_db = -8.0
+bus = &"SFX"
+
 [connection signal="total_updated" from="PiggyBank" to="Stats" method="_on_piggy_bank_total_updated"]
 [connection signal="timeout" from="CustomerSpawner/SpawnTimer" to="CustomerSpawner" method="_on_spawn_timer_timeout"]
+[connection signal="time_expired" from="Stats" to="EndScreen" method="_on_stats_time_expired"]

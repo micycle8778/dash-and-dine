@@ -125,6 +125,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	var grabbable: Grabbable = driver_cast.get_collider()
+	if grabbable == null: return
 	var is_passenger = driver_cast.is_colliding() and grabbable.state == State.GRABBED
 	if is_passenger and state != State.PASSENGER:
 		driver = grabbable

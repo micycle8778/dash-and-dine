@@ -11,9 +11,10 @@ enum State {
 var state = State.APPROACHING:
 	set(v):
 		state = v
-		if is_node_ready():
-			patience = initial_patience
 		bobbing = state in [State.APPROACHING, State.LEAVING]
+
+		if state == State.LEAVING:
+			Globals.customer_leaves.emit(patience / initial_patience)
 
 var money_scene := preload("res://customer/money.tscn")
 var desired_food_items: Array[FoodItem]
@@ -90,10 +91,11 @@ func _throw_fit(at_player: bool) -> void:
 func _process(delta: float) -> void:
 	if state == State.SEATED or state == State.ORDERED:
 		patience -= delta * World.instance.difficulty
-		patience_label.text = "%.1f/%.1f" % [patience, initial_patience]
 
 		if patience <= 0:
+			Globals.angry_customer.emit()
 			state = State.LEAVING
+	patience_label.text = "%.1f/%.1f" % [patience, initial_patience]
 	
 	if bobbing:
 		bob_clock += delta * 2.5
@@ -114,6 +116,7 @@ func _physics_process(_delta: float) -> void:
 			await get_tree().create_timer(3., false).timeout
 
 			state = State.ORDERED
+			patience *= 1.5
 			
 			while desired_food_items.size() < 2:
 				var food_item := FoodItem.get_random_food_item()
@@ -150,6 +153,7 @@ func _physics_process(_delta: float) -> void:
 
 				var value := 30 * (patience / initial_patience)
 				state = State.PAYING
+				Globals.customer_served.emit()
 
 				await get_tree().create_timer(2., false).timeout
 

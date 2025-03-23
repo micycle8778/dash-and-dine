@@ -15,3 +15,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("debug_reset"):
 		get_tree().reload_current_scene()
 
+
+func _on_stats_time_expired() -> void:
+	pass # Replace with function body.
+
