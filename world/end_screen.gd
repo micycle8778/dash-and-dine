@@ -33,6 +33,9 @@ func _on_customer_leaves(s: float) -> void:
 	satisfaction = (satisfaction * satisfaction_count + s) / (satisfaction_count + 1)
 	satisfaction_count += 1
 
+	SaveSystem.save_data.tutorial_completed = true
+	SaveSystem.save()
+
 func _ready() -> void:
 	Globals.customer_served.connect(_on_customer_served)
 	Globals.angry_customer.connect(_on_angry_customer)

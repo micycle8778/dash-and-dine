@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://cmg6qfaa8n7he"]
+[gd_scene load_steps=32 format=4 uid="uid://cmg6qfaa8n7he"]
 
 [ext_resource type="Script" uid="uid://co1i6d2e4r885" path="res://pour_machine/pour_machine.gd" id="1_du4yb"]
 [ext_resource type="PackedScene" uid="uid://divwvk8a61l4a" path="res://pour_machine/pour_machine.blend" id="1_lqr6v"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bnkieq0nem3g6" path="res://spawning_machine/button_3d.tscn" id="4_41ee4"]
 [ext_resource type="Shader" uid="uid://ba5uvtjdaxx07" path="res://grabbable/outline.gdshader" id="5_n86hl"]
 [ext_resource type="AudioStream" uid="uid://buaupjmf6pta" path="res://sfx/beerpour-91033.wav" id="6_hr0ia"]
+[ext_resource type="AudioStream" uid="uid://ceaam1j5f6sp" path="res://sfx/small-explosion-103931.mp3" id="7_m1tdr"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lqr6v"]
 data = PackedVector3Array(-0.25, -0.0496, 0.1775, -0.25, 0.25, 0.25, -0.25, -0.0496, 0.25, -0.25, 0.25, 0.25, -0.25, -0.0496, 0.1775, -0.25, -0.0496, -0.25, -0.25, 0.25, 0.25, -0.25, -0.0496, -0.25, -0.25, 0.25, -0.25, -0.25, -0.0496, 0.25, -0.25, -0.3037, 0.1775, -0.25, -0.0496, 0.1775, -0.25, -0.0496, 0.25, -0.25, -0.3037, 0.25, -0.25, -0.3037, 0.1775, -0.25, -0.0496, -0.25, 0.25, 0.25, -0.25, -0.25, 0.25, -0.25, -0.25, -0.0496, -0.25, 0.25, -0.0496, -0.25, 0.25, 0.25, -0.25, 0.25, -0.0496, 0.1775, 0.25, 0.25, -0.25, 0.25, -0.0496, -0.25, 0.25, 0.25, -0.25, 0.25, -0.0496, 0.1775, 0.25, -0.0496, 0.25, 0.25, 0.25, -0.25, 0.25, -0.0496, 0.25, 0.25, 0.25, 0.25, 0.25, -0.0496, 0.1775, 0.25, -0.3037, 0.25, 0.25, -0.0496, 0.25, 0.25, -0.0496, 0.1775, 0.25, -0.3037, 0.1775, 0.25, -0.3037, 0.25, 0.25, -0.0496, 0.25, -0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, -0.0496, 0.25, -0.25, -0.0496, 0.25, -0.25, 0.25, 0.25, 0.25, -0.0496, 0.25, -0.25, -0.3037, 0.25, -0.25, -0.0496, 0.25, 0.25, -0.0496, 0.25, 0.25, -0.3037, 0.25, -0.25, -0.3037, 0.25, -0.25, -0.0496, -0.25, 0.25, -0.0496, 0.1775, 0.25, -0.0496, -0.25, -0.25, -0.0496, -0.25, -0.25, -0.0496, 0.1775, 0.25, -0.0496, 0.1775, 0.25, 0.25, -0.25, -0.25, 0.25, 0.25, -0.25, 0.25, -0.25, 0.25, 0.25, -0.25, 0.25, 0.25, 0.25, -0.25, 0.25, 0.25, -0.25, -0.3037, 0.1775, 0.25, -0.3037, 0.25, 0.25, -0.3037, 0.1775, -0.25, -0.3037, 0.1775, -0.25, -0.3037, 0.25, 0.25, -0.3037, 0.25, 0.25, -0.3037, 0.1775, -0.25, -0.3037, 0.1775, -0.25, -0.3037, 0.1775, -0.25, -0.3037, -0.2415, -0.25, -0.3037, 0.1775, 0.25, -0.3037, 0.1775, -0.25, -0.3037, -0.2415, 0.25, -0.3037, 0.1775, 0.25, -0.3037, -0.2415, 0.25, -0.3037, -0.2415, 0.25, -0.3037, 0.1775, 0.25, -0.3037, 0.1775, -0.25, -0.0496, 0.1775, 0.25, -0.3037, 0.1775, 0.25, -0.0496, 0.1775, -0.25, -0.0496, 0.1775, -0.25, -0.3037, 0.1775, 0.25, -0.3037, 0.1775, -0.25, -0.3037, 0.1775, 0.25, -0.3037, 0.1775, 0.25, -0.3037, 0.1775, -0.25, -0.3037, 0.1775, -0.25, -0.3037, 0.1775, 0.25, -0.3037, 0.1775, -0.25, -0.3037, -0.2415, -0.25, -0.2781, 0.1775, -0.25, -0.3037, 0.1775, -0.25, -0.3037, -0.2415, -0.25, -0.2781, -0.2415, -0.25, -0.2781, 0.1775, -0.25, -0.2781, 0.1775, 0.25, -0.2781, -0.2415, 0.25, -0.2781, 0.1775, -0.25, -0.2781, 0.1775, -0.25, -0.2781, -0.2415, 0.25, -0.2781, -0.2415, -0.25, -0.3037, 0.1775, 0.25, -0.2781, 0.1775, 0.25, -0.3037, 0.1775, -0.25, -0.3037, 0.1775, -0.25, -0.2781, 0.1775, 0.25, -0.2781, 0.1775, 0.25, -0.3037, 0.1775, 0.25, -0.2781, -0.2415, 0.25, -0.3037, -0.2415, 0.25, -0.3037, 0.1775, 0.25, -0.2781, 0.1775, 0.25, -0.2781, -0.2415, 0.25, -0.3037, -0.2415, -0.25, -0.2781, -0.2415, -0.25, -0.3037, -0.2415, 0.25, -0.3037, -0.2415, 0.25, -0.2781, -0.2415, -0.25, -0.2781, -0.2415)
@@ -105,6 +106,28 @@ random_pitch = 1.05
 random_volume_offset_db = 5.0
 streams_count = 1
 stream_0/stream = ExtResource("6_hr0ia")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1tdr"]
+transparency = 1
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_rv0n3"]
+material = SubResource("StandardMaterial3D_m1tdr")
+radius = 0.188
+height = 0.375
+
+[sub_resource type="Gradient" id="Gradient_38cki"]
+offsets = PackedFloat32Array(0.549223, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_d8jr5"]
+material = SubResource("StandardMaterial3D_m1tdr")
+radius = 0.188
+height = 0.375
+
+[sub_resource type="Gradient" id="Gradient_pqm53"]
+offsets = PackedFloat32Array(0, 0.391192)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="PourMachine" type="Node3D"]
 script = ExtResource("1_du4yb")
@@ -220,6 +243,52 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.729936, -0.153394)
 stream = SubResource("AudioStreamRandomizer_hr0ia")
 volume_db = -2.0
 bus = &"Music"
+
+[node name="ExplosionVFX" type="CPUParticles3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.505705, 0)
+emitting = false
+amount = 12
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("SphereMesh_rv0n3")
+direction = Vector3(0, 0.25, -1)
+spread = 37.77
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+color = Color(0.94, 0.344667, 0, 0.988235)
+color_ramp = SubResource("Gradient_38cki")
+
+[node name="SmokeVFX" type="CPUParticles3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.47984, -0.0751961)
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 0.77
+mesh = SubResource("SphereMesh_d8jr5")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.26
+emission_ring_radius = 0.5
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+color = Color(0.1, 0.1, 0.1, 0.494118)
+color_ramp = SubResource("Gradient_pqm53")
+
+[node name="ExplosionSFX" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.530911, 0)
+stream = ExtResource("7_m1tdr")
+volume_db = -15.0
+bus = &"SFX"
 
 [connection signal="pressed" from="SoupButton" to="." method="_on_soup_button_pressed"]
 [connection signal="pressed" from="SoupButton/FruitButton" to="." method="_on_fruit_button_pressed"]

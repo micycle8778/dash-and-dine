@@ -2,6 +2,9 @@ class_name Tray extends Grabbable
 
 @onready var area: Area3D = %Area3D
 
+func _ready() -> void:
+	Globals.made_tray.emit()
+
 func get_food_containers() -> Array[FoodContainer]:
 	var ret: Array[FoodContainer] = []
 	for body in area.get_overlapping_bodies():

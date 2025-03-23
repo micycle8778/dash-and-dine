@@ -39,7 +39,7 @@ var bobbing := true:
 @onready var ticket_transform = dummy_ticket.transform
 
 @onready var patience_label: Label3D = %PatienceLabel
-var patience := randf_range(80, 120)
+var patience := randf_range(160, 240)
 @onready var initial_patience := patience
 
 class Lifetime extends Node:
@@ -125,11 +125,17 @@ func _physics_process(_delta: float) -> void:
 
 			state = State.ORDERED
 			patience *= 1.5
+			Globals.ticket_written_in.emit()
 			
-			while desired_food_items.size() < 2:
-				var food_item := FoodItem.get_random_food_item()
-				ticket.add_food_item(food_item)
-				desired_food_items.append(food_item)
+			if World.instance.tutorial:
+				for food_item in [FoodItem.Soda, FoodItem.Burger]:
+					ticket.add_food_item(food_item)
+					desired_food_items.append(food_item)
+			else:
+				while desired_food_items.size() < 2:
+					var food_item := FoodItem.get_random_food_item()
+					ticket.add_food_item(food_item)
+					desired_food_items.append(food_item)
 
 			ticket.state = Grabbable.State.FREE
 			ticket.global_transform = global_transform

@@ -28,6 +28,10 @@ SaveSystem="*res://autoloads/save_system.gd"
 window/size/mode=3
 window/stretch/mode="canvas_items"
 
+[global_group]
+
+Customer=""
+
 [input]
 
 move_forward={

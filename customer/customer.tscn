@@ -38,7 +38,7 @@ shader_parameter/x_expand = 1.15
 shader_parameter/y_expand = 1.6
 shader_parameter/z_expand = 1.1
 
-[node name="Customer" type="Node3D"]
+[node name="Customer" type="Node3D" groups=["Customer"]]
 script = ExtResource("1_qmmwg")
 head_material = SubResource("StandardMaterial3D_qmmwg")
 body_material = SubResource("StandardMaterial3D_2c3mv")

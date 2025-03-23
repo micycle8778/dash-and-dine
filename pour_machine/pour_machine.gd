@@ -14,11 +14,18 @@ var filled_container: FoodContainer
 @onready var soup_vfx: Node3D = %SoupVFX
 @onready var fruit_vfx: Node3D = %FruitVFX
 
+@onready var explode_particles: CPUParticles3D = %ExplosionVFX
+@onready var smoke_particles: CPUParticles3D = %SmokeVFX
+@onready var explode_sound: AudioStreamPlayer3D = %ExplosionSFX
+
 func _new_container() -> void:
 	container.linear_velocity = Vector3.ZERO
 	container.state = Grabbable.State.ANIMATED
 	container.rotation = Vector3.ZERO
 	container.global_position = pos
+
+	if container is Mug:
+		Globals.in_pourer.emit()
 
 func _physics_process(_delta: float) -> void:
 	if filled_container != null: return
@@ -56,6 +63,10 @@ func _pour(food_item: FoodItem) -> void:
 			Quaternion.from_euler(Vector3(0., randf_range(-.3, .3), 0)) * \
 			Vector3(0, 1, -2).normalized() * randf_range(1000, 1100)
 		)
+
+		explode_particles.emitting = true
+		smoke_particles.emitting = true
+		explode_sound.playing = true
 
 		flung_container = container
 		container = null

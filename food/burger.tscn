@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=4 uid="uid://bdhg1xnfg44x6"]
+[gd_scene load_steps=12 format=4 uid="uid://bdhg1xnfg44x6"]
 
 [ext_resource type="PackedScene" uid="uid://bvwamwxca565f" path="res://food/plate_food.tscn" id="1_ev0si"]
 [ext_resource type="Script" uid="uid://b61oqqblniwdn" path="res://food_item.gd" id="2_u4gdr"]
 [ext_resource type="PackedScene" uid="uid://cn7um4p0ahry1" path="res://food/burger.blend" id="3_u4gdr"]
 [ext_resource type="Shader" uid="uid://ba5uvtjdaxx07" path="res://grabbable/outline.gdshader" id="3_w2ssg"]
+[ext_resource type="Script" uid="uid://boc60snwr757j" path="res://food/burger_behavior.gd" id="5_6x3lb"]
 
 [sub_resource type="Resource" id="Resource_w2ssg"]
 script = ExtResource("2_u4gdr")
@@ -15,6 +16,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_w2ssg")
 shader_parameter/enabled = false
+shader_parameter/animated = true
 shader_parameter/x_expand = 1.1
 shader_parameter/y_expand = 1.15
 shader_parameter/z_expand = 1.1
@@ -76,5 +78,8 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0256516, 0)
 shape = SubResource("ConvexPolygonShape3D_lhgpo")
+
+[node name="BurgerBehavior" type="Node" parent="." index="6"]
+script = ExtResource("5_6x3lb")
 
 [editable path="burger"]

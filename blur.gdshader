@@ -20,7 +20,7 @@ vec3 blur(sampler2D sp, vec2 uv, vec2 scale) {
     float accum = 0.0;
     float weight;
     vec2 offset;
-    
+
     for (int x = -samples / 2; x < samples / 2; ++x) {
         for (int y = -samples / 2; y < samples / 2; ++y) {
             offset = vec2(float(x), float(y));
@@ -29,14 +29,14 @@ vec3 blur(sampler2D sp, vec2 uv, vec2 scale) {
             accum += weight;
         }
     }
-    
+
     return col / accum;
 }
 
 void fragment() {
     vec2 ps = vec2(1.0) / iResolution.xy * .000001 * strength;
     vec2 uv = UV ;
-    
+
     COLOR.rgb = blur(SCREEN_TEXTURE, uv, ps) * modulate;
     COLOR.a = 1.0;
 }

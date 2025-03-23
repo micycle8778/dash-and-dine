@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://bitfv6iqc8mwh"]
+[gd_scene load_steps=69 format=3 uid="uid://bitfv6iqc8mwh"]
 
 [ext_resource type="PackedScene" uid="uid://jgyasjf5x5fh" path="res://player/player.tscn" id="1_6xmxd"]
 [ext_resource type="Script" uid="uid://pbe2nre427ka" path="res://world/world.gd" id="1_tcf2h"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://c2dvimpy52fkb" path="res://world/wall.tscn" id="25_0pnie"]
 [ext_resource type="Script" uid="uid://d2t4ys5ganatg" path="res://world/pause_menu.gd" id="26_llyeo"]
 [ext_resource type="FontFile" uid="uid://beermqri38tb5" path="res://fonts/SourGummy-VariableFont_wdth,wght.ttf" id="27_2tavo"]
+[ext_resource type="Script" uid="uid://dl8iy5558n7r8" path="res://world/tutorial.gd" id="28_k8wd0"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4717r"]
 
@@ -1262,6 +1263,40 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 48
 text = "Mouse Sens"
+
+[node name="Tutorial" type="Node3D" parent="."]
+script = ExtResource("28_k8wd0")
+
+[node name="one" type="Label3D" parent="Tutorial"]
+transform = Transform3D(0.811503, 0, 0.584349, 0, 1, 0, -0.584349, 0, 0.811503, 5.33547, 1.74216, -0.427571)
+billboard = 2
+text = "Grab Ticket"
+font_size = 64
+outline_size = 24
+
+[node name="two" type="Label3D" parent="Tutorial"]
+transform = Transform3D(0.811503, 0, 0.584349, 0, 1, 0, -0.584349, 0, 0.811503, 5.33547, 1.74216, -0.427571)
+visible = false
+billboard = 2
+text = "Place ticket in front of customer"
+font_size = 64
+outline_size = 24
+
+[node name="three" type="Label3D" parent="Tutorial"]
+transform = Transform3D(0.999991, 0, -0.00434595, 0, 1, 0, 0.00434595, 0, 0.999991, -0.543251, 1.74216, 6.83803)
+visible = false
+billboard = 2
+text = "Create tray"
+font_size = 64
+outline_size = 24
+
+[node name="four" type="Label3D" parent="Tutorial"]
+transform = Transform3D(0.999991, 0, -0.00434595, 0, 1, 0, 0.00434595, 0, 0.999991, -0.543251, 1.74216, 6.83803)
+visible = false
+billboard = 2
+text = "Put money in pig"
+font_size = 64
+outline_size = 24
 
 [connection signal="total_updated" from="PiggyBank" to="Stats" method="_on_piggy_bank_total_updated"]
 [connection signal="timeout" from="CustomerSpawner/SpawnTimer" to="CustomerSpawner" method="_on_spawn_timer_timeout"]

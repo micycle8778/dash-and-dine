@@ -1,14 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://ua338m8feseg"]
+[gd_scene load_steps=10 format=3 uid="uid://ua338m8feseg"]
 
 [ext_resource type="PackedScene" uid="uid://celoyr831c4cw" path="res://grabbable/grabbable.tscn" id="1_opmg6"]
 [ext_resource type="Script" uid="uid://da1a730usa0r1" path="res://grabbable/tray.gd" id="2_2ondd"]
 [ext_resource type="Shader" uid="uid://ba5uvtjdaxx07" path="res://grabbable/outline.gdshader" id="3_8tfoo"]
+[ext_resource type="Script" uid="uid://ckhdxc6xidypd" path="res://grabbable/tutorial_behavior.gd" id="4_oerg7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oerg7"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_8tfoo")
 shader_parameter/enabled = false
+shader_parameter/animated = true
 shader_parameter/x_expand = 1.05
 shader_parameter/y_expand = 1.5
 shader_parameter/z_expand = 1.1
@@ -50,3 +52,6 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00621033, 0.180832, 0)
 shape = SubResource("BoxShape3D_8tfoo")
+
+[node name="TutorialBehavior" type="Node" parent="." index="7"]
+script = ExtResource("4_oerg7")

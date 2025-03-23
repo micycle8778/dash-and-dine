@@ -3,7 +3,7 @@ class_name Stats extends Sprite3D
 signal time_expired
 
 var total_bonus_time := 0.
-var clock := 180.
+var clock := 300.
 var running := true
 
 @onready var piggy_bank: PiggyBank = %PiggyBank
@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 func _on_piggy_bank_total_updated(increment:float) -> void:
 	total_label.text = "$%.2f" % piggy_bank.total
 
-	var bonus_time := increment * randf_range(1., 1.5)
+	var bonus_time := increment * randf_range(.5, 1)
 	clock += bonus_time
 	bonus_label.text = "BONUS TIME: %.2f" % bonus_time
 	bonus_label.clock = 4.
