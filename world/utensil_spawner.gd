@@ -3,8 +3,7 @@ extends Node3D
 var plate_scene := preload("res://grabbable/food_container/plate.tscn")
 var bowl_scene := preload("res://grabbable/food_container/bowl.tscn")
 var mug_scene := preload("res://grabbable/food_container/mug.tscn")
-# TODO:
-# var tray_scene := preload("res://grabbable/food_container/tray.tscn")
+var tray_scene := preload("res://grabbable/tray.tscn")
 
 @onready var spawning_machine: SpawningMachine = %SpawningMachine
 
@@ -17,7 +16,7 @@ func _on_plate_button_pressed() -> void:
 	_spawn(plate_scene)
 
 func _on_tray_button_pressed() -> void:
-	pass # Replace with function body.
+	_spawn(tray_scene)
 
 func _on_bowl_button_pressed() -> void:
 	_spawn(bowl_scene)

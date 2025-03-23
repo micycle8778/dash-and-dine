@@ -2,6 +2,7 @@ extends Node3D
 
 var container: FoodContainer
 var flung_container: FoodContainer
+var filled_container: FoodContainer
 
 @onready var area: Area3D = %Area3D
 @onready var pos: Vector3 = %Pos.global_position
@@ -12,11 +13,13 @@ var flung_container: FoodContainer
 @onready var fruit_vfx: Node3D = %FruitVFX
 
 func _new_container() -> void:
+	container.linear_velocity = Vector3.ZERO
 	container.state = Grabbable.State.ANIMATED
 	container.rotation = Vector3.ZERO
 	container.global_position = pos
 
 func _physics_process(_delta: float) -> void:
+	if filled_container != null: return
 	if container == null:
 		for body in area.get_overlapping_bodies():
 			if body == flung_container: continue
@@ -60,12 +63,13 @@ func _pour(food_item: FoodItem) -> void:
 
 	var vfx := _get_vfx(food_item)
 	vfx.visible = true
-	await get_tree().create_timer(1., false).timeout
+	await get_tree().create_timer(5., false).timeout
 	vfx.visible = false
 
 	pouring = false
 	container.contained_food = food_item
 	container.state = Grabbable.State.FREE
+	filled_container = container
 	container = null
 
 func _on_coffee_button_pressed() -> void:
@@ -81,6 +85,8 @@ func _on_soup_button_pressed() -> void:
 	_pour(FoodItem.Soup)
 
 func _on_area_3d_body_exited(body:Node3D) -> void:
+	if body == filled_container:
+		filled_container = null
 	if body == flung_container:
 		flung_container = null
 

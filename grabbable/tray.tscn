@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://ua338m8feseg"]
+
+[ext_resource type="PackedScene" uid="uid://celoyr831c4cw" path="res://grabbable/grabbable.tscn" id="1_opmg6"]
+[ext_resource type="Script" uid="uid://da1a730usa0r1" path="res://grabbable/tray.gd" id="2_2ondd"]
+[ext_resource type="Shader" uid="uid://ba5uvtjdaxx07" path="res://grabbable/outline.gdshader" id="3_8tfoo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oerg7"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_8tfoo")
+shader_parameter/enabled = false
+shader_parameter/x_expand = 1.05
+shader_parameter/y_expand = 1.5
+shader_parameter/z_expand = 1.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_og3bt"]
+resource_local_to_scene = true
+next_pass = SubResource("ShaderMaterial_oerg7")
+albedo_color = Color(0.66, 0.66, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_o1lep"]
+size = Vector3(1.5, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n8m4t"]
+size = Vector3(1.52295, 0.102661, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8tfoo"]
+size = Vector3(1.51907, 0.200409, 1)
+
+[node name="Tray" instance=ExtResource("1_opmg6")]
+script = ExtResource("2_2ondd")
+outline_shader = SubResource("ShaderMaterial_oerg7")
+
+[node name="Tray" type="MeshInstance3D" parent="." index="4"]
+material_override = SubResource("StandardMaterial3D_og3bt")
+mesh = SubResource("BoxMesh_o1lep")
+skeleton = NodePath("")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000244141, -0.00250244, 0)
+shape = SubResource("BoxShape3D_n8m4t")
+metadata/_edit_lock_ = true
+
+[node name="Area3D" type="Area3D" parent="." index="6"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00621033, 0.180832, 0)
+shape = SubResource("BoxShape3D_8tfoo")

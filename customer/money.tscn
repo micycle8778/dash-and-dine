@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=4 uid="uid://bbsd0sj6gfmjm"]
+
+[ext_resource type="PackedScene" uid="uid://celoyr831c4cw" path="res://grabbable/grabbable.tscn" id="1_4lytw"]
+[ext_resource type="Shader" uid="uid://ba5uvtjdaxx07" path="res://grabbable/outline.gdshader" id="2_fa07w"]
+[ext_resource type="Script" uid="uid://c05k1ti1jl0mh" path="res://customer/money.gd" id="2_faqr3"]
+[ext_resource type="PackedScene" uid="uid://co0qk7qr5x1q4" path="res://customer/money.blend" id="3_faqr3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3dd8c"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_fa07w")
+shader_parameter/enabled = false
+shader_parameter/x_expand = 1.15
+shader_parameter/y_expand = 2.0
+shader_parameter/z_expand = 1.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_av6yl"]
+resource_name = "Material.001"
+cull_mode = 2
+albedo_color = Color(0.0575424, 0.569215, 0, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_upkeu"]
+_surfaces = [{
+"aabb": AABB(-0.254718, -0.0138718, -0.246459, 0.509436, 0.0277436, 0.492917),
+"format": 34359742465,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAAEAAEAAgADAAUAAgAFAAAAAAAGAAQAAAAFAAYABAAHAAEAAQAHAAMABAAGAAcABQADAAcABQAHAAYACAAJAAoACQALAAoACAAMAAkACgALAA0ACgANAAgACAAOAAwACAANAA4ADAAPAAkACQAPAAsADAAOAA8ADQALAA8ADQAPAA4A"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("Cz/EvQAAAACfX3w+Cz/EPQAAAACfX3y+Cz/EvQAAAACfX3y+Cz/EvWJGYzyfX3y+Cz/EPQAAAACfX3w+Cz/EvWJGYzyfX3w+Cz/EPWJGYzyfX3w+Cz/EPWJGYzyfX3y+0DUPPoBGY7ypzmU+0DUPvoBGY7ypzmW+a2qCvoBGY7xKbpG9a2qCvgAA8LJKbpG9a2qCPoBGY7xKbpE90DUPPgAA8LKpzmU+a2qCPgAA8LJKbpE90DUPvgAA8LKpzmW+")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3a0wi"]
+resource_name = "money_Plane_001"
+_surfaces = [{
+"aabb": AABB(-0.254718, -0.0138718, -0.246459, 0.509436, 0.0277436, 0.492917),
+"attribute_data": PackedByteArray("AAAAAAAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAAAAAACAPwAAgD8AAAAAAACAPwAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPwAAAAAAAIA/AAAAAAAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAIA/AACAPwAAAAAAAIA/AAAAAAAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAAAAAACAPwAAgD8AAAAAAACAPwAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPwAAAAAAAIA/AAAAAAAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAIA/AACAPwAAAAAAAIA/"),
+"format": 34359742487,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0A"),
+"material": SubResource("StandardMaterial3D_av6yl"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("Cz/EvQAAAACfX3w+Cz/EPQAAAACfX3y+Cz/EvQAAAACfX3y+Cz/EPQAAAACfX3w+Cz/EvWJGYzyfX3w+Cz/EPWJGYzyfX3y+Cz/EPWJGYzyfX3w+Cz/EvWJGYzyfX3y+Cz/EPQAAAACfX3w+Cz/EPWJGYzyfX3y+Cz/EPQAAAACfX3y+Cz/EPWJGYzyfX3w+Cz/EvQAAAACfX3y+Cz/EvWJGYzyfX3w+Cz/EvQAAAACfX3w+Cz/EvWJGYzyfX3y+Cz/EPQAAAACfX3y+Cz/EvWJGYzyfX3y+Cz/EvQAAAACfX3y+Cz/EPWJGYzyfX3y+Cz/EvQAAAACfX3w+Cz/EPWJGYzyfX3w+Cz/EPQAAAACfX3w+Cz/EvWJGYzyfX3w+0DUPPoBGY7ypzmU+0DUPvoBGY7ypzmW+a2qCvoBGY7xKbpG9a2qCPoBGY7xKbpE90DUPPgAA8LKpzmU+0DUPvgAA8LKpzmW+a2qCPgAA8LJKbpE9a2qCvgAA8LJKbpG9a2qCPoBGY7xKbpE90DUPvgAA8LKpzmW+0DUPvoBGY7ypzmW+a2qCPgAA8LJKbpE9a2qCvoBGY7xKbpG90DUPPgAA8LKpzmU+0DUPPoBGY7ypzmU+a2qCvgAA8LJKbpG90DUPvoBGY7ypzmW+a2qCvgAA8LJKbpG9a2qCvoBGY7xKbpG90DUPvgAA8LKpzmW+0DUPPoBGY7ypzmU+a2qCPgAA8LJKbpE9a2qCPoBGY7xKbpE90DUPPgAA8LKpzmU+/38AAP///z//fwAA////P/9/AAD///8//38AAP///z//f///////v/9///////+//3///////7//f///////v////3////+/////f////7////9/////v////3////+/AAD/f////78AAP9/////vwAA/3////+/AAD/f////7//////////P/////////8//////////z//////////P/9//3////8//3//f////z//f/9/////P/9//3////8//38AAP//Zxv/fwAA//9nG/9/AAD//2cb/38AAP//Zxv/f/////+X5P9//////5fk/3//////l+T/f/////+X5P//MMn///8///8wyf///z///zDJ////P///MMn///8/MUn/f////z8xSf9/////PzFJ/3////8/MUn/f////z8AAM22////PwAAzbb///8/AADNtv///z8AAM22////PzDJ/3////8/MMn/f////z8wyf9/////PzDJ/3////8/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_upkeu")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_75wq1"]
+points = PackedVector3Array(-0.0958434, 0.00105157, -0.246459, -0.139876, -0.0128208, -0.224457, -0.0958434, 0.014924, -0.246459, 0.0957936, 0.00105157, -0.246459, -0.144962, -0.0192534, 0.0176111, -0.254718, -0.0128208, -0.0710233, -0.139876, 0.00105157, -0.224457, 0.109357, -0.0192534, -0.0967403, -0.0826787, 0.0165817, -0.224698, 0.0957936, 0.014924, -0.246459, -0.254718, 0.00105157, -0.0710233, -0.144962, 0.0212613, 0.0176111, 0.254718, -0.0128208, 0.070975, -0.109407, -0.0192534, 0.096692, -0.0958434, 0.00105157, 0.246459, 0.144912, -0.0192534, -0.0176593, 0.109357, 0.0212613, -0.0967403, 0.0826288, 0.0165817, -0.224698, 0.144912, 0.0212613, -0.0176593, 0.254718, 0.00105157, 0.070975, -0.0958434, 0.014924, 0.246459, -0.109407, 0.0212613, 0.096692, 0.139826, -0.0128208, 0.224408, 0.0957936, 0.00105157, 0.246459, 0.0826288, 0.0165817, 0.22465, 0.0957936, 0.014924, 0.246459, 0.139826, 0.00105157, 0.224408, -0.0826787, 0.0165817, 0.22465)
+
+[node name="Money" instance=ExtResource("1_4lytw")]
+script = ExtResource("2_faqr3")
+outline_shader = SubResource("ShaderMaterial_3dd8c")
+
+[node name="Plane_005" type="MeshInstance3D" parent="." index="4"]
+transform = Transform3D(0.953931, 0, -1.37433, 0, 1.67295, 0, 1.37433, 0, 0.953931, 0.00422011, 0.00856427, -0.00587583)
+material_override = SubResource("ShaderMaterial_3dd8c")
+mesh = SubResource("ArrayMesh_3a0wi")
+skeleton = NodePath("")
+
+[node name="money" parent="." index="5" instance=ExtResource("3_faqr3")]
+transform = Transform3D(1.67295, 0, 0, 0, 1.67295, 0, 0, 0, 1.67295, -0.000653474, -0.00464675, 0.000909858)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="6"]
+transform = Transform3D(1.00269, 0, -1.33917, 0, 1.67295, 0, 1.33917, 0, 1.00269, -0.000653474, 0.0167975, 0.000909858)
+shape = SubResource("ConvexPolygonShape3D_75wq1")
+
+[node name="ValueLabel" type="Label3D" parent="." index="7"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.302678, 0)
+billboard = 2
+modulate = Color(0.271827, 0.76, 0.1368, 1)
+text = "$69.4"
+
+[editable path="money"]
