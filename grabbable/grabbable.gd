@@ -1,5 +1,7 @@
 class_name Grabbable extends RigidBody3D
 
+signal grabbed
+
 enum State {
 	FREE,
 	GRABBED,
@@ -22,6 +24,7 @@ var state: State = State.FREE:
 var driver: Grabbable
 var passengers: Array[Grabbable]
 var still_time := 0.
+var grabbable := false
 
 @onready var driver_cast: RayCast3D = %DriverCast
 
@@ -50,6 +53,7 @@ func _leave_state(old_state: State) -> void:
 func _enter_state(new_state: State) -> void:
 	match new_state:
 		State.GRABBED:
+			grabbed.emit()
 			passengers = []
 			for body in get_colliding_bodies():
 				if body is Grabbable and body.global_position.y > global_position.y:
@@ -62,6 +66,7 @@ func _enter_state(new_state: State) -> void:
 		State.PASSENGER:
 			gravity_scale *= GRAV_MUL
 		State.ANIMATED:
+			grabbable = false
 			process_mode = Node.PROCESS_MODE_DISABLED
 
 func _ready() -> void:

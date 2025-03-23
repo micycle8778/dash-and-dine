@@ -25,9 +25,9 @@ fov = 90.0
 
 [node name="GrabRaycast" type="RayCast3D" parent="Camera3D"]
 unique_name_in_owner = true
-visible = false
 target_position = Vector3(0, 0, -3)
 collision_mask = 4
+hit_from_inside = true
 
 [node name="HoldDistanceRaycast" type="RayCast3D" parent="Camera3D"]
 unique_name_in_owner = true
@@ -36,6 +36,7 @@ target_position = Vector3(0, 0, -2)
 
 [node name="ButtonRaycast" type="RayCast3D" parent="Camera3D"]
 unique_name_in_owner = true
+visible = false
 target_position = Vector3(0, 0, -3)
 collision_mask = 8
 collide_with_areas = true

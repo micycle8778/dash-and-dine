@@ -136,7 +136,7 @@ func _physics_process(_delta: float) -> void:
 					container.add_child(Lifetime.new(5.))
 				tray.add_child(Lifetime.new(5.))
 
-				var value := 100 * (patience / initial_patience)
+				var value := 30 * (patience / initial_patience)
 				state = State.LEAVING
 
 				await get_tree().create_timer(2., false).timeout
