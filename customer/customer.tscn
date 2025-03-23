@@ -56,6 +56,7 @@ outline_shader = SubResource("ShaderMaterial_kyy7l")
 [node name="PatienceLabel" type="Label3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(-0.999802, 0, -0.019913, 0, 1, 0, 0.019913, 0, -0.999802, 0, 2.60327, 0)
+visible = false
 text = "6.9/15w"
 font_size = 64
 

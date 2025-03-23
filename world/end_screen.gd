@@ -58,6 +58,9 @@ func _anim_score_label_visible() -> void:
 
 	pass # TODO: high score
 
+	await get_tree().create_timer(3.).timeout
+	SceneTransition.change_scene(preload("res://main_menu/main_menu.tscn"))
+
 func _on_stats_time_expired() -> void:
 	Player.instance.frozen = true
 
@@ -73,6 +76,8 @@ func _on_stats_time_expired() -> void:
 	var s := "%.3f" % millis
 	overtime_label.text = "%02d:%02d.%s" % [minutes, seconds, s.get_slice('.', 1)]
 
+	$AnimationPlayer.play("RESET")
+	await $AnimationPlayer.animation_finished
 	$AnimationPlayer.play("fade_in")
 	await $AnimationPlayer.animation_finished
 	$AnimationPlayer.play("slide_in")

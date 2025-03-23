@@ -3,6 +3,8 @@ extends Node
 var stack: Array[Input.MouseMode]
 
 func _input(event: InputEvent) -> void:
+	if not OS.has_feature("web"): return
+	if stack.is_empty(): return
 	if event is InputEventMouseButton and stack[-1] == Input.MOUSE_MODE_CAPTURED:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 

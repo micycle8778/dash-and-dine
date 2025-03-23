@@ -10,6 +10,9 @@ extends Node3D
 
 var clock := 0.
 
+func _ready() -> void:
+	MouseStack.override(Input.MOUSE_MODE_VISIBLE)
+
 func _process(delta: float) -> void:
 	clock += delta
 

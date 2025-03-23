@@ -359,6 +359,7 @@ tracks/16/keys = {
 
 [sub_resource type="Animation" id="Animation_b2suy"]
 resource_name = "fade_in"
+length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -890,6 +891,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -1152.0
+offset_right = -1152.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_m0cxt")

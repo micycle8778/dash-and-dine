@@ -20,6 +20,7 @@ config/icon="uid://cju21f53ed0g1"
 
 MouseStack="*res://autoloads/mouse_stack.gd"
 Globals="*res://autoloads/globals.gd"
+SceneTransition="*res://autoloads/scene_transition.tscn"
 
 [display]
 
