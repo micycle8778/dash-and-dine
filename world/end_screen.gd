@@ -11,6 +11,7 @@ extends CanvasLayer
 @onready var satisfaction_label: Label = %SatisfactionLabel
 @onready var overtime_label: Label = %OvertimeLabel
 @onready var score_label: Label = %ScoreLabel
+@onready var high_score_label: Label = %HighScoreLabel
 
 var customers_served := 0
 var angry_customers := 0
@@ -56,7 +57,12 @@ func _anim_score_label_visible() -> void:
 	await t.finished
 	await get_tree().create_timer(1.).timeout
 
-	pass # TODO: high score
+	if piggy_bank.total > SaveSystem.save_data.high_score:
+		high_score_label.visible = true
+		high_score_sfx.play()
+
+		SaveSystem.save_data.high_score = piggy_bank.total
+		SaveSystem.save()
 
 	await get_tree().create_timer(3.).timeout
 	SceneTransition.change_scene(preload("res://main_menu/main_menu.tscn"))

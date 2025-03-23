@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bitfv6iqc8mwh"]
+[gd_scene load_steps=58 format=3 uid="uid://bitfv6iqc8mwh"]
 
 [ext_resource type="PackedScene" uid="uid://jgyasjf5x5fh" path="res://player/player.tscn" id="1_6xmxd"]
 [ext_resource type="Script" uid="uid://pbe2nre427ka" path="res://world/world.gd" id="1_tcf2h"]
@@ -23,6 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://jigjxi07u23v" path="res://sfx/typewriter-04.wav" id="19_gi7ib"]
 [ext_resource type="AudioStream" uid="uid://bt7qeyseb27m5" path="res://sfx/traditional-stamp-44189.wav" id="21_0pnie"]
 [ext_resource type="AudioStream" uid="uid://cfggl5imdl4jr" path="res://sfx/coin.wav" id="23_gi7ib"]
+[ext_resource type="AudioStream" uid="uid://b15op0e5lb11h" path="res://sfx/cash-register-purchase-87313.mp3" id="24_llyeo"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4717r"]
 
@@ -1018,6 +1019,7 @@ theme_override_font_sizes/font_size = 96
 text = "$42.24"
 
 [node name="HighScoreLabel" type="Label" parent="EndScreen/Panel/TextureRect"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 offset_left = 146.0
@@ -1056,7 +1058,7 @@ bus = &"SFX"
 
 [node name="HighScoreSFX" type="AudioStreamPlayer" parent="EndScreen"]
 unique_name_in_owner = true
-stream = ExtResource("23_gi7ib")
+stream = ExtResource("24_llyeo")
 volume_db = -8.0
 bus = &"SFX"
 
