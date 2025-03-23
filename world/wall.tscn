@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2dvimpy52fkb"]
+
+[ext_resource type="PackedScene" uid="uid://cpkybcdkwfpu8" path="res://world/wall.blend" id="1_fbtni"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fbtni"]
+points = PackedVector3Array(-0.520859, 0, -8, 0.520859, 0, -8, -0.520859, 0, 8, -0.520859, 12.3006, -8, 0.520859, 12.3006, -8, 0.520859, 0, 8, -0.520859, 12.3006, 8, 0.520859, 12.3006, 8)
+
+[node name="Wall" type="StaticBody3D"]
+
+[node name="wall" parent="." instance=ExtResource("1_fbtni")]
+
+[node name="Plane" parent="wall" index="0"]
+layers = 17
+cast_shadow = 0
+
+[node name="Plane_001" parent="wall" index="1"]
+layers = 17
+cast_shadow = 0
+
+[node name="Plane_002" parent="wall" index="2"]
+layers = 17
+cast_shadow = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_fbtni")
+
+[editable path="wall"]

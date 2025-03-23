@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://bitfv6iqc8mwh"]
+[gd_scene load_steps=53 format=3 uid="uid://bitfv6iqc8mwh"]
 
 [ext_resource type="PackedScene" uid="uid://jgyasjf5x5fh" path="res://player/player.tscn" id="1_6xmxd"]
 [ext_resource type="Script" uid="uid://pbe2nre427ka" path="res://world/world.gd" id="1_tcf2h"]
@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://bt7qeyseb27m5" path="res://sfx/traditional-stamp-44189.wav" id="21_0pnie"]
 [ext_resource type="AudioStream" uid="uid://cfggl5imdl4jr" path="res://sfx/coin.wav" id="23_gi7ib"]
 [ext_resource type="AudioStream" uid="uid://b15op0e5lb11h" path="res://sfx/cash-register-purchase-87313.mp3" id="24_llyeo"]
+[ext_resource type="PackedScene" uid="uid://c2dvimpy52fkb" path="res://world/wall.tscn" id="25_0pnie"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4717r"]
 
@@ -31,7 +32,7 @@
 albedo_color = Color(0.28, 0.151573, 0.0392, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6xmxd"]
-size = Vector2(25, 25)
+size = Vector2(6000, 6000)
 
 [sub_resource type="Gradient" id="Gradient_sc4t8"]
 offsets = PackedFloat32Array(0.375622, 0.472637, 0.768657)
@@ -53,30 +54,6 @@ sky = SubResource("Sky_gi7ib")
 ambient_light_source = 2
 ambient_light_color = Color(1, 0.926667, 0.89, 1)
 ambient_light_energy = 0.21
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tcf2h"]
-albedo_color = Color(1, 0.16, 0.16, 1)
-emission_enabled = true
-emission = Color(0.397482, 4.57242e-07, 1.68458e-07, 1)
-emission_energy_multiplier = 4.06
-
-[sub_resource type="BoxMesh" id="BoxMesh_4717r"]
-size = Vector3(5, 5, 5)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4717r"]
-points = PackedVector3Array(2.5, 2.5, 2.5, 2.5, 2.5, -2.5, -2.5, 2.5, 2.5, 2.5, -2.5, 2.5, 2.5, -2.5, -2.5, -2.5, 2.5, -2.5, -2.5, -2.5, 2.5, -2.5, -2.5, -2.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mmdvd"]
-albedo_color = Color(0, 0, 0.4, 1)
-emission_enabled = true
-emission = Color(0.0333333, 0, 1, 1)
-emission_energy_multiplier = 4.06
-
-[sub_resource type="BoxMesh" id="BoxMesh_fn3g3"]
-size = Vector3(3, 3, 3)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h5o24"]
-points = PackedVector3Array(1.5, 1.5, 1.5, 1.5, 1.5, -1.5, -1.5, 1.5, 1.5, 1.5, -1.5, 1.5, 1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b2suy"]
 albedo_color = Color(0.95, 0.316667, 0, 1)
@@ -633,30 +610,6 @@ shadow_enabled = true
 directional_shadow_max_distance = 17.7
 metadata/_edit_lock_ = true
 
-[node name="Cube" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.32967, 2.52784, 0)
-metadata/_edit_lock_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cube"]
-material_override = SubResource("StandardMaterial3D_tcf2h")
-mesh = SubResource("BoxMesh_4717r")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube"]
-shape = SubResource("ConvexPolygonShape3D_4717r")
-
-[node name="Cube2" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4635, 2.52784, 6.69858)
-metadata/_edit_lock_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cube2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0183773, -1.03589, -1.09115)
-material_override = SubResource("StandardMaterial3D_mmdvd")
-mesh = SubResource("BoxMesh_fn3g3")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0183773, -1.03589, -1.09115)
-shape = SubResource("ConvexPolygonShape3D_h5o24")
-
 [node name="Table" parent="." instance=ExtResource("6_fn3g3")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -2.83451)
 
@@ -680,9 +633,20 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_ysn08")
 
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(-7.62391e-08, 0, 1.5184, 0, 2.11679, 0, -1.74415, 0, -6.63712e-08, -5.25432, 0, -0.5881)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+material_override = SubResource("StandardMaterial3D_b2suy")
+mesh = SubResource("BoxMesh_h8lre")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("ConvexPolygonShape3D_ysn08")
+
 [node name="PiggyBank" parent="." instance=ExtResource("10_fyhu2")]
 unique_name_in_owner = true
-transform = Transform3D(2.98023e-08, 0, -1, 0, 1, 0, 1, 0, 2.98023e-08, -5.09677, 1.91817, -0.0050869)
+transform = Transform3D(2.98023e-08, 0, -1, 0, 1, 0, 1, 0, 2.98023e-08, -5.09677, 1.69771, -0.658569)
 
 [node name="TicketPrinter" parent="." instance=ExtResource("9_4papg")]
 transform = Transform3D(-0.75943, 0, 0.650589, 0, 1, 0, -0.650589, 0, -0.75943, 4.9687, 0.20441, -0.515567)
@@ -721,7 +685,7 @@ autostart = true
 
 [node name="Stats" type="Sprite3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(-2.63718e-08, 0, 0.603315, 0, 0.603315, 0, -0.603315, 0, -2.63718e-08, -5.47452, 3.96539, -0.000142336)
+transform = Transform3D(-2.63718e-08, 0, 0.603315, 0, 0.603315, 0, -0.603315, 0, -2.63718e-08, -5.74999, 7.48695, -0.000142336)
 texture = SubResource("ViewportTexture_4papg")
 script = ExtResource("10_mad0u")
 
@@ -1061,6 +1025,22 @@ unique_name_in_owner = true
 stream = ExtResource("24_llyeo")
 volume_db = -8.0
 bus = &"SFX"
+
+[node name="Wall" parent="." instance=ExtResource("25_0pnie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.50827, 0, 5.00244)
+
+[node name="Wall3" parent="." instance=ExtResource("25_0pnie")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.182201, 0, 13.1545)
+
+[node name="Wall2" parent="." instance=ExtResource("25_0pnie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.61841, 0, 5.00244)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(-1.49012e-08, -0.938553, 0.345134, -0.681858, 0.25246, 0.686537, -0.731485, -0.235333, -0.63996, 1.3776, 19.2103, -3.96449)
+light_color = Color(1, 0.736, 0.00999999, 1)
+light_energy = 6.86
+spot_range = 21.637
+spot_angle_attenuation = 0.101532
 
 [connection signal="total_updated" from="PiggyBank" to="Stats" method="_on_piggy_bank_total_updated"]
 [connection signal="timeout" from="CustomerSpawner/SpawnTimer" to="CustomerSpawner" method="_on_spawn_timer_timeout"]
