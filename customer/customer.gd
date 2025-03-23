@@ -16,6 +16,11 @@ var state = State.APPROACHING:
 		if state == State.LEAVING:
 			Globals.customer_leaves.emit(patience / initial_patience)
 
+@export var head_material: StandardMaterial3D
+@export var body_material: StandardMaterial3D
+@export var head_colors: Gradient
+@export var body_colors: Gradient
+
 var money_scene := preload("res://customer/money.tscn")
 var desired_food_items: Array[FoodItem]
 
@@ -47,6 +52,9 @@ class Lifetime extends Node:
 
 func _ready() -> void:
 	dummy_ticket.queue_free()
+
+	head_material.albedo_color = head_colors.sample(randf())
+	body_material.albedo_color = body_colors.sample(randf())
 
 func _check_for_grabbable(body: Node3D, predicate: Callable) -> Grabbable:
 	if body is not Grabbable: return null
