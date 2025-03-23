@@ -685,7 +685,7 @@ autostart = true
 
 [node name="Stats" type="Sprite3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(-2.63718e-08, 0, 0.603315, 0, 0.603315, 0, -0.603315, 0, -2.63718e-08, -5.74999, 7.48695, -0.000142336)
+transform = Transform3D(-2.63718e-08, 0, 0.603315, 0, 0.603315, 0, -0.603315, 0, -2.63718e-08, -5.74999, 2.6717, 2.68995)
 texture = SubResource("ViewportTexture_4papg")
 script = ExtResource("10_mad0u")
 

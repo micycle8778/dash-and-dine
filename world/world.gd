@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	difficulty += delta / 225
-	if Input.is_action_just_pressed("debug_reset"):
+	if Input.is_action_just_pressed("debug_reset") and OS.has_feature("editor"):
 		get_tree().reload_current_scene()
 
 

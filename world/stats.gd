@@ -14,7 +14,7 @@ var running := true
 func _process(delta: float) -> void:
 	if not running: return
 
-	if Input.is_action_just_pressed("debug_end_game"):
+	if Input.is_action_just_pressed("debug_end_game") and OS.has_feature("editor"):
 		clock = .1
 
 	clock -= delta

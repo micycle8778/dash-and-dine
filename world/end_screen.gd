@@ -57,7 +57,9 @@ func _anim_score_label_visible() -> void:
 	await t.finished
 	await get_tree().create_timer(1.).timeout
 
-	if piggy_bank.total > SaveSystem.save_data.high_score:
+	if SaveSystem.save_data.high_score == 0.:
+		SaveSystem.save_data.high_score = piggy_bank.total
+	elif piggy_bank.total > SaveSystem.save_data.high_score:
 		high_score_label.visible = true
 		high_score_sfx.play()
 
