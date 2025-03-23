@@ -7,6 +7,7 @@ var customer_scene := preload("res://customer/customer.tscn")
 
 @onready var first_path: Path3D = %FirstPath
 @onready var branching_paths: Node3D = %BranchingPaths
+@onready var spawn_timer: Timer = %SpawnTimer
 
 func _ready() -> void:
 	_on_spawn_timer_timeout()
@@ -45,6 +46,7 @@ func _remove_customer(customer: Customer) -> void:
 		customers.erase(customer)
 
 func _on_spawn_timer_timeout() -> void:
+	spawn_timer.start(spawn_timer.wait_time - 0.2)
 	if customers.size() >= 5: return
 
 	var customer: Customer = customer_scene.instantiate()

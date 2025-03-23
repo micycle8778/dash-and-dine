@@ -151,7 +151,7 @@ func _physics_process(_delta: float) -> void:
 					container.add_child(Lifetime.new(5.))
 				tray.add_child(Lifetime.new(5.))
 
-				var value := 30 * (patience / initial_patience)
+				var value := 7 + 20 * (patience / initial_patience)
 				state = State.PAYING
 				Globals.customer_served.emit()
 

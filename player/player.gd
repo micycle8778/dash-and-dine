@@ -6,7 +6,7 @@ const MOVE_SPEED: float = 8.
 
 const GRAVITY: float = 35
 const JUMP_POWER: float = 15
-const MOUSE_SENSITIVITY: float = 0.0015
+var MOUSE_SENSITIVITY: float = 0.005 if OS.has_feature("web") else 0.0015 
 
 static var instance: Player
 

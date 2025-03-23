@@ -31,9 +31,9 @@ func _process(delta: float) -> void:
 func _on_piggy_bank_total_updated(increment:float) -> void:
 	total_label.text = "$%.2f" % piggy_bank.total
 
-	var bonus_time := increment * randf_range(1.25, 2.)
+	var bonus_time := increment * randf_range(1., 1.5)
 	clock += bonus_time
 	bonus_label.text = "BONUS TIME: %.2f" % bonus_time
-	bonus_label.clock = 2.
+	bonus_label.clock = 4.
 
 	total_bonus_time += bonus_time

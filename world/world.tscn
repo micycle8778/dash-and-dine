@@ -713,6 +713,7 @@ curve = SubResource("Curve3D_b2suy")
 curve = SubResource("Curve3D_h8lre")
 
 [node name="SpawnTimer" type="Timer" parent="CustomerSpawner"]
+unique_name_in_owner = true
 wait_time = 30.0
 autostart = true
 
