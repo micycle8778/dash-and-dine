@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2eg2em0qyrwh"]
+[gd_scene load_steps=9 format=3 uid="uid://c2eg2em0qyrwh"]
 
 [ext_resource type="PackedScene" uid="uid://g1xn7f07dgf0" path="res://customer/customer.blend" id="1_2c3mv"]
 [ext_resource type="Script" uid="uid://dhnu0a5v6d1qv" path="res://customer/customer.gd" id="1_qmmwg"]
@@ -11,9 +11,6 @@ albedo_color = Color(1, 0.19, 0.19, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qmmwg"]
 albedo_color = Color(0.91, 0.637, 0.5005, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_2c3mv"]
-size = Vector3(0.25, 0.25, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2c3mv"]
 size = Vector3(2.11035, 1, 2.12073)
@@ -31,6 +28,7 @@ shader_parameter/z_expand = 1.1
 script = ExtResource("1_qmmwg")
 
 [node name="customer" parent="." instance=ExtResource("1_2c3mv")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.811805, 0)
 
 [node name="Cone" parent="customer" index="0"]
@@ -38,11 +36,6 @@ material_override = SubResource("StandardMaterial3D_2c3mv")
 
 [node name="Sphere" parent="customer" index="1"]
 material_override = SubResource("StandardMaterial3D_qmmwg")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.73207, -0.638097)
-visible = false
-mesh = SubResource("BoxMesh_2c3mv")
 
 [node name="Michael" type="Area3D" parent="."]
 unique_name_in_owner = true
@@ -56,11 +49,13 @@ shape = SubResource("BoxShape3D_2c3mv")
 [node name="Ticket" parent="." instance=ExtResource("3_fn4jp")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.502145, -0.864784, 0, 0.864784, 0.502145, 0, 1.14556, -0.996593)
+visible = false
 outline_shader = SubResource("ShaderMaterial_kyy7l")
 
 [node name="PatienceLabel" type="Label3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(-0.999802, 0, -0.019913, 0, 1, 0, 0.019913, 0, -0.999802, 0, 2.60327, 0)
+visible = false
 text = "6.9/15w"
 font_size = 64
 

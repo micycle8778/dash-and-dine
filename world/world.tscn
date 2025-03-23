@@ -1,10 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://bitfv6iqc8mwh"]
+[gd_scene load_steps=33 format=3 uid="uid://bitfv6iqc8mwh"]
 
 [ext_resource type="PackedScene" uid="uid://jgyasjf5x5fh" path="res://player/player.tscn" id="1_6xmxd"]
 [ext_resource type="Script" uid="uid://pbe2nre427ka" path="res://world/world.gd" id="1_tcf2h"]
-[ext_resource type="PackedScene" uid="uid://c2eg2em0qyrwh" path="res://customer/customer.tscn" id="5_mmdvd"]
 [ext_resource type="PackedScene" uid="uid://boadlmdkoxque" path="res://world/table.tscn" id="6_fn3g3"]
 [ext_resource type="PackedScene" uid="uid://ut4diejo6rsx" path="res://world/ticket_printer.tscn" id="9_4papg"]
+[ext_resource type="Script" uid="uid://62gn63hhfleb" path="res://world/customer_spawner.gd" id="9_fyhu2"]
 [ext_resource type="PackedScene" uid="uid://cpikm7nt00snq" path="res://world/piggy_bank.tscn" id="10_fyhu2"]
 [ext_resource type="PackedScene" uid="uid://cilpu2u6opesq" path="res://world/utensil_spawner.tscn" id="11_ov2xu"]
 [ext_resource type="PackedScene" uid="uid://b0n8hvq0gl7rp" path="res://world/plate_food_spawner.tscn" id="14_dqqhb"]
@@ -71,6 +71,48 @@ albedo_color = Color(0.95, 0.316667, 0, 1)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ysn08"]
 points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
 
+[sub_resource type="Curve3D" id="Curve3D_ov2xu"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_mad0u"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9.183),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_ocfjn"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 4.5161, 0, -6.08526, -4.5161, 0, 6.08526, 3.65797, 0, 10.8289),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_dqqhb"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, -4.516, 0, -6.085, -4.5161, 0, 6.08526, -3.658, 0, 10.829),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_b2suy"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 7.42478, 0, -10.6014, -7.42478, 0, 10.6014, 6.06911, 0, 13.3549),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_h8lre"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, -7.425, 0, -10.601, -7.42478, 0, 10.6014, -6.069, 0, 13.355),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
 [node name="World" type="Node3D"]
 script = ExtResource("1_tcf2h")
 
@@ -124,9 +166,6 @@ mesh = SubResource("BoxMesh_fn3g3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0183773, -1.03589, -1.09115)
 shape = SubResource("ConvexPolygonShape3D_h5o24")
 
-[node name="Customer" parent="." instance=ExtResource("5_mmdvd")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -10.0028)
-
 [node name="Table" parent="." instance=ExtResource("6_fn3g3")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -2.83451)
 
@@ -154,4 +193,37 @@ shape = SubResource("ConvexPolygonShape3D_ysn08")
 transform = Transform3D(2.98023e-08, 0, -1, 0, 1, 0, 1, 0, 2.98023e-08, -5.09677, 1.91817, -0.0050869)
 
 [node name="TicketPrinter" parent="." instance=ExtResource("9_4papg")]
-transform = Transform3D(-0.568504, 0, -0.82268, 0, 1, 0, 0.82268, 0, -0.568504, 4.9687, 1.45881, -4.10927)
+transform = Transform3D(-0.75943, 0, 0.650589, 0, 1, 0, -0.650589, 0, -0.75943, 4.9687, 0.20441, -0.515567)
+
+[node name="CustomerSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -28.2574)
+script = ExtResource("9_fyhu2")
+
+[node name="FirstPath" type="Path3D" parent="CustomerSpawner"]
+unique_name_in_owner = true
+curve = SubResource("Curve3D_ov2xu")
+
+[node name="BranchingPaths" type="Node3D" parent="CustomerSpawner/FirstPath"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+
+[node name="Path3D" type="Path3D" parent="CustomerSpawner/FirstPath/BranchingPaths"]
+curve = SubResource("Curve3D_mad0u")
+
+[node name="Path3D2" type="Path3D" parent="CustomerSpawner/FirstPath/BranchingPaths"]
+curve = SubResource("Curve3D_ocfjn")
+
+[node name="Path3D4" type="Path3D" parent="CustomerSpawner/FirstPath/BranchingPaths"]
+curve = SubResource("Curve3D_dqqhb")
+
+[node name="Path3D3" type="Path3D" parent="CustomerSpawner/FirstPath/BranchingPaths"]
+curve = SubResource("Curve3D_b2suy")
+
+[node name="Path3D5" type="Path3D" parent="CustomerSpawner/FirstPath/BranchingPaths"]
+curve = SubResource("Curve3D_h8lre")
+
+[node name="SpawnTimer" type="Timer" parent="CustomerSpawner"]
+wait_time = 30.0
+autostart = true
+
+[connection signal="timeout" from="CustomerSpawner/SpawnTimer" to="CustomerSpawner" method="_on_spawn_timer_timeout"]

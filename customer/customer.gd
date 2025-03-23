@@ -4,23 +4,33 @@ enum State {
 	APPROACHING,
 	SEATED,
 	ORDERED,
+	PAYING,
 	LEAVING
 }
 
-var state = State.SEATED:
+var state = State.APPROACHING:
 	set(v):
 		state = v
 		if is_node_ready():
 			patience = initial_patience
+		bobbing = state in [State.APPROACHING, State.LEAVING]
 
 var money_scene := preload("res://customer/money.tscn")
-
 var desired_food_items: Array[FoodItem]
 
+var bob_clock: float = 0.
+var bobbing := true:
+	set(v):
+		if bobbing != v:
+			bob_clock = 0.
+		bobbing = v
+
+
 @onready var michael: Area3D = %Michael
+@onready var mesh: Node3D = %customer
 
 @onready var dummy_ticket: Node3D = %Ticket
-var ticket_transform: Transform3D
+@onready var ticket_transform = dummy_ticket.transform
 
 @onready var patience_label: Label3D = %PatienceLabel
 var patience := randf_range(50, 70)
@@ -35,8 +45,6 @@ class Lifetime extends Node:
 		get_parent().queue_free()
 
 func _ready() -> void:
-	ticket_transform = dummy_ticket.global_transform
-
 	dummy_ticket.queue_free()
 
 func _check_for_grabbable(body: Node3D, predicate: Callable) -> Grabbable:
@@ -49,6 +57,7 @@ func _check_for_grabbable(body: Node3D, predicate: Callable) -> Grabbable:
 	return grabbable
 
 func _is_valid_ticket(grabbable: Grabbable) -> bool:
+	if not state == State.SEATED: return false
 	if not desired_food_items.is_empty(): return false
 	if grabbable is not Ticket: return false
 	var ticket := grabbable as Ticket
@@ -56,29 +65,38 @@ func _is_valid_ticket(grabbable: Grabbable) -> bool:
 	return true
 
 func _is_valid_tray(grabbable: Grabbable) -> bool:
+	if not state == State.ORDERED: return false
 	if grabbable is not Tray: return false
 	if grabbable.still_time < 2.: return false
 	return true
+
+func _fling(body: RigidBody3D, z: float = -1, min_power: float = 1000, max_power: float = 1100) -> void:
+	body.apply_central_force(
+		global_transform * \
+		(Vector3(0, 1, z).normalized() * randf_range(min_power, max_power)).rotated(Vector3.UP, randf_range(-.2, .2))
+	)
+	body.apply_torque_impulse(Vector3(
+		randf_range(-3, 3),
+		randf_range(-3, 3),
+		randf_range(-3, 3),
+	))
 
 func _throw_fit(at_player: bool) -> void:
 	for body in michael.get_overlapping_bodies():
 		if body is Grabbable:
 			var z := -1 if at_player else 1
-			body.apply_central_force(
-				quaternion * \
-				Quaternion.from_euler(Vector3(0., randf_range(-.2, .2), 0)) * \
-				Vector3(0, 1, z).normalized() * randf_range(1000, 1100)
-			)
-			body.apply_torque_impulse(Vector3(
-				randf_range(-3, 3),
-				randf_range(-3, 3),
-				randf_range(-3, 3),
-			))
+			_fling(body, z)
 
 func _process(delta: float) -> void:
 	if state == State.SEATED or state == State.ORDERED:
 		patience -= delta * World.instance.difficulty
 		patience_label.text = "%.1f/%.1f" % [patience, initial_patience]
+	
+	if bobbing:
+		bob_clock += delta * 2.5
+		# magic number from initial mesh offset
+		mesh.position.y = 0.812 + absf(sin(bob_clock)) / 2.
+	
 
 func _physics_process(_delta: float) -> void:
 	for body in michael.get_overlapping_bodies():
@@ -88,7 +106,7 @@ func _physics_process(_delta: float) -> void:
 			ticket.state = Grabbable.State.ANIMATED
 			state = State.ORDERED
 
-			var t := create_tween().tween_property(ticket, "global_transform", ticket_transform, .15)
+			var t := create_tween().tween_property(ticket, "global_transform", global_transform * ticket_transform, .15)
 			await t.finished
 			await get_tree().create_timer(3., false).timeout
 
@@ -103,16 +121,7 @@ func _physics_process(_delta: float) -> void:
 			ticket.global_transform = global_transform
 			ticket.position.y += 1.5
 			await get_tree().physics_frame
-			ticket.apply_central_force(
-				quaternion * \
-				Quaternion.from_euler(Vector3(0., randf_range(-.2, .2), 0)) * \
-				Vector3(0, 1, -1).normalized() * randf_range(1000, 1100)
-			)
-			ticket.apply_torque_impulse(Vector3(
-				randf_range(-3, 3),
-				randf_range(-3, 3),
-				randf_range(-3, 3),
-			))
+			_fling(ticket)
 		elif _check_for_grabbable(body, _is_valid_tray) != null:
 			var tray: Tray = _check_for_grabbable(body, _is_valid_tray)
 			var fs := desired_food_items.duplicate()
@@ -137,7 +146,7 @@ func _physics_process(_delta: float) -> void:
 				tray.add_child(Lifetime.new(5.))
 
 				var value := 30 * (patience / initial_patience)
-				state = State.LEAVING
+				state = State.PAYING
 
 				await get_tree().create_timer(2., false).timeout
 
@@ -148,16 +157,9 @@ func _physics_process(_delta: float) -> void:
 
 				cs.add_child(money)
 
-				money.apply_central_force(
-					quaternion * \
-					Quaternion.from_euler(Vector3(0., randf_range(-.2, .2), 0)) * \
-					Vector3(0, 1, -1).normalized() * randf_range(1000, 1100)
-				)
-				money.apply_torque_impulse(Vector3(
-					randf_range(-3, 3),
-					randf_range(-3, 3),
-					randf_range(-3, 3),
-				))
+				_fling(money, -1, 900, 1000)
+
+				state = State.LEAVING
 
 			else:
 				_throw_fit(true)
