@@ -20,6 +20,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_wgyk6")
 shader_parameter/enabled = false
+shader_parameter/animated = true
 shader_parameter/x_expand = 1.15
 shader_parameter/y_expand = 1.6
 shader_parameter/z_expand = 1.1

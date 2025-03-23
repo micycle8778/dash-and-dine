@@ -1,0 +1,171 @@
+[gd_scene load_steps=19 format=3 uid="uid://cjqcnx5t6ttwb"]
+
+[ext_resource type="Script" uid="uid://bf4uxc1s2o14q" path="res://main_menu/main_menu.gd" id="1_bws42"]
+[ext_resource type="PackedScene" uid="uid://bdhg1xnfg44x6" path="res://food/burger.tscn" id="1_d3a7t"]
+[ext_resource type="Shader" uid="uid://ba5uvtjdaxx07" path="res://grabbable/outline.gdshader" id="2_3shxk"]
+[ext_resource type="PackedScene" uid="uid://dym0xn1b2xnqq" path="res://grabbable/food_container/mug.tscn" id="4_3f7m4"]
+[ext_resource type="Texture2D" uid="uid://e65ospk1njon" path="res://logo.svg" id="5_3f7m4"]
+[ext_resource type="FontFile" uid="uid://beermqri38tb5" path="res://fonts/SourGummy-VariableFont_wdth,wght.ttf" id="5_6tl50"]
+[ext_resource type="Script" uid="uid://d3cdq8nfpjtoo" path="res://main_menu/quit_button.gd" id="7_t6bnd"]
+
+[sub_resource type="Gradient" id="Gradient_1h4yd"]
+offsets = PackedFloat32Array(0.375622, 0.472637, 0.768657)
+colors = PackedColorArray(0.93, 0.55676, 0.1302, 1, 1, 0.248, 0.06, 1, 1, 0.0913334, 0.06, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ai45w"]
+gradient = SubResource("Gradient_1h4yd")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_oa53l"]
+panorama = SubResource("GradientTexture2D_ai45w")
+
+[sub_resource type="Sky" id="Sky_fyhu2"]
+sky_material = SubResource("PanoramaSkyMaterial_oa53l")
+
+[sub_resource type="Environment" id="Environment_d3a7t"]
+background_mode = 2
+sky = SubResource("Sky_fyhu2")
+ambient_light_source = 2
+ambient_light_color = Color(1, 0.926667, 0.89, 1)
+ambient_light_energy = 0.21
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bws42"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_3shxk")
+shader_parameter/enabled = true
+shader_parameter/animated = false
+shader_parameter/x_expand = 1.1
+shader_parameter/y_expand = 1.15
+shader_parameter/z_expand = 1.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6tl50"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_3shxk")
+shader_parameter/enabled = true
+shader_parameter/animated = false
+shader_parameter/x_expand = 1.1
+shader_parameter/y_expand = 1.1
+shader_parameter/z_expand = 1.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t6bnd"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_3shxk")
+shader_parameter/enabled = true
+shader_parameter/animated = false
+shader_parameter/x_expand = 1.1
+shader_parameter/y_expand = 1.1
+shader_parameter/z_expand = 1.1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t6bnd"]
+bg_color = Color(1, 0.27069, 0.241459, 1)
+border_width_bottom = 10
+border_color = Color(0.8, 0.096, 0.096, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 20.0
+expand_margin_right = 20.0
+expand_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6tl50"]
+bg_color = Color(1, 0.17, 0.17, 1)
+border_width_bottom = 30
+border_color = Color(0.8, 0.096, 0.096, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 20.0
+expand_margin_right = 20.0
+expand_margin_bottom = 15.0
+
+[sub_resource type="Theme" id="Theme_t6bnd"]
+Button/colors/font_color = Color(0.831373, 0, 0, 1)
+Button/colors/font_focus_color = Color(0.831373, 0, 0, 1)
+Button/colors/font_hover_color = Color(0.831373, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0.831373, 0, 0, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0.831373, 0, 0, 1)
+Button/constants/outline_size = 30
+Button/font_sizes/font_size = 96
+Button/fonts/font = ExtResource("5_6tl50")
+Button/styles/focus = SubResource("StyleBoxFlat_t6bnd")
+Button/styles/hover = SubResource("StyleBoxFlat_t6bnd")
+Button/styles/normal = SubResource("StyleBoxFlat_6tl50")
+Button/styles/pressed = SubResource("StyleBoxFlat_t6bnd")
+
+[node name="MainMenu" type="Node3D"]
+script = ExtResource("1_bws42")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_d3a7t")
+
+[node name="Burger" parent="." instance=ExtResource("1_d3a7t")]
+unique_name_in_owner = true
+transform = Transform3D(-0.547132, -0.233915, -0.803698, -0.467172, 0.882037, 0.0613203, 0.694548, 0.409016, -0.591869, 0.522967, -0.11702, 0)
+outline_shader = SubResource("ShaderMaterial_bws42")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.693467)
+
+[node name="Mug" parent="." instance=ExtResource("4_3f7m4")]
+unique_name_in_owner = true
+transform = Transform3D(0.896594, 0.0445942, -0.440603, -0.285447, 0.81886, -0.497985, 0.338584, 0.572259, 0.746914, 0.248451, 6.10352e-05, -0.763272)
+outline_shader = SubResource("ShaderMaterial_6tl50")
+
+[node name="DriverCast" parent="Mug/Node" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.248451, 6.10352e-05, -0.763272)
+
+[node name="Cylinder2" parent="Mug/mug" index="1"]
+material_override = SubResource("ShaderMaterial_t6bnd")
+
+[node name="Soda" parent="Mug/mug" index="2"]
+visible = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.927921, 0.263598, -0.263589, 0, 0.707094, 0.707119, 0.372777, -0.656151, 0.656128, 0, 0, 0)
+light_energy = 0.558
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_t6bnd")
+
+[node name="Logo" type="Sprite2D" parent="Control"]
+unique_name_in_owner = true
+position = Vector2(271, 129)
+scale = Vector2(0.333, 0.333)
+texture = ExtResource("5_3f7m4")
+
+[node name="PlayButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 276.0
+offset_right = 391.0
+offset_bottom = 431.0
+text = "Play"
+
+[node name="QuitButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 234.0
+offset_top = 475.0
+offset_right = 350.0
+offset_bottom = 578.0
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 56
+text = "Quit"
+script = ExtResource("7_t6bnd")
+
+[connection signal="pressed" from="Control/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Control/QuitButton" to="." method="_on_quit_button_pressed"]
+
+[editable path="Mug"]
+[editable path="Mug/mug"]

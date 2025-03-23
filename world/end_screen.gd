@@ -41,7 +41,7 @@ func _ready() -> void:
 func _score_animate(v: float) -> void:
 	score_label.text = "$%.2f" % v
 	
-	score_label.add_theme_font_size_override("font_size", remap(v, 0, 500, 36, 96))
+	score_label.add_theme_font_size_override("font_size", int(remap(v, 0, 500, 36, 96)))
 	var t := clampf(inverse_lerp(0, 500, v), 0, 1)
 	score_label.add_theme_color_override("font_color", Color.BLACK.lerp(Color.GREEN, t))
 
@@ -59,6 +59,8 @@ func _anim_score_label_visible() -> void:
 	pass # TODO: high score
 
 func _on_stats_time_expired() -> void:
+	Player.instance.frozen = true
+
 	# setup labels
 	served_label.text = str(customers_served)
 	lost_label.text = str(angry_customers)

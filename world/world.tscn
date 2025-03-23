@@ -36,19 +36,19 @@ size = Vector2(25, 25)
 offsets = PackedFloat32Array(0.375622, 0.472637, 0.768657)
 colors = PackedColorArray(0.93, 0.55676, 0.1302, 1, 1, 0.248, 0.06, 1, 1, 0.0913334, 0.06, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ai45w"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3ljsx"]
 gradient = SubResource("Gradient_sc4t8")
 fill_to = Vector2(0, 1)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_4papg"]
-panorama = SubResource("GradientTexture2D_ai45w")
+panorama = SubResource("GradientTexture2D_3ljsx")
 
-[sub_resource type="Sky" id="Sky_fyhu2"]
+[sub_resource type="Sky" id="Sky_gi7ib"]
 sky_material = SubResource("PanoramaSkyMaterial_4papg")
 
 [sub_resource type="Environment" id="Environment_6xmxd"]
 background_mode = 2
-sky = SubResource("Sky_fyhu2")
+sky = SubResource("Sky_gi7ib")
 ambient_light_source = 2
 ambient_light_color = Color(1, 0.926667, 0.89, 1)
 ambient_light_energy = 0.21
@@ -149,57 +149,6 @@ shader_parameter/strength = 0.0
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/font_sizes/font_size = 36
 Label/fonts/font = ExtResource("12_b2suy")
-
-[sub_resource type="Animation" id="Animation_b2suy"]
-resource_name = "fade_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Panel:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Panel:material:shader_parameter/modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 0.5]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Panel:material:shader_parameter/strength")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("WhistleSFX:playing")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_h8lre"]
 length = 0.001
@@ -406,6 +355,57 @@ tracks/16/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_b2suy"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:material:shader_parameter/modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:material:shader_parameter/strength")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WhistleSFX:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_llyeo"]
@@ -889,8 +889,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1152.0
-offset_right = -1152.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_m0cxt")

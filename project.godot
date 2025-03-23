@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="Dash and Dine"
-run/main_scene="uid://bitfv6iqc8mwh"
+run/main_scene="uid://cjqcnx5t6ttwb"
 config/features=PackedStringArray("4.4")
-config/icon="res://icon.svg"
+boot_splash/image="uid://cpot2gpcfr5ps"
+config/icon="uid://cju21f53ed0g1"
 
 [autoload]
 

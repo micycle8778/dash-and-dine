@@ -1,4 +1,4 @@
-extends CharacterBody3D
+class_name Player extends CharacterBody3D
 
 const RUN_MUL: float = 2.
 const WALK_MUL: float = .5
@@ -8,18 +8,29 @@ const GRAVITY: float = 35
 const JUMP_POWER: float = 15
 const MOUSE_SENSITIVITY: float = 0.0015
 
+static var instance: Player
+
+var frozen := false
+
 @onready var camera: Camera3D = %Camera3D
 @onready var grab_raycast: RayCast3D = %GrabRaycast
 @onready var hold_distance_raycast: RayCast3D = %HoldDistanceRaycast
 @onready var button_raycast: RayCast3D = %ButtonRaycast
 
+func _init() -> void:
+	instance = self
+
 func _input(event: InputEvent) -> void:
+	if frozen: return
+
 	if event is InputEventMouseMotion:
 		var sens := MOUSE_SENSITIVITY # * Globals.sensitivity
 		rotation.y -= event.relative.x * sens
 		camera.rotation.x = clampf(camera.rotation.x - event.relative.y * sens, -PI / 2 + 0.1, PI / 2)
 
 func _kinematics(delta: float) -> void:
+	if frozen: return
+
 	var run_mul := 1.
 
 	if Input.is_action_pressed("sprint"):

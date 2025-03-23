@@ -2,6 +2,7 @@ shader_type spatial;
 render_mode cull_front, unshaded;
 
 uniform bool enabled = false;
+uniform bool animated = true;
 
 uniform float x_expand: hint_range(1., 2.) = 1.05;
 uniform float y_expand: hint_range(1., 2.) = 1.05;
@@ -17,5 +18,10 @@ void fragment() {
 	if (!enabled) discard;
 	float t = TIME / 1.5;
 	float x = mod(SCREEN_UV.x + t, 1.);
-	ALBEDO *= mix(vec3(0.), vec3(0.4, 0.4, 0.3), distance(x, 0.5) * 2.);
+
+	if (animated) {
+		ALBEDO *= mix(vec3(0.), vec3(0.4, 0.4, 0.3), distance(x, 0.5) * 2.);
+	} else {
+		ALBEDO = vec3(0.);
+	}
 }
