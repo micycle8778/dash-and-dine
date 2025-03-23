@@ -1,17 +1,18 @@
-[gd_scene load_steps=12 format=4 uid="uid://b6doxsdiw8mmu"]
+[gd_scene load_steps=26 format=4 uid="uid://b6doxsdiw8mmu"]
 
 [ext_resource type="PackedScene" uid="uid://dcdrq1lxcsxd7" path="res://grabbable/food_container/food_container.tscn" id="1_g0pnc"]
 [ext_resource type="PackedScene" uid="uid://dv7fa70plwci1" path="res://grabbable/food_container/bowl.blend" id="2_g2x01"]
-[ext_resource type="Script" uid="uid://b61oqqblniwdn" path="res://food_item.gd" id="2_sgsbi"]
+[ext_resource type="Script" uid="uid://c5qa3mhc2mnrp" path="res://grabbable/food_container/bowl.gd" id="2_sgsbi"]
 [ext_resource type="Shader" uid="uid://ba5uvtjdaxx07" path="res://grabbable/outline.gdshader" id="3_sgsbi"]
+[ext_resource type="Script" uid="uid://b61oqqblniwdn" path="res://food_item.gd" id="3_sq4uj"]
 
-[sub_resource type="Resource" id="Resource_sq4uj"]
-script = ExtResource("2_sgsbi")
+[sub_resource type="Resource" id="Resource_xpxu1"]
+script = ExtResource("3_sq4uj")
 display_name = "soup"
 metadata/_custom_type_script = "uid://b61oqqblniwdn"
 
-[sub_resource type="Resource" id="Resource_xpxu1"]
-script = ExtResource("2_sgsbi")
+[sub_resource type="Resource" id="Resource_rtpph"]
+script = ExtResource("3_sq4uj")
 display_name = "fruit"
 metadata/_custom_type_script = "uid://b61oqqblniwdn"
 
@@ -61,20 +62,170 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0wxk4")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgsbi"]
+albedo_color = Color(0.67, 0.153207, 0.0737, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sq4uj"]
+top_radius = 0.25
+bottom_radius = 0.0
+height = 0.001
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3gp6w"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.47451)
+
+[sub_resource type="SphereMesh" id="SphereMesh_sgsbi"]
+material = SubResource("StandardMaterial3D_3gp6w")
+radius = 0.05
+height = 0.1
+
+[sub_resource type="Gradient" id="Gradient_sq4uj"]
+offsets = PackedFloat32Array(0.0668203, 0.345622)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xpxu1"]
+albedo_color = Color(0.1035, 0.27, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rtpph"]
+size = Vector3(0.01, 0.01, 0.07)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_artp3"]
+albedo_color = Color(0.58, 0.0928, 0.0928, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_g8eho"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqihk"]
+albedo_color = Color(0.064, 0.0752, 0.4, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ybi6g"]
+albedo_color = Color(0.4012, 0.68, 0.272, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m75jc"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6xm6k"]
+albedo_color = Color(0.88, 0.73568, 0.1584, 1)
+
 [node name="Bowl" instance=ExtResource("1_g0pnc")]
-acceptable_foods = Array[ExtResource("2_sgsbi")]([SubResource("Resource_sq4uj"), SubResource("Resource_xpxu1")])
+script = ExtResource("2_sgsbi")
+acceptable_foods = Array[ExtResource("3_sq4uj")]([SubResource("Resource_xpxu1"), SubResource("Resource_rtpph")])
 outline_shader = SubResource("ShaderMaterial_g2x01")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="0"]
-transform = Transform3D(0.269467, 0, 0, 0, 0.269467, 0, 0, 0, 0.269467, 0, 0, 0)
+transform = Transform3D(0.269467, 0, 0, 0, 0.269467, 0, 0, 0, 0.269467, 0, 0.0822965, 0)
 shape = SubResource("ConvexPolygonShape3D_g0pnc")
 
 [node name="bowl" parent="." index="5" instance=ExtResource("2_g2x01")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0822965, 0)
 
 [node name="Sphere2" type="MeshInstance3D" parent="bowl" index="1"]
 transform = Transform3D(0.269467, 0, 0, 0, 0.269467, 0, 0, 0, 0.269467, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_g2x01")
 mesh = SubResource("ArrayMesh_wlqjc")
 skeleton = NodePath("")
+
+[node name="Soup" type="Node3D" parent="." index="6"]
+unique_name_in_owner = true
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Soup" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.149015, 0)
+material_override = SubResource("StandardMaterial3D_sgsbi")
+mesh = SubResource("CylinderMesh_sq4uj")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Soup" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0039784, 0.173772, 0.000572979)
+amount = 5
+mesh = SubResource("SphereMesh_sgsbi")
+emission_shape = 3
+emission_box_extents = Vector3(0.15, 0.01, 0.15)
+direction = Vector3(0, 1, 0)
+spread = 20.16
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.7
+initial_velocity_max = 1.15
+color_ramp = SubResource("Gradient_sq4uj")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Soup" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.150613, 0)
+material_override = SubResource("StandardMaterial3D_xpxu1")
+mesh = SubResource("BoxMesh_rtpph")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Soup" index="3"]
+transform = Transform3D(0.658282, 0, -0.752771, 0, 1, 0, 0.752771, 0, 0.658282, 0.0289296, 0.152336, -0.0256892)
+material_override = SubResource("StandardMaterial3D_xpxu1")
+mesh = SubResource("BoxMesh_rtpph")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Soup" index="4"]
+transform = Transform3D(0.59423, -0.430275, -0.679525, 0.158213, 0.890896, -0.425761, 0.788581, 0.145491, 0.597472, -0.0596368, 0.13842, -0.015758)
+material_override = SubResource("StandardMaterial3D_xpxu1")
+mesh = SubResource("BoxMesh_rtpph")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Soup" index="5"]
+transform = Transform3D(-0.61015, -0.268557, -0.745382, -0.190807, 0.962917, -0.190744, 0.768967, 0.0258409, -0.638766, -0.00888126, 0.146929, -0.0705505)
+material_override = SubResource("StandardMaterial3D_xpxu1")
+mesh = SubResource("BoxMesh_rtpph")
+
+[node name="Fruit" type="Node3D" parent="." index="7"]
+unique_name_in_owner = true
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Fruit" index="0"]
+transform = Transform3D(0.154887, 0, 0, 0, 0.154887, 0, 0, 0, 0.154887, 0, 0.0778994, 0)
+material_override = SubResource("StandardMaterial3D_artp3")
+mesh = SubResource("SphereMesh_g8eho")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Fruit" index="1"]
+transform = Transform3D(0.121931, 0, 0, 0, 0.121931, 0, 0, 0, 0.121931, -0.11886, 0.0778994, -0.0635497)
+material_override = SubResource("StandardMaterial3D_artp3")
+mesh = SubResource("SphereMesh_g8eho")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Fruit" index="2"]
+transform = Transform3D(0.141744, 0, 0, 0, 0.141744, 0, 0, 0, 0.141744, -0.11886, 0.0778994, 0.0801243)
+material_override = SubResource("StandardMaterial3D_artp3")
+mesh = SubResource("SphereMesh_g8eho")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Fruit" index="3"]
+transform = Transform3D(0.150458, 0, 0, 0, 0.150458, 0, 0, 0, 0.150458, 0.0665778, 0.0778994, 0.0801243)
+material_override = SubResource("StandardMaterial3D_yqihk")
+mesh = SubResource("SphereMesh_g8eho")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Fruit" index="4"]
+transform = Transform3D(0.150458, 0, 0, 0, 0.150458, 0, 0, 0, 0.150458, 0.0685589, 0.155743, -0.0915721)
+material_override = SubResource("StandardMaterial3D_yqihk")
+mesh = SubResource("SphereMesh_g8eho")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Fruit" index="5"]
+transform = Transform3D(0.124411, 0, 0, 0, 0.124411, 0, 0, 0, 0.124411, -0.0868759, 0.155743, -0.0915721)
+material_override = SubResource("StandardMaterial3D_yqihk")
+mesh = SubResource("SphereMesh_g8eho")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Fruit" index="6"]
+transform = Transform3D(0.597037, 0.802214, 0, -0.750262, 0.558373, 0.354014, 0.283994, -0.211359, 0.93524, -0.0255685, 0.153689, 0.160044)
+material_override = SubResource("StandardMaterial3D_ybi6g")
+mesh = SubResource("BoxMesh_m75jc")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Fruit" index="7"]
+transform = Transform3D(0.188082, 0.693594, -0.695379, 0.821034, 0.277526, 0.498882, 0.539007, -0.664761, -0.517267, 0.123536, 0.153689, -0.0247509)
+material_override = SubResource("StandardMaterial3D_ybi6g")
+mesh = SubResource("BoxMesh_m75jc")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Fruit" index="8"]
+transform = Transform3D(0.151524, 0.55878, -0.560218, 0.661449, 0.223583, 0.401914, 0.43424, -0.535551, -0.416725, -0.0973109, 0.153689, -0.0247509)
+material_override = SubResource("StandardMaterial3D_6xm6k")
+mesh = SubResource("BoxMesh_m75jc")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="Fruit" index="9"]
+transform = Transform3D(0.151524, 0.55878, -0.560218, 0.661449, 0.223583, 0.401914, 0.43424, -0.535551, -0.416725, 0.143377, 0.153689, 0.0945019)
+material_override = SubResource("StandardMaterial3D_6xm6k")
+mesh = SubResource("BoxMesh_m75jc")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Fruit" index="10"]
+transform = Transform3D(0.743504, -0.567466, -0.353814, 0.668582, 0.619585, 0.411233, -0.0141436, -0.542307, 0.840062, -0.0380972, 0.153689, -0.156537)
+material_override = SubResource("StandardMaterial3D_ybi6g")
+mesh = SubResource("BoxMesh_m75jc")
+
+[connection signal="contained_food_updated" from="." to="." method="_on_contained_food_updated"]
 
 [editable path="bowl"]

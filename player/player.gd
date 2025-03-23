@@ -59,6 +59,10 @@ func _handle_holding(_delta: float) -> void:
 			else: return
 		else: return
 
+	if holding.state == Grabbable.State.ANIMATED:
+		holding = null
+		return
+
 	# if the player is dropping the object, drop it then return
 	if Input.is_action_just_released("pickup"):
 		# drop the object!

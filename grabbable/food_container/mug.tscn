@@ -1,17 +1,18 @@
-[gd_scene load_steps=12 format=4 uid="uid://dym0xn1b2xnqq"]
+[gd_scene load_steps=21 format=4 uid="uid://dym0xn1b2xnqq"]
 
 [ext_resource type="PackedScene" uid="uid://dcdrq1lxcsxd7" path="res://grabbable/food_container/food_container.tscn" id="1_k8mtc"]
 [ext_resource type="PackedScene" uid="uid://cbex7jnpor8kh" path="res://grabbable/food_container/mug.blend" id="2_ktalm"]
-[ext_resource type="Script" uid="uid://b61oqqblniwdn" path="res://food_item.gd" id="2_s3gb2"]
+[ext_resource type="Script" uid="uid://co7x7blm3jipf" path="res://grabbable/food_container/mug.gd" id="2_s3gb2"]
+[ext_resource type="Script" uid="uid://b61oqqblniwdn" path="res://food_item.gd" id="3_rhf64"]
 [ext_resource type="Shader" uid="uid://ba5uvtjdaxx07" path="res://grabbable/outline.gdshader" id="3_s3gb2"]
 
-[sub_resource type="Resource" id="Resource_rhf64"]
-script = ExtResource("2_s3gb2")
+[sub_resource type="Resource" id="Resource_3gp6w"]
+script = ExtResource("3_rhf64")
 display_name = "soda"
 metadata/_custom_type_script = "uid://b61oqqblniwdn"
 
-[sub_resource type="Resource" id="Resource_3gp6w"]
-script = ExtResource("2_s3gb2")
+[sub_resource type="Resource" id="Resource_0c0m4"]
+script = ExtResource("3_rhf64")
 display_name = "coffee"
 metadata/_custom_type_script = "uid://b61oqqblniwdn"
 
@@ -64,21 +65,104 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_58gn1")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktalm"]
+albedo_color = Color(1, 0.333333, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_s3gb2"]
+top_radius = 0.16
+bottom_radius = 0.1
+height = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rhf64"]
+transparency = 1
+albedo_color = Color(0.99, 0.995333, 1, 0.803922)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3gp6w"]
+size = Vector3(0.07, 0.07, 0.07)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s3gb2"]
+albedo_color = Color(0.2, 0.0866667, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3gp6w"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.47451)
+
+[sub_resource type="SphereMesh" id="SphereMesh_0c0m4"]
+material = SubResource("StandardMaterial3D_3gp6w")
+radius = 0.05
+height = 0.1
+
+[sub_resource type="Gradient" id="Gradient_na3df"]
+offsets = PackedFloat32Array(0.0668203, 0.345622)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_k8mtc"]
 points = PackedVector3Array(0, -0.2, -0.180758, 0.0352409, -0.2, -0.177271, -0.0352763, -0.2, -0.177271, -0.116939, -0.0584965, -0.256313, -0.122423, -0.0303054, -0.26664, 0.0691372, -0.2, -0.166988, -0.0691726, -0.2, -0.166988, -0.148429, -0.0588097, -0.240116, -0.153949, -0.030462, -0.250443, -0.15586, 0, -0.253974, -0.124334, 0, -0.270126, 0.0691372, 0.2, -0.166988, 0.10038, -0.2, -0.150306, -0.100415, -0.2, -0.150306, -0.127801, -0.2, -0.127798, -0.150305, -0.2, -0.100436, -0.167005, -0.2, -0.0691901, -0.177266, -0.2, -0.0352962, -0.153949, 0.0304229, -0.250443, -0.122423, 0.0302662, -0.26664, -0.180733, -0.2, -3.41237e-05, -0.180733, 0.2, -3.41237e-05, -0.177266, 0.2, -0.0352962, 0.0352409, 0.2, -0.177271, 0.10038, 0.2, -0.150306, 0.127766, -0.2, -0.127798, -0.148429, 0.0587706, -0.240116, -0.167005, 0.2, -0.0691901, -0.116939, 0.0584573, -0.256313, -0.177266, -0.2, 0.0352279, -0.177266, 0.2, 0.0352279, 0, 0.2, -0.180758, 0.127766, 0.2, -0.127798, 0.150269, -0.2, -0.100436, -0.150305, 0.2, -0.100436, -0.127801, 0.2, -0.127798, -0.100415, 0.2, -0.150306, -0.0691726, 0.2, -0.166988, -0.0352763, 0.2, -0.177271, -0.167005, -0.2, 0.0691218, -0.167005, 0.2, 0.0691218, 0.150269, 0.2, -0.100436, 0.16697, -0.2, -0.0691901, -0.150305, -0.2, 0.100368, -0.150305, 0.2, 0.100368, 0.16697, 0.2, -0.0691901, 0.177231, -0.2, -0.0352962, -0.127801, -0.2, 0.127774, -0.127801, 0.2, 0.127774, 0.177231, 0.2, -0.0352962, 0.180733, -0.2, -3.41237e-05, -0.100415, -0.2, 0.150238, -0.100415, 0.2, 0.150238, 0.180733, 0.2, -3.41237e-05, 0.177231, -0.2, 0.0352279, -0.0691726, -0.2, 0.166964, -0.0691726, 0.2, 0.166964, 0.177231, 0.2, 0.0352279, 0.16697, -0.2, 0.0691218, -0.0352763, -0.2, 0.177247, -0.0352763, 0.2, 0.177247, 0.16697, 0.2, 0.0691218, 0.150269, -0.2, 0.100368, 0, -0.2, 0.180733, 0, 0.2, 0.180733, 0.150269, 0.2, 0.100368, 0.127766, -0.2, 0.127774, 0.0352409, -0.2, 0.177247, 0.0352409, 0.2, 0.177247, 0.127766, 0.2, 0.127774, 0.10038, -0.2, 0.150238, 0.0691372, -0.2, 0.166964, 0.0691372, 0.2, 0.166964, 0.10038, 0.2, 0.150238)
 
 [node name="Mug" instance=ExtResource("1_k8mtc")]
-acceptable_foods = Array[ExtResource("2_s3gb2")]([SubResource("Resource_rhf64"), SubResource("Resource_3gp6w")])
+script = ExtResource("2_s3gb2")
+acceptable_foods = Array[ExtResource("3_rhf64")]([SubResource("Resource_3gp6w"), SubResource("Resource_0c0m4")])
 outline_shader = SubResource("ShaderMaterial_rhf64")
 
 [node name="mug" parent="." index="4" instance=ExtResource("2_ktalm")]
+transform = Transform3D(0.23118, -2.14305e-05, 0.972911, 0.0013203, 0.999999, -0.000291713, -0.97291, 0.00135197, 0.23118, 0, 0.207805, 0)
 
 [node name="Cylinder2" type="MeshInstance3D" parent="mug" index="1"]
 material_override = SubResource("ShaderMaterial_rhf64")
 mesh = SubResource("ArrayMesh_j2xmx")
 skeleton = NodePath("")
 
+[node name="Soda" type="Node3D" parent="mug" index="2"]
+unique_name_in_owner = true
+transform = Transform3D(0.23118, 0.0013203, -0.97291, -2.14158e-05, 0.999999, 0.00135197, 0.972911, -0.000291699, 0.23118, 0, 0, 0)
+visible = false
+
+[node name="Soda" type="MeshInstance3D" parent="mug/Soda" index="0"]
+material_override = SubResource("StandardMaterial3D_ktalm")
+mesh = SubResource("CylinderMesh_s3gb2")
+
+[node name="IceCube" type="MeshInstance3D" parent="mug/Soda" index="1"]
+transform = Transform3D(0.760259, -0.401151, 0.510964, 0.649621, 0.469472, -0.597987, 0, 0.786558, 0.617516, -0.0703975, 0.143212, -0.0227262)
+material_override = SubResource("StandardMaterial3D_rhf64")
+mesh = SubResource("BoxMesh_3gp6w")
+
+[node name="IceCube2" type="MeshInstance3D" parent="mug/Soda" index="2"]
+transform = Transform3D(0.99228, -0.0765826, 0.0975467, 0.124017, 0.612749, -0.780486, 0, 0.786558, 0.617516, 0.0878123, 0.141579, -0.00637166)
+material_override = SubResource("StandardMaterial3D_rhf64")
+mesh = SubResource("BoxMesh_3gp6w")
+
+[node name="IceCube3" type="MeshInstance3D" parent="mug/Soda" index="3"]
+transform = Transform3D(0.99228, -0.0765826, 0.0975467, 0.116302, 0.301524, -0.946339, 0.0430605, 0.950378, 0.308103, -0.0254315, 0.116611, 0.0720977)
+material_override = SubResource("StandardMaterial3D_rhf64")
+mesh = SubResource("BoxMesh_3gp6w")
+
+[node name="Coffee" type="Node3D" parent="mug" index="3"]
+unique_name_in_owner = true
+transform = Transform3D(0.23118, 0.0013203, -0.97291, -2.14158e-05, 0.999999, 0.00135197, 0.972911, -0.000291699, 0.23118, 0, 0, 0)
+visible = false
+
+[node name="Soda" type="MeshInstance3D" parent="mug/Coffee" index="0"]
+material_override = SubResource("StandardMaterial3D_s3gb2")
+mesh = SubResource("CylinderMesh_s3gb2")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="mug/Coffee" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.214106, 0)
+amount = 5
+mesh = SubResource("SphereMesh_0c0m4")
+emission_shape = 3
+emission_box_extents = Vector3(0.15, 0.01, 0.15)
+direction = Vector3(0, 1, 0)
+spread = 20.16
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.7
+initial_velocity_max = 1.15
+color_ramp = SubResource("Gradient_na3df")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="5"]
+transform = Transform3D(0.23118, -2.14305e-05, 0.972911, 0.0013203, 0.999999, -0.000291713, -0.97291, 0.00135197, 0.23118, 0, 0.207805, 0)
 shape = SubResource("ConvexPolygonShape3D_k8mtc")
+
+[connection signal="contained_food_updated" from="." to="." method="_on_contained_food_updated"]
 
 [editable path="mug"]

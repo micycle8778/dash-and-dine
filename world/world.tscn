@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bitfv6iqc8mwh"]
+[gd_scene load_steps=43 format=3 uid="uid://bitfv6iqc8mwh"]
 
 [ext_resource type="PackedScene" uid="uid://jgyasjf5x5fh" path="res://player/player.tscn" id="1_6xmxd"]
 [ext_resource type="Script" uid="uid://pbe2nre427ka" path="res://world/world.gd" id="1_tcf2h"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bdhg1xnfg44x6" path="res://food/burger.tscn" id="12_mad0u"]
 [ext_resource type="PackedScene" uid="uid://mcnmcj554cyw" path="res://food/salad.tscn" id="13_ocfjn"]
 [ext_resource type="PackedScene" uid="uid://b0n8hvq0gl7rp" path="res://world/plate_food_spawner.tscn" id="14_dqqhb"]
+[ext_resource type="PackedScene" uid="uid://cmg6qfaa8n7he" path="res://pour_machine/pour_machine.tscn" id="15_b2suy"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4717r"]
 
@@ -113,7 +114,7 @@ shader_parameter/x_expand = 1.07
 shader_parameter/y_expand = 1.6
 shader_parameter/z_expand = 1.07
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ocfjn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ysn08"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_h5o24")
@@ -139,6 +140,14 @@ shader_parameter/enabled = false
 shader_parameter/x_expand = 1.05
 shader_parameter/y_expand = 1.2
 shader_parameter/z_expand = 1.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b2suy"]
+albedo_color = Color(0.95, 0.316667, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h8lre"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ysn08"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_tcf2h")
@@ -227,8 +236,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
 outline_shader = SubResource("ShaderMaterial_b2suy")
 
 [node name="Mug" parent="." instance=ExtResource("10_fyhu2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)
-outline_shader = SubResource("ShaderMaterial_ocfjn")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.183652, -1)
+outline_shader = SubResource("ShaderMaterial_ysn08")
 
 [node name="UtensilSpawner" parent="." instance=ExtResource("11_ov2xu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.69068, 0, 6.239)
@@ -242,3 +251,17 @@ outline_shader = SubResource("ShaderMaterial_dqqhb")
 [node name="Salad" parent="." instance=ExtResource("13_ocfjn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.718316)
 outline_shader = SubResource("ShaderMaterial_h8lre")
+
+[node name="PourMachine" parent="." instance=ExtResource("15_b2suy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.98667, 9.6131)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(3.20818, 0, 0, 0, 2.11679, 0, 0, 0, 1, 0, 0, 9.20083)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_b2suy")
+mesh = SubResource("BoxMesh_h8lre")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ysn08")
