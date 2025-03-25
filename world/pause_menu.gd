@@ -1,11 +1,17 @@
 extends CanvasLayer
 
 func pause() -> void:
+	if not World.instance.tutorial:
+		DJMusicMan.play_tutorial()
+
 	visible = true
 	get_tree().paused = true
 	MouseStack.push(Input.MOUSE_MODE_VISIBLE)
 
 func unpause() -> void:
+	if not World.instance.tutorial:
+		DJMusicMan.play_game()
+
 	visible = false
 	get_tree().paused = false
 	MouseStack.pop(Input.MOUSE_MODE_VISIBLE)

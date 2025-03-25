@@ -22,6 +22,7 @@ MouseStack="*res://autoloads/mouse_stack.gd"
 Globals="*res://autoloads/globals.gd"
 SceneTransition="*res://autoloads/scene_transition.tscn"
 SaveSystem="*res://autoloads/save_system.gd"
+DJMusicMan="*res://autoloads/dj_music_man.tscn"
 
 [display]
 

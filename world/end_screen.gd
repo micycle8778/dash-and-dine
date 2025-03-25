@@ -75,6 +75,7 @@ func _anim_score_label_visible() -> void:
 
 func _on_stats_time_expired() -> void:
 	Player.instance.frozen = true
+	DJMusicMan.stop_playing()
 
 	# setup labels
 	served_label.text = str(customers_served)

@@ -12,6 +12,7 @@ var clock := 0.
 
 func _ready() -> void:
 	MouseStack.override(Input.MOUSE_MODE_VISIBLE)
+	DJMusicMan.play_title_screen()
 
 func _process(delta: float) -> void:
 	clock += delta

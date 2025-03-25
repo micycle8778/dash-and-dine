@@ -58,6 +58,7 @@ func _ready() -> void:
 	SaveSystem.save_data.tutorial_complete = true
 	SaveSystem.save()
 	World.instance.tutorial = false
+	DJMusicMan.play_game()
 
 	four.hide()
 	queue_free()

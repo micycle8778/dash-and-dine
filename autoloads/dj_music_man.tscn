@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://dwt5wqvbti5xt"]
+
+[ext_resource type="AudioStream" uid="uid://c0shl3tst3iae" path="res://music/dad-title-screen.ogg" id="1_p2536"]
+[ext_resource type="AudioStream" uid="uid://dvm7fb1o3dnpe" path="res://music/dad-tutorial.ogg" id="2_kj361"]
+[ext_resource type="AudioStream" uid="uid://dmpc8djffo0mg" path="res://music/dad-game.ogg" id="3_103jb"]
+[ext_resource type="Script" uid="uid://dt23212b51dkl" path="res://autoloads/dj_music_man.gd" id="4_mktxs"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_p2536"]
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_ytswo"]
+clip_count = 4
+clip_0/name = &"title-screen"
+clip_0/stream = ExtResource("1_p2536")
+clip_0/auto_advance = 0
+clip_1/name = &"tutorial"
+clip_1/stream = ExtResource("2_kj361")
+clip_1/auto_advance = 0
+clip_2/name = &"game"
+clip_2/stream = ExtResource("3_103jb")
+clip_2/auto_advance = 0
+clip_3/name = &"empty"
+clip_3/stream = SubResource("AudioStreamGenerator_p2536")
+clip_3/auto_advance = 0
+_transitions = {
+Vector2i(-1, -1): {
+"fade_beats": 0.0,
+"fade_mode": 0,
+"from_time": 2,
+"to_time": 1
+},
+Vector2i(-1, 0): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(-1, 3): {
+"fade_beats": 0.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(1, 2): {
+"fade_beats": 0.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(2, 1): {
+"fade_beats": 0.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+}
+}
+
+[node name="DJMusicMan" type="AudioStreamPlayer"]
+process_mode = 3
+stream = SubResource("AudioStreamInteractive_ytswo")
+bus = &"Music"
+script = ExtResource("4_mktxs")
